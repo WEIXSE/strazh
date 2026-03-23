@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- ══════════════════════════════════════════
+     ШАБЛОН СТАТЬИ — СТРАЖ
+     Как использовать:
+     1. Скопируй этот файл
+     2. Переименуй: article-007.html и т.д.
+     3. Замени всё между ═══ ЗАПОЛНИ ═══ метками
+     4. Положи рядом с index.html
+     5. Добавь запись в ARTICLES в index.html
+════════════════════════════════════════════ -->
+<title>ПОЧЕМУ КАЖДЫЙ МУЖЧИНА ДОЛЖЕН УМЕТЬ ДРАТЬСЯ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#03040A;--bg2:#070910;--card:#0A0C15;--card2:#0D1020;
+  --border:#161928;--border2:#222640;
+  --gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+  --white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+  --green:#22c55e;--blue:#3b82f6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(192,39,45,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(50px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+
+/* PROGRESS BAR TOP */
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--red),var(--gold2));z-index:999;transition:width .1s linear}
+
+/* NAV */
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s;letter-spacing:.3px}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;letter-spacing:1px;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+
+/* LAYOUT */
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+
+/* HEADER */
+.art-header{margin-bottom:2.8rem}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none;transition:.15s}
+.art-breadcrumb a:hover{color:var(--muted)}
+.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem;letter-spacing:-.01em}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;letter-spacing:.4px;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+
+/* BODY */
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;letter-spacing:.3px;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul,.art-body ol{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--red2);padding:1.2rem 1.8rem;background:rgba(192,39,45,.05);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(192,39,45,.2);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#C0A870;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+
+/* REVIEW */
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;transition:.15s;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-ta:focus{border-color:rgba(192,39,45,.4)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;letter-spacing:.5px;font-family:inherit}
+.rev-send:hover{border-color:var(--red2);color:var(--red)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}
+.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;letter-spacing:2px;margin-bottom:.3rem}
+.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}
+.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem;font-weight:500}
+
+/* NEXT ARTICLES */
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem;font-weight:500}
+
+/* NOTIF */
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+
+@media(max-width:700px){.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div>
+<div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ═══════════════════════════════════════════════
+       ЗАПОЛНИ: ШАПКА СТАТЬИ
+  ════════════════════════════════════════════════ -->
+  <div class="art-header">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a>
+      <span>/</span>
+      <a href="index.html">Борьба</a>
+      <span>/</span>
+      <span>Уметь драться</span>
+    </div>
+
+    <!-- ЗАПОЛНИ: цвет и название категории -->
+    <div class="art-tag" style="color:#C9960A;background:rgba(201,150,10,.1);border:1px solid rgba(201,150,10,.2)">⚔ БОРЬБА</div>
+
+    <!-- ЗАПОЛНИ: заголовок -->
+    <div class="art-title">⚔ ПОЧЕМУ КАЖДЫЙ МУЖЧИНА ДОЛЖЕН УМЕТЬ ДРАТЬСЯ</div>
+
+    <div class="art-meta">
+      <!-- ЗАПОЛНИ: дата и время -->
+      <span>📅 22 МАР 2026</span>
+      <span>⏱ 9 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <!-- ════════════════════════════════════════════ -->
+
+
+  <!-- ═══════════════════════════════════════════════
+       ЗАПОЛНИ: ТЕКСТ СТАТЬИ
+       Используй теги: <h2> <h3> <p> <ul><li> <blockquote><p> <strong>
+  ════════════════════════════════════════════════ -->
+  <div class="art-body" id="artBody">
+    <h2>ЭТО НЕ ПРО НАСИЛИЕ</h2>
+    <p>Большинство людей услышав «каждый мужчина должен уметь драться» — сразу думают об агрессии. О том кто первый начинает. О гопниках в подворотне. Это неправильная картинка.</p>
+    <p>Речь не про того кто нападает. Речь про того кто <strong>способен защитить</strong>. Себя. Женщину рядом. Ребёнка. Брата. Незнакомого человека которому плохо.</p>
+    <blockquote><p>Тот кто умеет бить — редко бьёт. Тот кто не умеет — часто срывается от бессилия.</p></blockquote>
+
+    <h2>МИР НЕ СТАЛ БЕЗОПАСНЕЕ</h2>
+    <p>Мы живём в городах, носим чистую одежду и едим в ресторанах. Это создаёт иллюзию что опасность исчезла. Но она никуда не делась — она просто спряталась.</p>
+    <p>Каждый день где-то рядом с тобой происходит то чего ты не видишь. Конфликт в подъезде. Пьяный агрессор в метро. Человек которому нужна помощь на улице. И в этот момент ты либо <strong>можешь</strong> — либо стоишь и смотришь.</p>
+    <p>Большинство мужчин стоят и смотрят. Не потому что трусы — потому что никогда не учились. Потому что никто не сказал им что это их ответственность.</p>
+    <blockquote><p>Если ты можешь спасти себя — ты можешь спасти другого. Это не право. Это обязанность мужчины.</p></blockquote>
+
+    <h2>ЧТО ПРОИСХОДИТ С ТОБОЙ КОГДА ТЫ НАЧИНАЕШЬ ТРЕНИРОВАТЬСЯ</h2>
+    <h3>Ты перестаёшь бояться</h3>
+    <p>Страх — это незнание. Когда ты не знаешь что делать в опасной ситуации — тело замирает. Адреналин есть, действия нет. Это паралич. Тренировки учат тебя <strong>действовать автоматически под давлением</strong>. Мозг больше не паникует — тело уже знает что делать.</p>
+    <h3>Ты становишься честным с собой</h3>
+    <p>На ковре нет социального статуса. Нет дорогих кроссовок, нет должности, нет подписчиков. Есть только ты — и партнёр который тебя кладёт. Снова и снова. Пока ты не научишься. Это <strong>самая честная обратная связь</strong> которую ты можешь получить о себе.</p>
+    <h3>Ты учишься терпеть</h3>
+    <p>Первые месяцы в зале единоборств — это непрерывное поражение. Тебя душат, бросают, кладут. И ты встаёшь. Идёшь снова. Это не про то как бить. Это про то что ты <strong>не ломаешься</strong>. Этот навык переносится во всё — в бизнес, в отношения, в жизнь.</p>
+    <h3>Меняется то как тебя воспринимают</h3>
+    <p>Люди которые занимаются единоборствами — двигаются иначе. Стоят иначе. Смотрят иначе. Это не поза — это уверенность которая вошла в тело. Агрессоры это считывают инстинктивно и обходят стороной. <strong>Большинство драк не случается именно потому что человек умеет драться.</strong></p>
+
+    <h2>ЗАЩИТА — ЭТО МУЖСКАЯ ФУНКЦИЯ</h2>
+    <p>Тысячелетиями мужчина был щитом. Не потому что так решило общество — потому что так устроена биология. Более высокий тестостерон, больше мышечной массы, выше болевой порог — это не случайность. Это инструменты защитника.</p>
+    <p>Современный мир говорит тебе что эта роль устарела. Что агрессивность — это плохо. Что физическая сила не важна. И пока ты в это веришь — кто-то другой принимает решения за тебя. В том числе решения о безопасности тех кого ты любишь.</p>
+    <blockquote><p>Мужчина без способности защитить — это не мирный человек. Это беспомощный человек который называет беспомощность миром.</p></blockquote>
+
+    <h2>С ЧЕГО НАЧАТЬ — КОНКРЕТНО</h2>
+    <p>Не нужно становиться профессиональным бойцом. Нужно иметь базу. Год регулярных тренировок даёт тебе то что большинство мужиков не имеют никогда.</p>
+    <ul>
+      <li><strong>Самбо или дзюдо</strong> — лучший старт. Научишься падать, бросать, держать позицию. Борьба — самое частое в реальном конфликте.</li>
+      <li><strong>Бокс</strong> — координация, удары, работа ног, характер под давлением. Через 3 месяца ты другой человек.</li>
+      <li><strong>BJJ (бразильское джиу-джитсу)</strong> — работа в партере, удушения, рычаги. Позволяет контролировать человека без травм. Полезно если нужно остановить — а не покалечить.</li>
+      <li><strong>Кикбоксинг или MMA</strong> — комплексно. Руки, ноги, партер. Если выбираешь одно на всё — бери это.</li>
+    </ul>
+    <p>Найди зал рядом. Скажи тренеру что ты новичок. Первая тренировка — почти везде бесплатно. <strong>Просто приди.</strong> Это единственное что нужно сделать сегодня.</p>
+
+    <h2>НАСТОЯЩЕЕ БРАТСТВО РОЖДАЕТСЯ В БОРЬБЕ</h2>
+    <p>Люди которые вместе терпели — связаны иначе. Ты можешь работать с человеком 5 лет и знать его поверхностно. Но после полугода совместных тренировок — ты знаешь его настоящего. Потому что борьба обнажает характер.</p>
+    <p>СТРАЖ — про это. Про мужиков которые не просто читают правильные слова — а действуют. Тренируются. Встречаются. Строят что-то реальное рядом друг с другом.</p>
+    <blockquote><p>Ты либо тот кто защищает — либо тот кого защищают. Выбор за тобой. Но выбор нужно сделать сейчас — потому что когда момент наступит, времени учиться уже не будет.</p></blockquote>
+
+  </div>
+  <!-- ═══════════════════════════════════════════════ -->
+
+
+  <!-- ОТЗЫВЫ — не трогай -->
+  <div class="rev-box">
+    <div class="rev-box-head">
+      <h3>АНОНИМНЫЙ ОТЗЫВ</h3>
+      <span class="avg" id="avgStars"></span>
+    </div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span>
+      <span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span>
+      <span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+
+
+  <!-- ДРУГИЕ ТЕМЫ — не трогай -->
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// ЗАПОЛНИ: укажи ID этой статьи из index.html
+// ═══════════════════════════════════════════════
+const THIS_ID = 4;
+const THIS_CAT = 'fight';
+
+// СПИСОК СТАТЕЙ — копируй из index.html
+// (нужен для блока "Другие темы")
+const ARTICLES = [
+  {id:1, file:'article-001', cat:'girls',  ico:'❤',  title:'Как общаться с девушкой без слабости',          time:'7 мин'},
+  {id:2, file:'article-002', cat:'sport',  ico:'💪',  title:'Программа на силу: 3 дня в неделю',             time:'6 мин'},
+  {id:3, file:'article-003', cat:'health', ico:'🧬',  title:'Тестостерон: как поднять естественно',           time:'8 мин'},
+  {id:4, file:'article-004', cat:'fight',  ico:'⚔',  title:'Почему каждый мужчина должен уметь драться',     time:'7 мин'},
+  {id:5, file:'article-005', cat:'biz',    ico:'💼',  title:'Первые деньги без опыта: честный гайд',          time:'9 мин'},
+  {id:6, file:'article-006', cat:'mind',   ico:'🧠',  title:'Почему большинство мужчин слабые — и как выйти', time:'8 мин'},
+  {id:4, file:'article-004', cat:'fight',  ico:'⚔',   title:'Почему каждый мужчина должен уметь драться', time:'9 мин'},
+  // ДОБАВЛЯЙ СЮДА ↓
+];
+
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+
+// ── Онлайн ──
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+
+// ── Прогресс чтения ──
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;
+  document.getElementById('rp').style.width=Math.min(100,pct)+'%';
+});
+
+// ── Просмотр + прочитано ──
+(function(){
+  const v=gV(); v[THIS_ID]=(v[THIS_ID]||0)+1; sV(v);
+  const r=gR(); r[THIS_ID]=true; sR(r);
+  document.getElementById('views-cnt').textContent=v[THIS_ID];
+  document.getElementById('read-badge').style.display='flex';
+})();
+
+// ── Отзывы ──
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){
+  if(!list.length)return'';
+  const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;
+  return'⭐ '+a.toFixed(1)+' ('+list.length+')';
+}
+function renderRevs(){
+  const list=(gRv()[THIS_ID]||[]);
+  document.getElementById('avgStars').textContent=avgStr(list);
+  const el=document.getElementById('revList');
+  if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}
+  el.innerHTML=list.map(r=>`
+    <div class="rev-item">
+      <div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div>
+      <div class="ri-text">${r.t}</div>
+      <div class="ri-date">${r.d}</div>
+    </div>`).join('');
+}
+function sendRev(){
+  const txt=document.getElementById('revTa').value.trim();
+  if(!curStar){showNotif('⚠ Поставь оценку');return;}
+  if(!txt){showNotif('⚠ Напиши мысль');return;}
+  const rv=gRv();
+  if(!rv[THIS_ID])rv[THIS_ID]=[];
+  rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});
+  sRv(rv);
+  document.getElementById('revTa').value='';curStar=0;
+  document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
+  renderRevs();showNotif('✓ Отзыв отправлен анонимно');
+}
+
+// ── Другие темы ──
+(function(){
+  const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);
+  document.getElementById('nextGrid').innerHTML=others.map(a=>`
+    <a class="next-card" href="${a.file}.html">
+      <div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div>
+      <div class="nc-title">${a.ico} ${a.title}</div>
+      <div class="nc-time">⏱ ${a.time}</div>
+    </a>`).join('');
+})();
+
+// ── Notif ──
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+
+renderRevs();
+</script>
+</body>
+</html>

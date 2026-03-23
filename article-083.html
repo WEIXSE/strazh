@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ВЫНОСЛИВОСТЬ БОЙЦА — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--fight:#C9960A;--fight2:#8C6A06;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--fight2),var(--fight));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:var(--fight);background:rgba(201,150,10,.1);border:1px solid rgba(201,150,10,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.55rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--fight2);padding:1.1rem 1.7rem;background:rgba(201,150,10,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#806010;font-style:italic;margin:0;font-size:.93rem}
+.zone-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin:1.2rem 0}
+.zg{background:var(--card2);border-radius:.4rem;padding:.85rem 1rem;text-align:center}
+.zg.z1{border:1px solid rgba(34,197,94,.2)}.zg.z1 .zlabel{color:var(--green)}
+.zg.z2{border:1px solid rgba(201,150,10,.2)}.zg.z2 .zlabel{color:var(--fight)}
+.zg.z3{border:1px solid rgba(192,39,45,.2)}.zg.z3 .zlabel{color:var(--red)}
+.zlabel{font-family:'Oswald',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:1px;margin-bottom:.25rem}
+.zpct{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:.2rem}
+.zdesc{font-size:.72rem;color:#8090A8;line-height:1.5}
+.protocol-cards{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.pc{background:var(--card2);border:1px solid rgba(201,150,10,.15);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.pc-ico{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.pc strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.1rem}
+.pc span{font-size:.79rem;color:#8090A8;line-height:1.6}
+.week-plan{background:rgba(201,150,10,.04);border:1px solid rgba(201,150,10,.18);border-radius:.45rem;padding:1.1rem 1.5rem;margin:1.4rem 0}
+.week-plan h4{font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:1.5px;color:var(--fight);margin-bottom:.7rem}
+.week-plan li{font-size:.82rem;color:#907840;line-height:1.9}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--fight);color:var(--fight)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.zone-grid{grid-template-columns:1fr}h1{font-size:1.85rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Борьба</span></div>
+    <div class="tag">◆ БОРЬБА</div>
+    <h1>🏃 ВЫНОСЛИВОСТЬ — КАК ТРЕНИРОВАТЬ ДЛЯ БОЯ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 8 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ГАЗ — ГЛАВНОЕ ОРУЖИЕ ЛЮБИТЕЛЯ</h2>
+  <p>В любительском бою выносливость решает больше чем техника. <strong>Уставший боец теряет технику, скорость, реакцию и психологическую устойчивость.</strong> Человек с хорошей базой и отличным газом победит технаря который задыхается на второй минуте.</p>
+  <p>Выносливость бойца — не марафонская и не тяжёлоатлетическая. Это <strong>анаэробно-аэробный микс:</strong> короткие взрывные усилия с неполным восстановлением между ними. Именно это имитирует реальный бой — где ты то взрываешься, то ненадолго восстанавливаешься в клинче или на дистанции.</p>
+
+  <blockquote><p>В бою нет усталых техников. Есть усталые люди которые забыли технику. Строй газ — и техника останется с тобой до последней секунды.</p></blockquote>
+
+  <h2>ТРИ ЗОНЫ — ЧТО СТРОИТЬ</h2>
+  <div class="zone-grid">
+    <div class="zg z1"><div class="zlabel">АЭРОБНАЯ БАЗА</div><div class="zpct">60%</div><div class="zdesc">Долгий бег, плавание, езда. ЧСС 130–150. Фундамент восстановления между раундами</div></div>
+    <div class="zg z2"><div class="zlabel">АНАЭРОБНЫЙ ПОРОГ</div><div class="zpct">30%</div><div class="zdesc">Интервалы, раунды на мешке. ЧСС 160–175. Имитация темпа боя. Главная зона</div></div>
+    <div class="zg z3"><div class="zlabel">ВЗРЫВНАЯ / VO2max</div><div class="zpct">10%</div><div class="zdesc">Спринты, табата. ЧСС 185+. Пиковая мощь. Немного но необходимо</div></div>
+  </div>
+
+  <h2>4 РАБОЧИХ ПРОТОКОЛА</h2>
+  <div class="protocol-cards">
+    <div class="pc"><div class="pc-ico">⏱️</div><div><strong>Раунды на мешке — имитация боя</strong><span>3–5 мин работа / 1 мин отдых × 6–10 раундов. Работай как в спарринге — не лупи без остановки. Комбинации, движение, темп. Лучший кардио-инструмент для бойца.</span></div></div>
+    <div class="pc"><div class="pc-ico">🏃</div><div><strong>Интервальный бег — 400м повторения</strong><span>400м в темпе 80% × 6–8 повторений, отдых 90 сек. Строит анаэробный порог — именно то что нужно во 2–3 раунде. 1–2 раза в неделю.</span></div></div>
+    <div class="pc"><div class="pc-ico">⚡</div><div><strong>Табата — 4 минуты ада</strong><span>20 сек максимум / 10 сек отдых × 8 = 4 мин. Берпи, скакалка, спринт на месте. Строит VO2max. Не злоупотребляй — 1 раз в неделю достаточно.</span></div></div>
+    <div class="pc"><div class="pc-ico">🪢</div><div><strong>Скакалка — недооценённый инструмент</strong><span>10–15 мин непрерывной скакалки = качественное кардио. Добавляет координацию и работу ног. Боксёры не зря начинают с неё каждую тренировку. 5 мин разминка → 10 мин работа.</span></div></div>
+  </div>
+
+  <h2>ПЛАН КАРДИО НА НЕДЕЛЮ</h2>
+  <div class="week-plan">
+    <h4>📅 СОВМЕЩЕНИЕ С ТРЕНИРОВКАМИ ЕДИНОБОРСТВ</h4>
+    <ul>
+      <li><strong>Пн:</strong> Единоборства (техника) + 10 мин скакалка после</li>
+      <li><strong>Вт:</strong> Бег 400м × 6–8 повторений — утром или вечером отдельно</li>
+      <li><strong>Ср:</strong> Единоборства (спарринг) — само по себе лучшее кардио</li>
+      <li><strong>Чт:</strong> Лёгкий аэробный бег 20–30 мин, ЧСС 140. Восстановление</li>
+      <li><strong>Пт:</strong> Единоборства + раунды на мешке 6×3 мин</li>
+      <li><strong>Сб:</strong> Табата или длинный бег 40–50 мин в лёгком темпе</li>
+      <li><strong>Вс:</strong> Полный отдых — без кардио. Нервная система восстанавливается</li>
+    </ul>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=83,CAT='fight';
+const ART=[{id:78,file:'article-078',cat:'fight',ico:'🥊',title:'MMA — С ЧЕГО НАЧАТЬ',time:'9 мин'},{id:82,file:'article-082',cat:'fight',ico:'💪',title:'СИЛОВАЯ ПОДГОТОВКА БОЙЦА',time:'9 мин'},{id:87,file:'article-087',cat:'fight',ico:'🧘',title:'ВОССТАНОВЛЕНИЕ БОЙЦА',time:'8 мин'},{id:90,file:'article-090',cat:'fight',ico:'🔥',title:'ДИСЦИПЛИНА ВОИНА',time:'8 мин'},{id:4,file:'article-004',cat:'fight',ico:'⚔️',title:'ПОЧЕМУ МУЖЧИНА ДОЛЖЕН УМЕТЬ ДРАТЬСЯ',time:'7 мин'},{id:35,file:'article-035',cat:'sport',ico:'🏃',title:'КАК НАЧАТЬ БЕГАТЬ',time:'7 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

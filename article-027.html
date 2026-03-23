@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ПРОКРАСТИНАЦИЯ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+--bg:#03040A;--bg2:#070910;--card:#0A0C15;--card2:#0D1020;
+--border:#161928;--border2:#222640;
+--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+--white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+--green:#22c55e;--blue:#3b82f6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(192,39,45,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(50px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--red),var(--gold2));z-index:999;transition:width .1s linear}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s;letter-spacing:.3px}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;letter-spacing:1px;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+.art-header{margin-bottom:2.8rem}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none}.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;letter-spacing:.4px;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;letter-spacing:.3px;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--gold2);padding:1.2rem 1.8rem;background:rgba(240,194,48,.04);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(240,194,48,.15);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#C0A870;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;letter-spacing:.5px;font-family:inherit}
+.rev-send:hover{border-color:var(--gold2);color:var(--gold)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}
+.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}
+.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem}
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:700px){.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div><div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="art-header">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a><span>/</span>
+      <a href="index.html">Мышление</a><span>/</span>
+      <span>Прокрастинация</span>
+    </div>
+    <div class="art-tag" style="color:#9A9A18;background:rgba(154,154,24,.1);border:1px solid rgba(154,154,24,.2)">◆ МЫШЛЕНИЕ</div>
+    <div class="art-title">⏳ ПРОКРАСТИНАЦИЯ — ЭТО НЕ ЛЕНЬ. ЭТО СТРАХ.</div>
+    <div class="art-meta">
+      <span>📅 22 МАР 2026</span><span>⏱ 9 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <div class="art-body">
+
+    <h2>ЧТО ЭТО НА САМОМ ДЕЛЕ</h2>
+    <p>«Я просто ленивый» — нет. Лень — это когда не хочется и не делаешь, и тебя это устраивает. Прокрастинация — это когда <strong>не делаешь, хотя хочешь, и чувствуешь себя при этом плохо</strong>. Это другое.</p>
+    <p>Исследования показывают: прокрастинация — это <strong>эмоциональная реакция, а не дефицит мотивации</strong>. Ты избегаешь не задачу — ты избегаешь чувства которые с ней связаны. Тревогу. Страх провала. Страх оценки. Перфекционизм.</p>
+
+    <blockquote><p>Прокрастинация — это не про время. Это про то что задача вызывает дискомфорт — и мозг ищет быстрое облегчение.</p></blockquote>
+
+    <h2>4 КОРНЯ ПРОКРАСТИНАЦИИ</h2>
+
+    <h3>1. Страх провала</h3>
+    <p>Пока не начал — не провалился. Мозг защищает самооценку через бездействие. <strong>«Я мог бы сделать — но не успел» звучит лучше чем «я сделал и это плохо».</strong> Это логика защиты эго — она убивает результаты.</p>
+
+    <h3>2. Перфекционизм</h3>
+    <p>«Начну когда буду готов». «Сделаю как надо или никак». Перфекционист не откладывает из лени — он откладывает потому что боится сделать недостаточно хорошо. <strong>Идеальное — враг сделанного.</strong> Готовый черновик лучше несуществующего шедевра.</p>
+
+    <h3>3. Размытость задачи</h3>
+    <p>«Надо разобраться с финансами» — это не задача. Это туман. Мозг не знает с чего начать — и не начинает. <strong>Конкретная задача запускает действие. Абстрактная — парализует.</strong></p>
+
+    <h3>4. Мгновенное вознаграждение</h3>
+    <p>Ролик в телефоне даёт дофамин прямо сейчас. Работа над проектом — через неделю. <strong>Мозг всегда выбирает ближнее вознаграждение.</strong> Это не слабость — это эволюция. Но её можно перехитрить.</p>
+
+    <h2>КАК ПОБЕДИТЬ — КОНКРЕТНО</h2>
+
+    <h3>Правило двух минут</h3>
+    <p>Если задача займёт менее двух минут — делай сейчас. Не записывай, не откладывай. <strong>Сделал — освободил голову.</strong> Большинство «висящих» дел на самом деле двухминутные.</p>
+
+    <h3>Съешь лягушку утром</h3>
+    <p>Самую неприятную задачу дня — первой. Пока сила воли ещё есть. Пока телефон не засосал. <strong>Один тяжёлый шаг с утра — и весь день легче.</strong> Это не метафора — это нейробиология: после завершения сложного мозг выделяет дофамин который заряжает на следующие задачи.</p>
+
+    <h3>Дроби до абсурда</h3>
+    <p>«Написать бизнес-план» → «открыть документ». Правда. Только это. Одно действие настолько маленькое что смешно не сделать. <strong>Начало — это 80% победы над прокрастинацией.</strong> После старта мозг переключается в режим продолжения.</p>
+
+    <h3>Помидор — 25 минут фокуса</h3>
+    <p>Таймер на 25 минут. Только одна задача. Телефон перевёрнут. После — 5 минут перерыв. Четыре помидора — длинный перерыв. <strong>Техника Помодоро работает потому что убирает бесконечность.</strong> «25 минут» — это конкретно и не страшно.</p>
+
+    <h3>Убери соблазны физически</h3>
+    <p>Телефон в другой комнате. Соцсети заблокированы на время работы. Вкладки закрыты. <strong>Сила воли слабеет — среда постоянна.</strong> Убери доступ к быстрому дофамину — и мозг сам переключится на задачу.</p>
+
+    <blockquote><p>Не жди вдохновения. Действие создаёт вдохновение — не наоборот. Начни — и мотивация придёт в процессе.</p></blockquote>
+
+    <h2>ЧТО ДЕЛАТЬ С ПЕРФЕКЦИОНИЗМОМ</h2>
+    <p>Скажи себе: <strong>«Сделаю на 80% — и отправлю»</strong>. Не на 100. Не идеально. Достаточно хорошо. Сделанное на 80% и отправленное — бесконечно ценнее идеального которое никто не увидит.</p>
+    <p>Версия 1.0 хуже версии 2.0. Но версии 2.0 не существует без версии 1.0. <strong>Начни несовершенно. Улучши потом.</strong></p>
+
+    <h2>ИТОГ</h2>
+    <p>Прокрастинация — это не про характер. Это про <strong>эмоциональное избегание и неправильно выстроенную среду</strong>. Убери страх через действие. Дроби задачи. Убери соблазны. Начни прямо сейчас — с одного маленького шага.</p>
+    <p><strong>Не завтра. Не с понедельника. Сейчас. Одно действие.</strong></p>
+
+  </div>
+
+  <div class="rev-box">
+    <div class="rev-box-head"><h3>АНОНИМНЫЙ ОТЗЫВ</h3><span class="avg" id="avgStars"></span></div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+</div>
+<script>
+const THIS_ID=27,THIS_CAT='mind';
+const ARTICLES=[
+  {id:2,file:'article-002',cat:'sport',ico:'💪',title:'ПЛАН ЗАЛА: 3 ДНЯ В НЕДЕЛЮ',time:'6 мин'},
+  {id:6,file:'article-006',cat:'mind',ico:'🧠',title:'ПОЧЕМУ БОЛЬШИНСТВО МУЖЧИН СЛАБЫЕ',time:'8 мин'},
+  {id:14,file:'article-014',cat:'mind',ico:'👑',title:'ВЫБЕРИ СЕБЯ — ТРИ ПРАВИЛА',time:'12 мин'},
+  {id:16,file:'article-016',cat:'girls',ico:'❤',title:'ОНА НЕ ХОЧЕТ ИДЕАЛЬНОГО',time:'9 мин'},
+  {id:20,file:'article-020',cat:'girls',ico:'🔒',title:'РЕВНОСТЬ — ЭТО НЕ ЛЮБОВЬ',time:'9 мин'},
+  {id:24,file:'article-024',cat:'girls',ico:'👁',title:'ПОДОШЁЛ. ПОЗНАКОМИЛСЯ.',time:'9 мин'},
+  {id:25,file:'article-025',cat:'girls',ico:'🛑',title:'ГРАНИЦЫ В ОТНОШЕНИЯХ',time:'9 мин'},
+  {id:26,file:'article-026',cat:'mind',ico:'🧠',title:'ДИСЦИПЛИНА — ЭТО СИСТЕМА',time:'10 мин'},
+];
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+window.addEventListener('scroll',()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rp').style.width=Math.min(100,pct)+'%';});
+(function(){const v=gV();v[THIS_ID]=(v[THIS_ID]||0)+1;sV(v);const r=gR();r[THIS_ID]=true;sR(r);document.getElementById('views-cnt').textContent=v[THIS_ID];document.getElementById('read-badge').style.display='flex';})();
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){if(!list.length)return'';const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;return'⭐ '+a.toFixed(1)+' ('+list.length+')';}
+function renderRevs(){const list=(gRv()[THIS_ID]||[]);document.getElementById('avgStars').textContent=avgStr(list);const el=document.getElementById('revList');if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=list.map(r=>`<div class="rev-item"><div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="ri-text">${r.t}</div><div class="ri-date">${r.d}</div></div>`).join('');}
+function sendRev(){const txt=document.getElementById('revTa').value.trim();if(!curStar){showNotif('⚠ Поставь оценку');return;}if(!txt){showNotif('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[THIS_ID])rv[THIS_ID]=[];rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('revTa').value='';curStar=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));renderRevs();showNotif('✓ Отзыв отправлен анонимно');}
+(function(){const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('nextGrid').innerHTML=others.map(a=>`<a class="next-card" href="${a.file}.html"><div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div><div class="nc-title">${a.ico} ${a.title}</div><div class="nc-time">⏱ ${a.time}</div></a>`).join('');})();
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+renderRevs();
+</script>
+</body>
+</html>

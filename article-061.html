@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ТРАВМЫ В ЗАЛЕ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;
+--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;
+--green:#22c55e;--blue:#3b82f6;--sport:#48A848;--orange:#E07820;
+}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(224,120,32,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(55px)}
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--orange),var(--red));z-index:999;transition:width .1s linear}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none}.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body strong{color:var(--text);font-weight:700}
+.art-body blockquote{border-left:3px solid var(--orange);padding:1.2rem 1.8rem;background:rgba(224,120,32,.04);margin:2.2rem 0;border-radius:0 .4rem .4rem 0}
+.art-body blockquote p{color:#A07040;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.injury-cards{display:flex;flex-direction:column;gap:.7rem;margin:1.3rem 0}
+.inj{background:var(--card2);border:1px solid rgba(192,39,45,.15);border-radius:.45rem;padding:1rem 1.2rem}
+.inj-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem}
+.inj-ico{font-size:1.1rem}
+.inj-title{font-size:.92rem;font-weight:700;color:var(--white)}
+.inj-risk{font-size:.6rem;font-weight:800;letter-spacing:1px;padding:.15rem .5rem;border-radius:.2rem;margin-left:auto}
+.inj-body{font-size:.82rem;color:#8090A8;line-height:1.7;margin-bottom:.5rem}
+.inj-fix{font-size:.78rem;color:#60A070;line-height:1.6}
+.inj-fix::before{content:"✓ ";color:var(--green)}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.3rem 0}
+.rg{background:var(--card2);border:1px solid var(--border);border-radius:.4rem;padding:.95rem 1.1rem}
+.rg-num{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--orange);margin-bottom:.3rem}
+.rg strong{display:block;font-size:.87rem;color:var(--white);margin-bottom:.2rem}
+.rg span{font-size:.78rem;color:#8090A8;line-height:1.6}
+.signal-list{display:flex;flex-direction:column;gap:.55rem;margin:1.3rem 0}
+.sig{background:var(--card2);border-radius:.35rem;padding:.8rem 1.1rem;display:flex;gap:.8rem;align-items:flex-start}
+.sig-ico{flex-shrink:0;font-size:.95rem}
+.sig strong{display:block;font-size:.85rem;color:var(--white);margin-bottom:.1rem}
+.sig span{font-size:.78rem;color:#8090A8;line-height:1.55}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;font-family:inherit}
+.rev-send:hover{border-color:var(--orange);color:var(--orange)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem}
+.next-block{margin-top:3rem}.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.rule-grid{grid-template-columns:1fr}.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.8rem">
+    <div class="art-breadcrumb"><a href="index.html">Главная</a><span>/</span><a href="index.html">Спорт</a><span>/</span><span>Травмы</span></div>
+    <div class="art-tag" style="color:#48A848;background:rgba(72,168,72,.1);border:1px solid rgba(72,168,72,.2)">◆ СПОРТ</div>
+    <div class="art-title">🚑 ТРАВМЫ В ЗАЛЕ — КАК НЕ УБИТЬ СЕБЯ</div>
+    <div class="art-meta">
+      <span>📅 22 МАР 2026</span><span>⏱ 9 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <div class="art-body">
+
+    <h2>ПРАВДА КОТОРУЮ НИКТО НЕ ГОВОРИТ</h2>
+    <p>Большинство травм в зале — не случайность. <strong>Это предсказуемый результат конкретных ошибок:</strong> пропущенная разминка, эго превыше техники, игнор сигналов тела, нулевое восстановление. Почти каждую травму можно было предотвратить. Это значит — ты контролируешь это.</p>
+    <p>Один серьёзный разрыв или грыжа — и ты выпадаешь на 3–12 месяцев. <strong>Год прогресса уничтожается за одну тупую тренировку с неправильным весом.</strong> Стоит ли?</p>
+
+    <blockquote><p>Лучшая программа тренировок — та которую ты можешь делать годами без травм. Не та которая убивает за 3 месяца.</p></blockquote>
+
+    <h2>5 САМЫХ ЧАСТЫХ ТРАВМ И КАК ИХ ИЗБЕЖАТЬ</h2>
+    <div class="injury-cards">
+      <div class="inj">
+        <div class="inj-head">
+          <div class="inj-ico">🔴</div>
+          <div class="inj-title">Поясница — грыжа / растяжение</div>
+          <div class="inj-risk" style="color:var(--red);background:rgba(192,39,45,.1);border:1px solid rgba(192,39,45,.2)">ВЫСОКИЙ РИСК</div>
+        </div>
+        <div class="inj-body">Причина: округлённая спина в становой и приседе, резкий старт без разминки, слишком большой вес. Самая разрушительная травма в зале — восстановление от 3 месяцев до года.</div>
+        <div class="inj-fix">Нейтральный позвоночник всегда. Разминка обязательна. Вес повышай не более 5% в неделю. Учи технику с пустым грифом.</div>
+      </div>
+      <div class="inj">
+        <div class="inj-head">
+          <div class="inj-ico">🟠</div>
+          <div class="inj-title">Плечи — ротаторная манжета</div>
+          <div class="inj-risk" style="color:var(--orange);background:rgba(224,120,32,.1);border:1px solid rgba(224,120,32,.2)">СРЕДНИЙ РИСК</div>
+        </div>
+        <div class="inj-body">Причина: жим лёжа с локтями под 90°, слишком широкий хват, игнор тяг на спину. Дисбаланс жим/тяга = 1:1 по объёму. Большинство жмут много — тянут мало.</div>
+        <div class="inj-fix">Локти под 45–75° в жиме. Равный объём горизонтальных тяг. Ротаторные упражнения раз в неделю. Не форсируй диапазон через боль.</div>
+      </div>
+      <div class="inj">
+        <div class="inj-head">
+          <div class="inj-ico">🟠</div>
+          <div class="inj-title">Колени — сухожилия / мениск</div>
+          <div class="inj-risk" style="color:var(--orange);background:rgba(224,120,32,.1);border:1px solid rgba(224,120,32,.2)">СРЕДНИЙ РИСК</div>
+        </div>
+        <div class="inj-body">Причина: колени вовнутрь в приседе, пятки отрываются, слишком быстрое увеличение нагрузки в беге. Часто провоцируется слабыми ягодичными.</div>
+        <div class="inj-fix">Колени по линии стоп всегда. Разминочные приседания без веса. Растяжка квадрицепсов и сгибателей бедра. Укрепляй ягодичные отдельно.</div>
+      </div>
+      <div class="inj">
+        <div class="inj-head">
+          <div class="inj-ico">🟡</div>
+          <div class="inj-title">Локоть — «локоть теннисиста»</div>
+          <div class="inj-risk" style="color:var(--gold);background:rgba(240,194,48,.08);border:1px solid rgba(240,194,48,.2)">НИЗКИЙ РИСК</div>
+        </div>
+        <div class="inj-body">Причина: слишком много работы на бицепс/трицепс, неправильный хват в тягах, много подтягиваний без прогрессии. Накапливается постепенно — больно потом.</div>
+        <div class="inj-fix">Не более 12–16 подходов на руки в неделю. Нейтральный хват снижает нагрузку. При первом дискомфорте — снизь объём сразу.</div>
+      </div>
+      <div class="inj">
+        <div class="inj-head">
+          <div class="inj-ico">🟡</div>
+          <div class="inj-title">Запястья — воспаление</div>
+          <div class="inj-risk" style="color:var(--gold);background:rgba(240,194,48,.08);border:1px solid rgba(240,194,48,.2)">НИЗКИЙ РИСК</div>
+        </div>
+        <div class="inj-body">Причина: слабые запястья при больших весах в жиме, неправильное положение кисти. Запястье должно быть прямым — не согнутым назад.</div>
+        <div class="inj-fix">Кисть прямо, гриф у основания ладони. Разминка запястий. Бинты при работе с максимальными весами — только для защиты, не как замена технике.</div>
+      </div>
+    </div>
+
+    <h2>8 ПРАВИЛ КОТОРЫЕ ЗАЩИЩАЮТ</h2>
+    <div class="rule-grid">
+      <div class="rg"><div class="rg-num">01</div><strong>Разминка — 10 минут минимум</strong><span>Суставная гимнастика + лёгкое кардио. Холодные мышцы рвутся в 3 раза легче тёплых.</span></div>
+      <div class="rg"><div class="rg-num">02</div><strong>Техника до веса</strong><span>Новый паттерн движения — сначала с пустым грифом. Неделями. Потом вес. Не наоборот.</span></div>
+      <div class="rg"><div class="rg-num">03</div><strong>Прогрессия 5% в неделю</strong><span>Тело адаптируется медленнее чем ты думаешь. Резкий прирост — прямой путь к травме.</span></div>
+      <div class="rg"><div class="rg-num">04</div><strong>Боль ≠ прогресс</strong><span>Жжение мышц — нормально. Острая боль в суставе — стоп. Мышцы восстанавливаются. Сухожилия — месяцами.</span></div>
+      <div class="rg"><div class="rg-num">05</div><strong>Сон как обязательный элемент</strong><span>Восстановление тканей идёт ночью. Недосып = хронический воспалительный фон = риск травмы.</span></div>
+      <div class="rg"><div class="rg-num">06</div><strong>Баланс групп мышц</strong><span>На каждый жим — тяга. На каждый квадрицепс — бицепс бедра. Дисбаланс = перекос = травма.</span></div>
+      <div class="rg"><div class="rg-num">07</div><strong>Слушай тело, не эго</strong><span>«Ещё один подход» через усталость и боль — причина половины травм. Уйди с тренировки вовремя.</span></div>
+      <div class="rg"><div class="rg-num">08</div><strong>Деload каждые 4–6 недель</strong><span>Неделя с 40–50% веса. Соединительная ткань восстанавливается. Возвращаешься сильнее — не слабее.</span></div>
+    </div>
+
+    <h2>СИГНАЛЫ СТОП — НЕМЕДЛЕННО ОСТАНАВЛИВАЙСЯ</h2>
+    <div class="signal-list">
+      <div class="sig"><div class="sig-ico">🛑</div><div><strong>Острая или «стреляющая» боль</strong><span>Особенно в позвоночнике, колене, плече. Не «перетерпи» — это тело говорит что что-то рвётся.</span></div></div>
+      <div class="sig"><div class="sig-ico">🛑</div><div><strong>Щелчок с болью</strong><span>Щелчок без боли — нормально (газ в суставе). Щелчок + боль = возможный разрыв. Врач.</span></div></div>
+      <div class="sig"><div class="sig-ico">🛑</div><div><strong>Онемение или покалывание</strong><span>В руках при работе со спиной, в ногах при приседе — сигнал нервного защемления. Немедленно стоп.</span></div></div>
+      <div class="sig"><div class="sig-ico">⚠️</div><div><strong>Боль которая не проходит 48 часов</strong><span>После тренировки мышцы болят 24–72 часа — это нормально. Суставная боль дольше — сигнал проблемы.</span></div></div>
+    </div>
+
+  </div>
+
+  <div class="rev-box">
+    <div class="rev-box-head"><h3>АНОНИМНЫЙ ОТЗЫВ</h3><span class="avg" id="avgStars"></span></div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+</div>
+<script>
+const THIS_ID=61,THIS_CAT='sport';
+const ARTICLES=[
+  {id:2,file:'article-002',cat:'sport',ico:'💪',title:'ПЛАН ЗАЛА: 3 ДНЯ В НЕДЕЛЮ',time:'6 мин'},
+  {id:43,file:'article-043',cat:'sport',ico:'🧘',title:'РАСТЯЖКА — ЗАЧЕМ И КАК',time:'7 мин'},
+  {id:59,file:'article-059',cat:'sport',ico:'🔥',title:'КАРДИО',time:'9 мин'},
+  {id:60,file:'article-060',cat:'sport',ico:'💊',title:'ДОБАВКИ',time:'9 мин'},
+  {id:49,file:'article-049',cat:'fight',ico:'🏋️',title:'ФИЗПОДГОТОВКА БОЙЦА',time:'9 мин'},
+  {id:26,file:'article-026',cat:'mind',ico:'🧠',title:'ДИСЦИПЛИНА — ЭТО СИСТЕМА',time:'10 мин'},
+  {id:7,file:'article-007',cat:'health',ico:'🍽',title:'ПИТАНИЕ — ФУНДАМЕНТ',time:'9 мин'},
+  {id:55,file:'article-055',cat:'fight',ico:'🧱',title:'ДЕРЖАТЬ УДАР',time:'9 мин'},
+];
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+window.addEventListener('scroll',()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rp').style.width=Math.min(100,pct)+'%';});
+(function(){const v=gV();v[THIS_ID]=(v[THIS_ID]||0)+1;sV(v);const r=gR();r[THIS_ID]=true;sR(r);document.getElementById('views-cnt').textContent=v[THIS_ID];document.getElementById('read-badge').style.display='flex';})();
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){if(!list.length)return'';const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;return'⭐ '+a.toFixed(1)+' ('+list.length+')';}
+function renderRevs(){const list=(gRv()[THIS_ID]||[]);document.getElementById('avgStars').textContent=avgStr(list);const el=document.getElementById('revList');if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=list.map(r=>`<div class="rev-item"><div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="ri-text">${r.t}</div><div class="ri-date">${r.d}</div></div>`).join('');}
+function sendRev(){const txt=document.getElementById('revTa').value.trim();if(!curStar){showNotif('⚠ Поставь оценку');return;}if(!txt){showNotif('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[THIS_ID])rv[THIS_ID]=[];rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('revTa').value='';curStar=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));renderRevs();showNotif('✓ Отзыв отправлен анонимно');}
+(function(){const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('nextGrid').innerHTML=others.map(a=>`<a class="next-card" href="${a.file}.html"><div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div><div class="nc-title">${a.ico} ${a.title}</div><div class="nc-time">⏱ ${a.time}</div></a>`).join('');})();
+let nT;function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+renderRevs();
+</script>
+</body>
+</html>

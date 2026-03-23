@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- ══════════════════════════════════════════
+     ШАБЛОН СТАТЬИ — СТРАЖ
+     Как использовать:
+     1. Скопируй этот файл
+     2. Переименуй: article-007.html и т.д.
+     3. Замени всё между ═══ ЗАПОЛНИ ═══ метками
+     4. Положи рядом с index.html
+     5. Добавь запись в ARTICLES в index.html
+════════════════════════════════════════════ -->
+<title>ПЛАН ЗАЛА 3 ДНЯ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#03040A;--bg2:#070910;--card:#0A0C15;--card2:#0D1020;
+  --border:#161928;--border2:#222640;
+  --gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+  --white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+  --green:#22c55e;--blue:#3b82f6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(192,39,45,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(50px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+
+/* PROGRESS BAR TOP */
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--red),var(--gold2));z-index:999;transition:width .1s linear}
+
+/* NAV */
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s;letter-spacing:.3px}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;letter-spacing:1px;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+
+/* LAYOUT */
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+
+/* HEADER */
+.art-header{margin-bottom:2.8rem}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none;transition:.15s}
+.art-breadcrumb a:hover{color:var(--muted)}
+.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem;letter-spacing:-.01em}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;letter-spacing:.4px;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+
+/* BODY */
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;letter-spacing:.3px;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul,.art-body ol{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--red2);padding:1.2rem 1.8rem;background:rgba(192,39,45,.05);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(192,39,45,.2);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#C0A870;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+
+/* REVIEW */
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;transition:.15s;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-ta:focus{border-color:rgba(192,39,45,.4)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;letter-spacing:.5px;font-family:inherit}
+.rev-send:hover{border-color:var(--red2);color:var(--red)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}
+.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;letter-spacing:2px;margin-bottom:.3rem}
+.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}
+.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem;font-weight:500}
+
+/* NEXT ARTICLES */
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem;font-weight:500}
+
+/* NOTIF */
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+
+@media(max-width:700px){.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div>
+<div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ═══════════════════════════════════════════════
+       ЗАПОЛНИ: ШАПКА СТАТЬИ
+  ════════════════════════════════════════════════ -->
+  <div class="art-header">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a>
+      <span>/</span>
+      <a href="index.html">Спорт</a>
+      <span>/</span>
+      <span>План зала 3 дня</span>
+    </div>
+
+    <!-- ЗАПОЛНИ: цвет и название категории -->
+    <div class="art-tag" style="color:#48A848;background:rgba(72,168,72,.1);border:1px solid rgba(72,168,72,.2)">◈ СПОРТ</div>
+
+    <!-- ЗАПОЛНИ: заголовок -->
+    <div class="art-title">🏋️ ПЛАН ЗАЛА: 3 ДНЯ В НЕДЕЛЮ — ОТ СТРАЖ</div>
+
+    <div class="art-meta">
+      <!-- ЗАПОЛНИ: дата и время -->
+      <span>📅 22 МАР 2026</span>
+      <span>⏱ 9 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <!-- ════════════════════════════════════════════ -->
+
+
+  <!-- ═══════════════════════════════════════════════
+       ЗАПОЛНИ: ТЕКСТ СТАТЬИ
+       Используй теги: <h2> <h3> <p> <ul><li> <blockquote><p> <strong>
+  ════════════════════════════════════════════════ -->
+  <div class="art-body" id="artBody">
+    <h2>ПОЧЕМУ 3 ДНЯ — ИДЕАЛЬНО</h2>
+    <p>Многие думают чем больше тренируешься — тем быстрее растёт мышца. Это ошибка которая стоила прогресса миллионам мужиков. <strong>Мышца растёт не во время тренировки — а после неё, во время восстановления.</strong> Тренировка — это только стимул. Рост — это сон, еда, отдых.</p>
+    <p>3 дня через день — это золотой стандарт для натурального атлета. Достаточно стресса чтобы мышца адаптировалась. Достаточно отдыха чтобы она выросла.</p>
+    <blockquote><p>Если ты не растёшь — скорее всего ты либо мало ешь, либо мало спишь. Не мало тренируешься.</p></blockquote>
+
+    <h2>ДЕНЬ 1 — ГРУДЬ + БИЦЕПС + ПРЕСС</h2>
+    <p>Начало недели — грудь и бицепс. Жмёшь — бицепс помогает. Тянешь — трицепс. Поэтому грудь и бицепс в один день — правильное сочетание, они не мешают друг другу.</p>
+    <ul>
+      <li><strong>Жим гантелей лёжа</strong> — 4×10. Основное движение. Опускай медленно (3 секунды вниз), взрывай вверх. Чувствуй грудь — не плечи.</li>
+      <li><strong>Разводка гантелей</strong> — 3×12. Максимальное растяжение грудной. В нижней точке держи 1 секунду — это важно.</li>
+      <li><strong>Отжимания с паузой</strong> — 3×max. В нижней точке держи 2 секунды. Убивает грудь лучше тренажёра.</li>
+      <li><strong>Сгибания рук со штангой</strong> — 4×10. Локти не двигаются. Только предплечье. Сверху — сожми как будто хочешь раздавить штангу.</li>
+      <li><strong>Молотки с гантелями</strong> — 3×12. Добивает длинную головку бицепса. Руки мощнее и объёмнее.</li>
+      <li><strong>Скручивания на пресс</strong> — 4×25. Не тяни шею — тяни рёбра к тазу. После последнего подхода — планка 60 секунд без остановки.</li>
+    </ul>
+    <p>⚡ <strong>Финишер дня 1:</strong> после всего — 3 подхода отжиманий до отказа с паузой 30 секунд между ними. Грудь должна гореть.</p>
+
+    <h2>ДЕНЬ 2 — ПЛЕЧИ + ТРИЦЕПС</h2>
+    <p>Плечи — самая травмоопасная зона. Разминай их дольше чем всё остальное. 2-3 минуты кругов руками, вращений, резиновая лента перед рабочими весами — обязательно.</p>
+    <ul>
+      <li><strong>Жим штанги/гантелей стоя</strong> — 4×8. Стоя — не сидя. Стоя подключает весь кор и даёт больший выброс тестостерона. Ноги на ширине плеч, спина прямая.</li>
+      <li><strong>Подъём гантелей в стороны</strong> — 4×15. Маленький вес — идеальная техника. Локти чуть согнуты. Поднимай до параллели с полом, не выше.</li>
+      <li><strong>Подъём гантелей перед собой</strong> — 3×12. Поочерёдно. Прорабатывает переднюю дельту — она создаёт объём плеча спереди.</li>
+      <li><strong>Французский жим лёжа</strong> — 4×10. Локти смотрят строго вверх. Опускай штангу ко лбу медленно. Взрывай вверх. Трицепс — это 2/3 объёма руки.</li>
+      <li><strong>Отжимания на брусьях</strong> — 4×max. Корпус вертикально — трицепс. Корпус наклонён вперёд — грудь. Нам нужен вертикальный.</li>
+      <li><strong>Жим книзу на блоке или с резиной</strong> — 3×15. Добивает трицепс в пике. Руки прижаты к телу.</li>
+    </ul>
+    <p>⚡ <strong>Финишер дня 2:</strong> отжимания узким хватом — 3 подхода до отказа. Отдых 20 секунд между подходами. Руки будут гореть — это нормально.</p>
+
+    <h2>ДЕНЬ 3 — СПИНА + НОГИ</h2>
+    <p>Ноги и спина — самые большие мышечные группы. Тренировка этих групп даёт максимальный выброс тестостерона и гормона роста. Если ты пропускаешь ноги — ты пропускаешь половину своего прогресса.</p>
+    <ul>
+      <li><strong>Приседания со штангой</strong> — 4×8. Таз назад и вниз. Колени не заваливаются внутрь. Опускайся ниже параллели — это включает ягодицы и бицепс бедра полностью. Пояс если вес серьёзный.</li>
+      <li><strong>Румынская тяга</strong> — 3×10. Спина прямая, таз назад, штанга ведётся по ногам. Тянешь не спиной — тянешь задней поверхностью бедра. Растяжение внизу — обязательно.</li>
+      <li><strong>Подтягивания широким хватом</strong> — 4×max. Если не можешь — резиновая лента в помощь. Тянешь лопатки вниз и к позвоночнику. Грудь к перекладине, не подбородок.</li>
+      <li><strong>Тяга гантели в наклоне</strong> — 3×12 на каждую руку. Тянешь локоть к потолку. В верхней точке — задержка 1 секунда. Прокачивает середину спины и формирует V-образный торс.</li>
+      <li><strong>Гиперэкстензия</strong> — 3×15. Разгибатели спины — это твой щит от травм. Без них — рано или поздно получишь грыжу.</li>
+    </ul>
+    <p>⚡ <strong>Финишер дня 3:</strong> выпады с гантелями — 3 круга по 10 шагов каждой ногой без остановки. Ноги должны гореть так что еле идёшь домой.</p>
+
+    <h2>ПРАВИЛА КОТОРЫЕ УМНОЖАЮТ РЕЗУЛЬТАТ</h2>
+    <h3>Прогрессия нагрузки</h3>
+    <p>Каждую неделю добавляй <strong>2.5 кг</strong> на штангу или <strong>1 повтор</strong> в каждом подходе. Без прогрессии — нет роста. Тело адаптируется к нагрузке и перестаёт меняться.</p>
+    <h3>Темп повторений</h3>
+    <p><strong>3-1-1</strong> — три секунды вниз (эксцентрика), одна секунда пауза, одна секунда вверх. Медленная эксцентрика рвёт мышцу сильнее. Больше микроразрывов — больше роста.</p>
+    <h3>Отдых между подходами</h3>
+    <p>Базовые упражнения (присед, жим, тяга) — <strong>2-3 минуты</strong>. Изолированные — <strong>60-90 секунд</strong>. Не сиди в телефоне 5 минут — теряешь накачку и время.</p>
+    <h3>Разминка и заминка</h3>
+    <p>5-10 минут кардио перед тренировкой — разогрев суставов и связок. 5-10 минут растяжки после — ускоряет восстановление и снижает крепатуру.</p>
+
+    <h2>ЕДА — БЕЗ НЕЁ ПЛАН НЕ РАБОТАЕТ</h2>
+    <ul>
+      <li><strong>Белок: 1.8–2г на кг веса</strong> — яйца, куриная грудка, творог, говядина, рыба. Без белка мышцам не из чего расти.</li>
+      <li><strong>Углеводы до тренировки</strong> — каша, рис, гречка за 1.5-2 часа до зала. Это топливо.</li>
+      <li><strong>Белок после тренировки</strong> — в течение 30-60 минут. Творог, яйца, протеиновый коктейль.</li>
+      <li><strong>Вода</strong> — минимум 2.5 литра в день. Во время тренировки — пей между подходами.</li>
+    </ul>
+    <blockquote><p>Зал строит форму. Кухня строит тело. Сон строит мышцы. Все три — или никак.</p></blockquote>
+
+  </div>
+  <!-- ═══════════════════════════════════════════════ -->
+
+
+  <!-- ОТЗЫВЫ — не трогай -->
+  <div class="rev-box">
+    <div class="rev-box-head">
+      <h3>АНОНИМНЫЙ ОТЗЫВ</h3>
+      <span class="avg" id="avgStars"></span>
+    </div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span>
+      <span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span>
+      <span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+
+
+  <!-- ДРУГИЕ ТЕМЫ — не трогай -->
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// ЗАПОЛНИ: укажи ID этой статьи из index.html
+// ═══════════════════════════════════════════════
+const THIS_ID = 2;
+const THIS_CAT = 'sport';
+
+// СПИСОК СТАТЕЙ — копируй из index.html
+// (нужен для блока "Другие темы")
+const ARTICLES = [
+  {id:1, file:'article-001', cat:'girls',  ico:'❤',  title:'Как общаться с девушкой без слабости',          time:'7 мин'},
+  {id:2, file:'article-002', cat:'sport',  ico:'💪',  title:'Программа на силу: 3 дня в неделю',             time:'6 мин'},
+  {id:3, file:'article-003', cat:'health', ico:'🧬',  title:'Тестостерон: как поднять естественно',           time:'8 мин'},
+  {id:4, file:'article-004', cat:'fight',  ico:'⚔',  title:'Почему каждый мужчина должен уметь драться',     time:'7 мин'},
+  {id:5, file:'article-005', cat:'biz',    ico:'💼',  title:'Первые деньги без опыта: честный гайд',          time:'9 мин'},
+  {id:6, file:'article-006', cat:'mind',   ico:'🧠',  title:'Почему большинство мужчин слабые — и как выйти', time:'8 мин'},
+  {id:2, file:'article-002', cat:'sport',  ico:'🏋️',  title:'План зала: 3 дня в неделю — от СТРАЖ', time:'9 мин'},
+  // ДОБАВЛЯЙ СЮДА ↓
+];
+
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+
+// ── Онлайн ──
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+
+// ── Прогресс чтения ──
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;
+  document.getElementById('rp').style.width=Math.min(100,pct)+'%';
+});
+
+// ── Просмотр + прочитано ──
+(function(){
+  const v=gV(); v[THIS_ID]=(v[THIS_ID]||0)+1; sV(v);
+  const r=gR(); r[THIS_ID]=true; sR(r);
+  document.getElementById('views-cnt').textContent=v[THIS_ID];
+  document.getElementById('read-badge').style.display='flex';
+})();
+
+// ── Отзывы ──
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){
+  if(!list.length)return'';
+  const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;
+  return'⭐ '+a.toFixed(1)+' ('+list.length+')';
+}
+function renderRevs(){
+  const list=(gRv()[THIS_ID]||[]);
+  document.getElementById('avgStars').textContent=avgStr(list);
+  const el=document.getElementById('revList');
+  if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}
+  el.innerHTML=list.map(r=>`
+    <div class="rev-item">
+      <div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div>
+      <div class="ri-text">${r.t}</div>
+      <div class="ri-date">${r.d}</div>
+    </div>`).join('');
+}
+function sendRev(){
+  const txt=document.getElementById('revTa').value.trim();
+  if(!curStar){showNotif('⚠ Поставь оценку');return;}
+  if(!txt){showNotif('⚠ Напиши мысль');return;}
+  const rv=gRv();
+  if(!rv[THIS_ID])rv[THIS_ID]=[];
+  rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});
+  sRv(rv);
+  document.getElementById('revTa').value='';curStar=0;
+  document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
+  renderRevs();showNotif('✓ Отзыв отправлен анонимно');
+}
+
+// ── Другие темы ──
+(function(){
+  const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);
+  document.getElementById('nextGrid').innerHTML=others.map(a=>`
+    <a class="next-card" href="${a.file}.html">
+      <div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div>
+      <div class="nc-title">${a.ico} ${a.title}</div>
+      <div class="nc-time">⏱ ${a.time}</div>
+    </a>`).join('');
+})();
+
+// ── Notif ──
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+
+renderRevs();
+</script>
+</body>
+</html>

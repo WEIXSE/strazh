@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ПЕРЕГОВОРЫ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+--bg:#03040A;--card:#0A0C15;--card2:#0D1020;
+--border:#161928;--border2:#222640;
+--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+--white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+--green:#22c55e;--blue:#3b82f6;--purple:#8060B0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(128,96,176,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(55px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold));z-index:999;transition:width .1s linear}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none}.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--gold2);padding:1.2rem 1.8rem;background:rgba(201,150,10,.04);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(201,150,10,.15);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#B09050;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+.tactic-list{display:flex;flex-direction:column;gap:.8rem;margin:1.3rem 0}
+.tac{background:var(--card2);border:1px solid var(--border);border-radius:.45rem;padding:1.1rem 1.3rem}
+.tac-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem}
+.tac-num{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--gold2);min-width:1.8rem}
+.tac-title{font-size:.92rem;font-weight:700;color:var(--white)}
+.tac-body{font-size:.82rem;color:#8090A8;line-height:1.7;margin-bottom:.55rem}
+.tac-example{background:rgba(201,150,10,.04);border-left:2px solid rgba(201,150,10,.25);padding:.5rem .9rem;border-radius:0 .3rem .3rem 0;font-size:.79rem;color:#A09070;line-height:1.6;font-style:italic}
+.mistake-row{display:flex;gap:1rem;background:var(--card2);border:1px solid rgba(192,39,45,.15);border-radius:.4rem;padding:.9rem 1.1rem;margin-bottom:.6rem}
+.mr-ico{font-size:1.1rem;flex-shrink:0}
+.mr-body strong{display:block;font-size:.87rem;color:var(--white);margin-bottom:.12rem}
+.mr-body span{font-size:.8rem;color:#8090A8;line-height:1.6}
+.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1.3rem 0}
+.pg-box{background:var(--card2);border:1px solid var(--border);border-radius:.4rem;padding:.9rem 1rem;text-align:center}
+.pg-box .p-num{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:700;color:var(--border2);margin-bottom:.2rem}
+.pg-box h4{font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+.pg-box p{font-size:.73rem;color:#7080A0;line-height:1.5;margin:0}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;font-family:inherit}
+.rev-send:hover{border-color:var(--gold2);color:var(--gold2)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem}
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.phase-grid{grid-template-columns:1fr 1fr}.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div><div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.8rem">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a><span>/</span>
+      <a href="index.html">Бизнес</a><span>/</span>
+      <span>Переговоры</span>
+    </div>
+    <div class="art-tag" style="color:#8060B0;background:rgba(128,96,176,.1);border:1px solid rgba(128,96,176,.2)">◆ БИЗНЕС</div>
+    <div class="art-title">🤝 ПЕРЕГОВОРЫ — КАК ПОЛУЧАТЬ ЧТО ХОЧЕШЬ</div>
+    <div class="art-meta">
+      <span>📅 22 МАР 2026</span><span>⏱ 10 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <div class="art-body">
+
+    <h2>ПЕРЕГОВОРЫ — ЭТО НЕ СПОР</h2>
+    <p>Большинство людей путают переговоры с давлением или победой. <strong>Настоящие переговоры — это управление восприятием, интересами и информацией.</strong> Цель не сломить оппонента, а найти решение в котором ты получаешь что тебе нужно — и другая сторона чувствует что тоже выиграла.</p>
+    <p>Переговоры происходят везде: зарплата, цена на рынке, условия сделки, конфликт с партнёром. <strong>Тот кто умеет договариваться — живёт лучше.</strong> Это не врождённое — это навык.</p>
+
+    <blockquote><p>Переговоры выигрывает не тот кто громче, а тот кто лучше подготовлен и меньше боится тишины.</p></blockquote>
+
+    <h2>3 ФАЗЫ ЛЮБЫХ ПЕРЕГОВОРОВ</h2>
+    <div class="phase-grid">
+      <div class="pg-box">
+        <div class="p-num" style="color:var(--blue)">1</div>
+        <h4>ПОДГОТОВКА</h4>
+        <p>Знай свой минимум (BATNA), знай интересы другой стороны, определи диапазон — до того как сесть за стол.</p>
+      </div>
+      <div class="pg-box">
+        <div class="p-num" style="color:var(--gold2)">2</div>
+        <h4>ТОРГ</h4>
+        <p>Управляй темпом, задавай вопросы, слушай больше чем говоришь, используй тишину как инструмент давления.</p>
+      </div>
+      <div class="pg-box">
+        <div class="p-num" style="color:var(--green)">3</div>
+        <h4>ЗАКРЫТИЕ</h4>
+        <p>Зафиксируй договорённость письменно. Не меняй условия после рукопожатия. Сохрани отношения — мир тесен.</p>
+      </div>
+    </div>
+
+    <h2>7 ТАКТИК КОТОРЫЕ РАБОТАЮТ</h2>
+    <div class="tactic-list">
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">01</div><div class="tac-title">ЯКОРЕНИЕ — НАЗОВИ ПЕРВЫМ</div></div>
+        <div class="tac-body">Первое названное число становится точкой отсчёта для всей дальнейшей торговли. Кто называет первым — тот задаёт диапазон. Называй выше желаемого — это даёт пространство для уступки.</div>
+        <div class="tac-example">«Стоимость моих услуг — 150 000 рублей» (хочешь 100к) → торг пойдёт в зоне 100–130к, а не 60–80к.</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">02</div><div class="tac-title">МОЛЧАНИЕ ПОСЛЕ ЦЕНЫ</div></div>
+        <div class="tac-body">Назвал условие — замолчи. Большинство людей не выносят паузу и начинают заполнять её уступками. Тишина — бесплатный инструмент давления. Не объясняй цену сразу.</div>
+        <div class="tac-example">«Моя цена — 200 000.» [пауза 5–10 секунд] Пусть они говорят первыми.</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">03</div><div class="tac-title">«ЕСЛИ… ТО» — УСЛОВНЫЕ УСТУПКИ</div></div>
+        <div class="tac-body">Никогда не давай уступку просто так. Каждая уступка с твоей стороны должна сопровождаться встречным условием. Это создаёт ощущение равноценного обмена и защищает от бесконечного давления.</div>
+        <div class="tac-example">«Если вы оплатите сразу и полностью — я готов сделать скидку 10%.»</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">04</div><div class="tac-title">BATNA — ЛУЧШАЯ АЛЬТЕРНАТИВА</div></div>
+        <div class="tac-body">Before Any Negotiated Agreement — что ты будешь делать если договориться не удастся? Чем сильнее твоя BATNA — тем меньше ты зависишь от этой сделки — тем увереннее держишь позицию. Готовь запасной вариант до переговоров.</div>
+        <div class="tac-example">Перед переговорами о зарплате — получи оффер от конкурента. Даже если не собираешься уходить.</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">05</div><div class="tac-title">ФОКУС НА ИНТЕРЕСАХ, НЕ ПОЗИЦИЯХ</div></div>
+        <div class="tac-body">Позиция: «Хочу 100 000». Интерес: «Хочу покрыть ипотеку и иметь подушку». Когда понимаешь реальный интерес — появляются нестандартные решения. Спрашивай «Почему это важно для вас?» вместо борьбы за цифры.</div>
+        <div class="tac-example">Клиент хочет скидку → реальный интерес — уложиться в бюджет → предложи рассрочку вместо скидки.</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">06</div><div class="tac-title">«НЕТ» КАК НАЧАЛО, НЕ КОНЕЦ</div></div>
+        <div class="tac-body">«Нет» — не провал, это начало настоящих переговоров. После «нет» спрашивай: «Что должно измениться чтобы это стало возможным?» Это переводит разговор из тупика в решение.</div>
+        <div class="tac-example">«Нас не устраивает цена» → «Что именно не устраивает — сумма или условия оплаты?»</div>
+      </div>
+
+      <div class="tac">
+        <div class="tac-head"><div class="tac-num">07</div><div class="tac-title">ДЕДЛАЙН — РЕАЛЬНЫЙ ИЛИ ОЩУЩАЕМЫЙ</div></div>
+        <div class="tac-body">Люди принимают решения под давлением времени. Создавай ограничения — реальные когда они есть, ощущаемые через фреймирование. Но не блефуй там где проверят — репутация дороже одной сделки.</div>
+        <div class="tac-example">«Это предложение актуально до пятницы — после у меня другие договорённости.»</div>
+      </div>
+
+    </div>
+
+    <h2>5 ОШИБОК КОТОРЫЕ СТОЯТ ДЕНЕГ</h2>
+    <div class="mistake-row"><div class="mr-ico">❌</div><div class="mr-body"><strong>Говоришь слишком много</strong><span>Каждое лишнее слово — информация для другой стороны. Говори меньше чем хочется. Задавай вопросы и слушай.</span></div></div>
+    <div class="mistake-row"><div class="mr-ico">❌</div><div class="mr-body"><strong>Соглашаешься на первое предложение</strong><span>Даже если оно хорошее — всегда делай встречное. Продавец который сразу соглашается вызывает подозрение что цена была завышена.</span></div></div>
+    <div class="mistake-row"><div class="mr-ico">❌</div><div class="mr-body"><strong>Нет BATNA — переговариваешься с позиции нужды</strong><span>«Мне очень нужна эта работа» — потеря всей переговорной силы. Всегда имей альтернативу до начала разговора.</span></div></div>
+    <div class="mistake-row"><div class="mr-ico">❌</div><div class="mr-body"><strong>Даёшь уступки без встречного условия</strong><span>«Ладно, сделаю дешевле» — обесценивает и тебя и твой продукт. Условная уступка сохраняет ценность.</span></div></div>
+    <div class="mistake-row"><div class="mr-ico">❌</div><div class="mr-body"><strong>Боишься спросить прямо</strong><span>«Можете ли вы поднять оффер?» — большинство людей никогда не спрашивают. А ответ чаще «да» чем ты думаешь.</span></div></div>
+
+    <blockquote><p>Самое дорогое слово в переговорах — то которое ты не сказал. Проси больше чем хочешь — худшее что услышишь это «нет».</p></blockquote>
+
+    <h2>ИТОГ</h2>
+    <p>Подготовься (знай BATNA и минимум), якорь первым, молчи после цены, давай уступки только условно. <strong>Один разговор о зарплате применив эти принципы может принести больше чем год работы.</strong> Переговоры — самый высокий ROI навык для мужчины.</p>
+
+  </div>
+
+  <div class="rev-box">
+    <div class="rev-box-head"><h3>АНОНИМНЫЙ ОТЗЫВ</h3><span class="avg" id="avgStars"></span></div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+</div>
+<script>
+const THIS_ID=52,THIS_CAT='biz';
+const ARTICLES=[
+  {id:50,file:'article-050',cat:'biz',ico:'💰',title:'КАК ЗАРАБАТЫВАТЬ ВНЕ ЗАРПЛАТЫ',time:'11 мин'},
+  {id:51,file:'article-051',cat:'biz',ico:'👁',title:'КАК ЧИТАТЬ ЛЮДЕЙ',time:'10 мин'},
+  {id:47,file:'article-047',cat:'fight',ico:'😤',title:'СТРАХ ПЕРЕД БОЕМ',time:'9 мин'},
+  {id:48,file:'article-048',cat:'fight',ico:'🥊',title:'ПЕРВЫЙ СПАРРИНГ',time:'8 мин'},
+  {id:26,file:'article-026',cat:'mind',ico:'🧠',title:'ДИСЦИПЛИНА — ЭТО СИСТЕМА',time:'10 мин'},
+  {id:28,file:'article-028',cat:'mind',ico:'🏆',title:'МЫШЛЕНИЕ ПОБЕДИТЕЛЯ',time:'10 мин'},
+  {id:33,file:'article-033',cat:'mind',ico:'🎯',title:'ЦЕЛИ КОТОРЫЕ РАБОТАЮТ',time:'10 мин'},
+  {id:34,file:'article-034',cat:'mind',ico:'⚡',title:'СТРЕСС — КАК УПРАВЛЯТЬ',time:'9 мин'},
+];
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+window.addEventListener('scroll',()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rp').style.width=Math.min(100,pct)+'%';});
+(function(){const v=gV();v[THIS_ID]=(v[THIS_ID]||0)+1;sV(v);const r=gR();r[THIS_ID]=true;sR(r);document.getElementById('views-cnt').textContent=v[THIS_ID];document.getElementById('read-badge').style.display='flex';})();
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){if(!list.length)return'';const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;return'⭐ '+a.toFixed(1)+' ('+list.length+')';}
+function renderRevs(){const list=(gRv()[THIS_ID]||[]);document.getElementById('avgStars').textContent=avgStr(list);const el=document.getElementById('revList');if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=list.map(r=>`<div class="rev-item"><div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="ri-text">${r.t}</div><div class="ri-date">${r.d}</div></div>`).join('');}
+function sendRev(){const txt=document.getElementById('revTa').value.trim();if(!curStar){showNotif('⚠ Поставь оценку');return;}if(!txt){showNotif('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[THIS_ID])rv[THIS_ID]=[];rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('revTa').value='';curStar=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));renderRevs();showNotif('✓ Отзыв отправлен анонимно');}
+(function(){const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('nextGrid').innerHTML=others.map(a=>`<a class="next-card" href="${a.file}.html"><div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div><div class="nc-title">${a.ico} ${a.title}</div><div class="nc-time">⏱ ${a.time}</div></a>`).join('');})();
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+renderRevs();
+</script>
+</body>
+</html>

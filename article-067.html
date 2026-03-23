@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>АНАЛИЗЫ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--health:#3A7EC0;--teal:#20A080;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--health),var(--teal));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:#3A7EC0;background:rgba(58,126,192,.1);border:1px solid rgba(58,126,192,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--health);padding:1.1rem 1.7rem;background:rgba(58,126,192,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#507090;font-style:italic;margin:0;font-size:.93rem}
+.test-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.82rem}
+.test-table th{font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:1.5px;color:var(--dim);font-weight:600;padding:.6rem .9rem;border-bottom:1px solid var(--border2);text-align:left}
+.test-table td{padding:.7rem .9rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.test-table tr:last-child td{border-bottom:none}
+.test-table tr:hover td{background:rgba(58,126,192,.03)}
+.tn{color:var(--white);font-weight:600}
+.tw{color:#7090A8}
+.tp{color:#508070;font-size:.75rem}
+.badge{display:inline-block;font-size:.55rem;font-weight:800;letter-spacing:1.5px;padding:.1rem .45rem;border-radius:.2rem;margin-left:.4rem;vertical-align:middle}
+.b-must{background:rgba(192,39,45,.15);color:var(--red);border:1px solid rgba(192,39,45,.2)}
+.b-rec{background:rgba(240,194,48,.1);color:var(--gold);border:1px solid rgba(240,194,48,.2)}
+.b-opt{background:rgba(58,126,192,.1);color:var(--health);border:1px solid rgba(58,126,192,.2)}
+.prep-box{background:var(--card2);border:1px solid var(--border);border-radius:.45rem;padding:1.2rem 1.5rem;margin:1.4rem 0}
+.prep-box h4{font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:1.5px;color:var(--health);margin-bottom:.7rem}
+.prep-box li{font-size:.82rem;color:#8090A8;line-height:1.8}
+.flag-cards{display:flex;flex-direction:column;gap:.55rem;margin:1.2rem 0}
+.fc{background:var(--card2);border:1px solid rgba(192,39,45,.12);border-radius:.35rem;padding:.8rem 1.1rem;display:flex;gap:.8rem}
+.fc-ico{font-size:.9rem;flex-shrink:0}
+.fc strong{display:block;font-size:.85rem;color:#C08080;margin-bottom:.1rem}
+.fc span{font-size:.78rem;color:#806060;line-height:1.6}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--health);color:var(--health)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){h1{font-size:1.9rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}.test-table{font-size:.75rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Здоровье</span></div>
+    <div class="tag">◆ ЗДОРОВЬЕ</div>
+    <h1>🔬 АНАЛИЗЫ КОТОРЫЕ НУЖНО СДАТЬ ДО 35 ЛЕТ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 8 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ЗАЧЕМ ЗНАТЬ СВОИ ПОКАЗАТЕЛИ</h2>
+  <p>Большинство мужчин не знают своих базовых показателей здоровья пока что-то не сломается. К тому времени проблема уже есть. <strong>Ежегодная проверка 10–15 показателей — это не паранойя, это управление своим телом как серьёзным активом.</strong></p>
+  <p>Многие критические состояния — высокий холестерин, преддиабет, дефицит витамина D, низкий тестостерон — <strong>не имеют симптомов годами.</strong> Анализ обнаружит это за 500–1500 рублей. Лечение последствий — в сотни раз дороже.</p>
+
+  <blockquote><p>Нельзя управлять тем что не измеряешь. Тело — не исключение.</p></blockquote>
+
+  <h2>ОБЯЗАТЕЛЬНЫЙ МИНИМУМ — РАЗ В ГОД</h2>
+  <table class="test-table">
+    <thead><tr><th>АНАЛИЗ</th><th>ЗАЧЕМ</th><th>НОРМА (ОРИЕНТИР)</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tn">Общий анализ крови (ОАК)</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Анемия, воспаление, иммунный статус</td><td class="tp">Гемоглобин 130–170 г/л</td></tr>
+      <tr><td><span class="tn">Глюкоза натощак</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Диабет, преддиабет — часто без симптомов</td><td class="tp">&lt;5.6 ммоль/л</td></tr>
+      <tr><td><span class="tn">Липидный профиль</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Риск инфаркта, атеросклероза</td><td class="tp">ЛПНП &lt;3.0, ЛПВП &gt;1.0</td></tr>
+      <tr><td><span class="tn">АЛТ, АСТ</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Состояние печени</td><td class="tp">АЛТ &lt;40 Ед/л</td></tr>
+      <tr><td><span class="tn">Тиреотропный гормон (ТТГ)</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Щитовидная железа — влияет на всё</td><td class="tp">0.4–4.0 мМЕ/л</td></tr>
+      <tr><td><span class="tn">Витамин D (25-OH)</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Иммунитет, кости, гормоны. Дефицит у 80%</td><td class="tp">Оптимум 50–80 нг/мл</td></tr>
+      <tr><td><span class="tn">Тестостерон общий</span><span class="badge b-rec">РЕКОМЕНДУЮ</span></td><td class="tw">Либидо, мышцы, настроение, энергия</td><td class="tp">12–35 нмоль/л</td></tr>
+      <tr><td><span class="tn">HbA1c (гликированный гемоглобин)</span><span class="badge b-rec">РЕКОМЕНДУЮ</span></td><td class="tw">Средний сахар за 3 месяца — точнее глюкозы</td><td class="tp">&lt;5.7%</td></tr>
+      <tr><td><span class="tn">Ферритин</span><span class="badge b-rec">РЕКОМЕНДУЮ</span></td><td class="tw">Запасы железа. Дефицит = усталость, туман в голове</td><td class="tp">30–200 мкг/л</td></tr>
+      <tr><td><span class="tn">Артериальное давление</span><span class="badge b-must">ОБЯЗАТЕЛЬНО</span></td><td class="tw">Гипертония — тихий убийца без симптомов</td><td class="tp">&lt;130/85 мм рт.ст.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>ДОПОЛНИТЕЛЬНО ПОСЛЕ 30</h2>
+  <table class="test-table">
+    <thead><tr><th>АНАЛИЗ</th><th>ЗАЧЕМ</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tn">ПСА (простат-специфический антиген)</span><span class="badge b-opt">ПОСЛЕ 30</span></td><td class="tw">Ранняя диагностика проблем предстательной железы</td></tr>
+      <tr><td><span class="tn">Магний в крови</span><span class="badge b-opt">ПОСЛЕ 30</span></td><td class="tw">Судороги, раздражительность, нарушения сна — часто дефицит</td></tr>
+      <tr><td><span class="tn">С-реактивный белок (СРБ)</span><span class="badge b-opt">ПОСЛЕ 30</span></td><td class="tw">Хроническое системное воспаление — маркер риска ССЗ</td></tr>
+      <tr><td><span class="tn">Омега-3 индекс</span><span class="badge b-opt">ПОСЛЕ 30</span></td><td class="tw">Статус жирных кислот, влияет на сердце и мозг</td></tr>
+    </tbody>
+  </table>
+
+  <h2>КАК ПРАВИЛЬНО СДАВАТЬ</h2>
+  <div class="prep-box">
+    <h4>ПОДГОТОВКА — БАЗОВЫЕ ПРАВИЛА</h4>
+    <ul>
+      <li>Кровь — строго натощак (8–12 часов голода), только вода</li>
+      <li>За 24 часа — исключить алкоголь и интенсивные тренировки</li>
+      <li>Тестостерон — утром с 7 до 11, первая половина недели</li>
+      <li>Сдавать одни и те же анализы в одной лаборатории — для сравнения в динамике</li>
+      <li>Норма в бланке ≠ оптимум. Учись читать или консультируйся с врачом</li>
+    </ul>
+  </div>
+
+  <h2>КРАСНЫЕ ФЛАГИ — ИДИ СЕЙЧАС</h2>
+  <div class="flag-cards">
+    <div class="fc"><div class="fc-ico">🔴</div><div><strong>Постоянная усталость без причины</strong><span>Ферритин, ТТГ, витамин D, тестостерон — одна из этих четырёх причин в 80% случаев.</span></div></div>
+    <div class="fc"><div class="fc-ico">🔴</div><div><strong>Давление выше 140/90 стабильно</strong><span>Немедленно к кардиологу. Гипертония — фактор риска инсульта и инфаркта №1.</span></div></div>
+    <div class="fc"><div class="fc-ico">🔴</div><div><strong>Глюкоза натощак выше 6.1</strong><span>Преддиабет. Обратимо если действовать сейчас. Игнорирование = диабет 2 типа через 3–5 лет.</span></div></div>
+    <div class="fc"><div class="fc-ico">🔴</div><div><strong>Снижение либидо, апатия, потеря мышц</strong><span>Тестостерон + СГСП + ЛГ + ФСГ. Возможна гипогонадизм — лечится.</span></div></div>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=67,CAT='health';
+const ART=[{id:3,file:'article-003',cat:'health',ico:'🧪',title:'ТЕСТОСТЕРОН',time:'4 мин'},{id:65,file:'article-065',cat:'health',ico:'🛡️',title:'ИММУНИТЕТ',time:'9 мин'},{id:66,file:'article-066',cat:'health',ico:'🍺',title:'АЛКОГОЛЬ — ЧЕСТНО',time:'10 мин'},{id:7,file:'article-007',cat:'health',ico:'🍽',title:'ПИТАНИЕ — ФУНДАМЕНТ',time:'9 мин'},{id:42,file:'article-042',cat:'sport',ico:'😴',title:'СОН — ЛУЧШАЯ ДОБАВКА',time:'8 мин'},{id:60,file:'article-060',cat:'sport',ico:'💊',title:'ДОБАВКИ',time:'9 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

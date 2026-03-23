@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ОРУЖИЕ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--fight:#C9960A;--fight2:#8C6A06;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--fight2),var(--fight));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:var(--fight);background:rgba(201,150,10,.1);border:1px solid rgba(201,150,10,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.55rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--fight2);padding:1.1rem 1.7rem;background:rgba(201,150,10,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#806010;font-style:italic;margin:0;font-size:.93rem}
+.law-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.82rem}
+.law-table th{font-family:'Oswald',sans-serif;font-size:.65rem;letter-spacing:2px;color:var(--dim);font-weight:600;text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--border2);background:var(--card2)}
+.law-table td{padding:.7rem .8rem;border-bottom:1px solid var(--border);color:#A0AECA;vertical-align:top;line-height:1.6}
+.law-table tr:last-child td{border:none}
+.law-table td:first-child{color:var(--fight);font-weight:700;white-space:nowrap}
+.law-table .ok{color:var(--green)}
+.law-table .no{color:var(--red)}
+.law-table .warn{color:var(--gold)}
+.tip-cards{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.tc{background:var(--card2);border:1px solid rgba(201,150,10,.15);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.tc-ico{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.tc strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.1rem}
+.tc span{font-size:.79rem;color:#8090A8;line-height:1.6}
+.warn-box{background:rgba(192,39,45,.04);border:1px solid rgba(192,39,45,.2);border-radius:.45rem;padding:1.1rem 1.5rem;margin:1.4rem 0}
+.warn-box h4{font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:1.5px;color:var(--red);margin-bottom:.7rem}
+.warn-box li{font-size:.82rem;color:#907060;line-height:1.85}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--fight);color:var(--fight)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){h1{font-size:1.85rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}.law-table{font-size:.73rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Борьба</span></div>
+    <div class="tag">◆ БОРЬБА</div>
+    <h1>🤺 ОРУЖИЕ — ПРАВОВОЙ МИНИМУМ И РЕАЛЬНОСТЬ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 8 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ЗАЧЕМ ЗНАТЬ ЭТО</h2>
+  <p>Большинство мужчин не знают что можно носить при себе законно, а что превращает тебя в уголовника ещё до того как ты что-то сделал. <strong>Незнание закона не освобождает — но знание закона освобождает буквально.</strong> Одна ошибка с выбором ножа — и ты под статьёй, даже если не применял его.</p>
+  <p>Эта статья — не инструкция к агрессии. Это карта того что легально, что серо, что запрещено. <strong>Цель — не иметь оружие, а понимать реальность.</strong></p>
+
+  <blockquote><p>Лучшее оружие — голова. Второе лучшее — ноги. Всё остальное — юридический и физический риск который нужно осознавать.</p></blockquote>
+
+  <h2>ЧТО МОЖНО НОСИТЬ В РФ — ТАБЛИЦА</h2>
+  <table class="law-table">
+    <thead><tr><th>ПРЕДМЕТ</th><th>СТАТУС</th><th>КОММЕНТАРИЙ</th></tr></thead>
+    <tbody>
+      <tr><td>Перцовый баллончик</td><td class="ok">✓ Законно</td><td>Продаётся свободно. Эффективен на дистанции до 3м. Лучший законный инструмент самообороны.</td></tr>
+      <tr><td>Электрошокер (до 3 Дж)</td><td class="ok">✓ Законно</td><td>Не требует лицензии до определённой мощности. Проверяй маркировку при покупке.</td></tr>
+      <tr><td>Складной нож (лезвие до 9 см, без фиксатора)</td><td class="warn">⚠ Серая зона</td><td>Хозяйственный нож — законен. Но «умысел на применение» превращает его в оружие. Контекст решает.</td></tr>
+      <tr><td>Нож с фиксатором лезвия</td><td class="no">✗ Требует лицензии</td><td>Холодное оружие. Без охотничьего билета + лицензии — незаконное ношение (ст. 222 УК).</td></tr>
+      <tr><td>Кастет, нунчаки, кастет-нож</td><td class="no">✗ Запрещено</td><td>Оружие вне закона независимо от назначения. Хранение и ношение — уголовная ответственность.</td></tr>
+      <tr><td>Охотничье ружьё</td><td class="warn">⚠ По лицензии</td><td>Охотничий билет + разрешение МВД. Хранение — только в сейфе. Ношение — только на охоте.</td></tr>
+      <tr><td>Травматический пистолет (ОООП)</td><td class="warn">⚠ По лицензии</td><td>Лицензия + обучение. Применение жёстко регулируется. Не панацея — судебная практика сложная.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>РЕАЛЬНОСТЬ ПРИМЕНЕНИЯ</h2>
+  <div class="tip-cards">
+    <div class="tc"><div class="tc-ico">🔴</div><div><strong>Достал оружие — уже несёшь ответственность</strong><span>Демонстрация оружия с угрозой — угроза убийством (ст. 119 УК). Применил — необходимая оборона или превышение её пределов. Суд будет разбираться долго. Готов к этому?</span></div></div>
+    <div class="tc"><div class="tc-ico">🟡</div><div><strong>Перцовый баллончик — оптимальный выбор</strong><span>Законен, эффективен, не летален. Применение юридически чище чем нож или травмат. Носи с собой — особенно ночью. Проверяй срок годности раз в год.</span></div></div>
+    <div class="tc"><div class="tc-ico">🟠</div><div><strong>Нож «для самообороны» — опасная иллюзия</strong><span>В реальной схватке нож опаснее для владельца если нет специальной подготовки. Противник может перехватить. А юридически — ты почти всегда в невыгодной позиции.</span></div></div>
+    <div class="tc"><div class="tc-ico">🟢</div><div><strong>Тренированные руки — лучшее законное оружие</strong><span>Никто не изымет при обыске. Не нужна лицензия. Применение регулируется только необходимой обороной как и любое физическое воздействие. Инвестиция в себя, а не в предмет.</span></div></div>
+  </div>
+
+  <h2>ЕСЛИ ОКАЗАЛСЯ ПОД УГРОЗОЙ ОРУЖИЯ</h2>
+  <div class="warn-box">
+    <h4>⚠️ ПРИОРИТЕТЫ ПО ПОРЯДКУ</h4>
+    <ul>
+      <li><strong>1. Деэскалируй:</strong> отдай телефон, кошелёк. Это восполнимо. Жизнь — нет</li>
+      <li><strong>2. Создай дистанцию и убегай:</strong> человек с ножом опасен только вплотную</li>
+      <li><strong>3. Используй преграды:</strong> машина, дверь, любой предмет между вами</li>
+      <li><strong>4. Кричи и привлекай внимание:</strong> большинство нападающих избегают свидетелей</li>
+      <li><strong>5. Если нет выбода — атакуй руки, не корпус:</strong> контроль вооружённой руки — единственная рабочая техника без многолетней подготовки</li>
+      <li>Техники разоружения из YouTube без живых тренировок под стрессом — фантастика. Не рассчитывай на них.</li>
+    </ul>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=86,CAT='fight';
+const ART=[{id:4,file:'article-004',cat:'fight',ico:'⚔️',title:'ПОЧЕМУ МУЖЧИНА ДОЛЖЕН УМЕТЬ ДРАТЬСЯ',time:'7 мин'},{id:84,file:'article-084',cat:'fight',ico:'🗡️',title:'САМООБОРОНА НА УЛИЦЕ',time:'9 мин'},{id:88,file:'article-088',cat:'fight',ico:'👁️',title:'ЧИТАТЬ ПРОТИВНИКА',time:'7 мин'},{id:81,file:'article-081',cat:'fight',ico:'🧠',title:'ПСИХОЛОГИЯ БОЯ',time:'8 мин'},{id:91,file:'article-091',cat:'fight',ico:'🛡️',title:'МЕНТАЛЬНОСТЬ БОЙЦА',time:'8 мин'},{id:78,file:'article-078',cat:'fight',ico:'🥊',title:'MMA — С ЧЕГО НАЧАТЬ',time:'9 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

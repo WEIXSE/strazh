@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ЗРЕНИЕ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--health:#3A7EC0;--teal:#20A080;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--health),var(--teal));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:#3A7EC0;background:rgba(58,126,192,.1);border:1px solid rgba(58,126,192,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--health);padding:1.1rem 1.7rem;background:rgba(58,126,192,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#507090;font-style:italic;margin:0;font-size:.93rem}
+.rule-box{background:linear-gradient(135deg,rgba(58,126,192,.06),rgba(32,160,128,.04));border:1px solid rgba(58,126,192,.2);border-radius:.5rem;padding:1.5rem 1.8rem;margin:1.4rem 0;text-align:center}
+.rule-box .big{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+.rule-box .sub{font-size:.78rem;color:#8090A8;line-height:1.7}
+.tip-cards{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.tc{background:var(--card2);border:1px solid rgba(58,126,192,.15);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.tc-num{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--health);min-width:1.8rem;flex-shrink:0}
+.tc strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.1rem}
+.tc span{font-size:.79rem;color:#8090A8;line-height:1.6}
+.myth-row{display:flex;flex-direction:column;gap:.55rem;margin:1.2rem 0}
+.mc{background:var(--card2);border-radius:.35rem;padding:.85rem 1.1rem;display:flex;gap:.85rem}
+.mc-x{color:var(--red);font-weight:800;flex-shrink:0}
+.mc strong{display:block;font-size:.86rem;color:#C08080;margin-bottom:.1rem}
+.mc span{font-size:.78rem;color:#806060;line-height:1.6}
+.symptom-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:1.2rem 0}
+.sg{background:var(--card2);border:1px solid rgba(192,39,45,.12);border-radius:.4rem;padding:.85rem 1rem}
+.sg .ico{font-size:.95rem;margin-bottom:.25rem}
+.sg strong{display:block;font-size:.83rem;color:#C08080;margin-bottom:.1rem}
+.sg span{font-size:.75rem;color:#806060;line-height:1.55}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--health);color:var(--health)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.symptom-grid{grid-template-columns:1fr}h1{font-size:1.9rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Здоровье</span></div>
+    <div class="tag">◆ ЗДОРОВЬЕ</div>
+    <h1>👁️ ЗРЕНИЕ — КАК НЕ УГРОБИТЬ ЗА ЭКРАНОМ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 7 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ЦИФРОВАЯ УСТАЛОСТЬ ГЛАЗ — РЕАЛЬНАЯ ПРОБЛЕМА</h2>
+  <p>Средний офисный работник проводит за экранами 10–12 часов в день. Глаза <strong>не созданы для длительной фокусировки на близком расстоянии.</strong> Результат — цифровой зрительный синдром: усталость, сухость, головные боли, размытость. Это затрагивает 60–90% людей работающих за компьютером.</p>
+  <p>Хорошая новость: экраны не «портят» зрение напрямую. Плохая: <strong>хроническое напряжение без отдыха ускоряет прогрессирование близорукости</strong> и создаёт постоянный дискомфорт который большинство принимают за норму.</p>
+
+  <blockquote><p>Ты не замечаешь усталость глаз так же как не замечаешь сутулость — пока не начинает болеть голова к вечеру каждого дня.</p></blockquote>
+
+  <h2>ПРАВИЛО 20-20-20 — ОСНОВА</h2>
+  <div class="rule-box">
+    <div class="big">20 — 20 — 20</div>
+    <div class="sub">Каждые <strong style="color:var(--white)">20 минут</strong> за экраном → смотреть на объект в <strong style="color:var(--white)">20 футах (6 м)</strong> вдаль в течение <strong style="color:var(--white)">20 секунд</strong><br>Это снимает спазм аккомодации — главную причину усталости глаз</div>
+  </div>
+
+  <h2>8 ПРАВИЛ ДЛЯ ЗДОРОВЬЯ ГЛАЗ</h2>
+  <div class="tip-cards">
+    <div class="tc"><div class="tc-num">01</div><div><strong>Расстояние до монитора — 50–70 см</strong><span>«Длина руки» — хороший ориентир. Экран телефона — минимум 30–35 см. Не тянись к экрану — регулируй размер шрифта.</span></div></div>
+    <div class="tc"><div class="tc-num">02</div><div><strong>Верхний край монитора — на уровне глаз или чуть ниже</strong><span>Смотреть чуть вниз — естественное положение. Монитор выше уровня глаз = сухость (веки открыты шире) + напряжение шеи.</span></div></div>
+    <div class="tc"><div class="tc-num">03</div><div><strong>Осознанное моргание</strong><span>За экраном люди моргают в 3 раза реже нормы. Напомни себе моргать. При хронической сухости — искусственная слеза без консервантов.</span></div></div>
+    <div class="tc"><div class="tc-num">04</div><div><strong>Яркость и цветовая температура</strong><span>Яркость экрана ≈ яркость окружения. Night mode / тёплый цвет после заката — снижает нагрузку и сохраняет мелатонин для сна.</span></div></div>
+    <div class="tc"><div class="tc-num">05</div><div><strong>2 часа на улице — не опция, а необходимость</strong><span>Исследования показали: ежедневное пребывание на улице при естественном освещении — единственный доказанный способ замедлить прогрессирование миопии.</span></div></div>
+    <div class="tc"><div class="tc-num">06</div><div><strong>Контрастность и антибликовое покрытие</strong><span>Работа с бликами на экране = постоянное перенапряжение. Матовые экраны или антибликовые очки (не обязательно с диоптриями) заметно снижают усталость.</span></div></div>
+    <div class="tc"><div class="tc-num">07</div><div><strong>Омега-3 и лютеин</strong><span>Омега-3 улучшает качество слёзной плёнки — снижает сухость. Лютеин (шпинат, яичный желток, добавки) защищает сетчатку от синего света. Не панацея — но реальная поддержка.</span></div></div>
+    <div class="tc"><div class="tc-num">08</div><div><strong>Офтальмолог раз в год</strong><span>Глаукома и макулярная дегенерация на ранних стадиях не дают симптомов. После 25 — ежегодная проверка. После 40 — обязательно измерение внутриглазного давления.</span></div></div>
+  </div>
+
+  <h2>МИФЫ — НЕ ТРАТЬ ДЕНЬГИ</h2>
+  <div class="myth-row">
+    <div class="mc"><div class="mc-x">✗</div><div><strong>«Компьютерные очки с синим фильтром восстановят зрение»</strong><span>Синий свет — не главная причина усталости глаз. Главное — напряжение аккомодации от близкого фокуса. Фильтр помогает со сном, но не с усталостью глаз.</span></div></div>
+    <div class="mc"><div class="mc-x">✗</div><div><strong>«Гимнастика для глаз восстановит зрение»</strong><span>Упражнения снимают спазм и усталость — это полезно. Но исправить анатомическую миопию они не могут. Не трать деньги на «курсы восстановления зрения».</span></div></div>
+    <div class="mc"><div class="mc-x">✗</div><div><strong>«В темноте читать вредно»</strong><span>Дискомфортно — да. Необратимо вредит зрению — нет доказательств. Просто неприятно и быстро утомляет.</span></div></div>
+  </div>
+
+  <h2>ТРЕВОЖНЫЕ СИМПТОМЫ — К ВРАЧУ</h2>
+  <div class="symptom-grid">
+    <div class="sg"><div class="ico">⚡</div><strong>Вспышки или молнии в поле зрения</strong><span>Отслойка сетчатки — неотложно</span></div>
+    <div class="sg"><div class="ico">🌫️</div><strong>Внезапное ухудшение зрения на один глаз</strong><span>Сосудистая катастрофа — скорая</span></div>
+    <div class="sg"><div class="ico">🔴</div><strong>Боль в глазу + покраснение</strong><span>Глаукома острая — срочно</span></div>
+    <div class="sg"><div class="ico">✨</div><strong>«Занавеска» или тёмное пятно</strong><span>Отслойка — неотложно</span></div>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=69,CAT='health';
+const ART=[{id:3,file:'article-003',cat:'health',ico:'🧪',title:'ТЕСТОСТЕРОН',time:'4 мин'},{id:65,file:'article-065',cat:'health',ico:'🛡️',title:'ИММУНИТЕТ',time:'9 мин'},{id:67,file:'article-067',cat:'health',ico:'🔬',title:'АНАЛИЗЫ ДО 35',time:'8 мин'},{id:68,file:'article-068',cat:'health',ico:'🦴',title:'ОСАНКА И СПИНА',time:'8 мин'},{id:42,file:'article-042',cat:'sport',ico:'😴',title:'СОН — ЛУЧШАЯ ДОБАВКА',time:'8 мин'},{id:66,file:'article-066',cat:'health',ico:'🍺',title:'АЛКОГОЛЬ — ЧЕСТНО',time:'10 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

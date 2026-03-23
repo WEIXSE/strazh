@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>МУЖСКАЯ ДРУЖБА — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+--bg:#03040A;--card:#0A0C15;--card2:#0D1020;
+--border:#161928;--border2:#222640;
+--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+--white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+--green:#22c55e;--blue:#3b82f6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(192,39,45,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(50px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--red),var(--gold2));z-index:999;transition:width .1s linear}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none}.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--gold2);padding:1.2rem 1.8rem;background:rgba(240,194,48,.04);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(240,194,48,.15);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#C0A870;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+.friend-levels{display:flex;flex-direction:column;gap:.7rem;margin:1.3rem 0}
+.fl-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--card2);border:1px solid var(--border);border-radius:.4rem}
+.fl-bar{width:6px;border-radius:3px;flex-shrink:0;align-self:stretch;min-height:40px}
+.fl-body h4{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.2rem}
+.fl-body p{font-size:.8rem;color:#8090A8;line-height:1.6;margin:0}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;font-family:inherit}
+.rev-send:hover{border-color:var(--gold2);color:var(--gold)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}
+.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}
+.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem}
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:700px){.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div><div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.8rem">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a><span>/</span>
+      <a href="index.html">Мышление</a><span>/</span>
+      <span>Мужская дружба</span>
+    </div>
+    <div class="art-tag" style="color:#9A9A18;background:rgba(154,154,24,.1);border:1px solid rgba(154,154,24,.2)">◆ МЫШЛЕНИЕ</div>
+    <div class="art-title">🤝 МУЖСКАЯ ДРУЖБА — ПОЧЕМУ ОНА ИСЧЕЗАЕТ</div>
+    <div class="art-meta">
+      <span>📅 22 МАР 2026</span><span>⏱ 9 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <div class="art-body">
+
+    <h2>МУЖСКОЕ ОДИНОЧЕСТВО — ЭПИДЕМИЯ</h2>
+    <p>Исследования фиксируют: за последние 30 лет количество мужчин без близких друзей утроилось. Каждый третий мужчина старше 30 не может назвать ни одного человека которому доверяет по-настоящему. <strong>Это не просто грустно — это опасно.</strong> Одиночество разрушает здоровье сильнее курения.</p>
+    <p>Почему так происходит? После школы и армии — структура исчезает. Нет регулярного пространства где мужчины проводят время вместе. Работа, семья, усталость. <strong>Дружба требует инициативы — а мужчин не учат её проявлять.</strong></p>
+
+    <blockquote><p>Мужчины дружат бок о бок — делая что-то вместе. Женщины — лицом к лицу — разговаривая. Оба способа настоящие. Просто разные.</p></blockquote>
+
+    <h2>4 УРОВНЯ МУЖСКИХ СВЯЗЕЙ</h2>
+    <div class="friend-levels">
+      <div class="fl-item">
+        <div class="fl-bar" style="background:#4A5578"></div>
+        <div class="fl-body"><h4>Знакомые</h4><p>Здороваешься, иногда общаешься. Никаких обязательств, никакой глубины. Большинство «друзей» в соцсетях — здесь.</p></div>
+      </div>
+      <div class="fl-item">
+        <div class="fl-bar" style="background:#3A7EC0"></div>
+        <div class="fl-body"><h4>Приятели</h4><p>Вместе проводишь время, есть общие темы. Но позвонить в 2 ночи — не вариант. Большинство «друзей» из рабочего коллектива — здесь.</p></div>
+      </div>
+      <div class="fl-item">
+        <div class="fl-bar" style="background:#C9960A"></div>
+        <div class="fl-body"><h4>Друзья</h4><p>Знают тебя настоящего. Можно говорить честно. Помогут в трудный момент. Таких обычно 3–5 человек за всю жизнь — и это нормально.</p></div>
+      </div>
+      <div class="fl-item">
+        <div class="fl-bar" style="background:#F0C230"></div>
+        <div class="fl-body"><h4>Братья</h4><p>Прошли через что-то тяжёлое вместе. Общая история, полное доверие. Редкость. Ценность — бесценна. Один такой человек меняет жизнь.</p></div>
+      </div>
+    </div>
+
+    <h2>ПОЧЕМУ МУЖЧИНЫ НЕ СТРОЯТ ДРУЖБУ</h2>
+    <p>Первая причина — <strong>ожидание что дружба возникнет сама</strong>. В детстве так и было — живёшь рядом, учишься вместе. Во взрослой жизни дружба требует намеренного строительства. Без инициативы — нет дружбы.</p>
+    <p>Вторая — <strong>страх выглядеть нуждающимся</strong>. «Позвоню просто так — он подумает что мне плохо». Это ловушка. Настоящая дружба начинается именно с уязвимости — когда один говорит «мне важно твоё мнение» или «хочу поговорить».</p>
+
+    <h2>КАК СТРОИТЬ МУЖСКУЮ ДРУЖБУ ВЗРОСЛЫМ</h2>
+
+    <h3>Делай что-то вместе</h3>
+    <p>Мужская дружба строится через совместное действие: спорт, проект, поездка, хобби. <strong>Не нужен повод поговорить о чувствах — нужен повод быть рядом.</strong> Разговоры придут сами в процессе.</p>
+
+    <h3>Будь тем кто инициирует</h3>
+    <p>Напиши первым. Позвони. Позови. Большинство мужчин хотят встретиться — но ждут что позовут. <strong>Стань тем кто зовёт — и у тебя всегда будет компания.</strong> Это не слабость. Это лидерство в отношениях.</p>
+
+    <h3>Регулярность важнее интенсивности</h3>
+    <p>Раз в неделю на час — лучше чем раз в год на весь день. <strong>Связь живёт в регулярности.</strong> Постоянный контакт — даже небольшой — поддерживает близость лучше редких глубоких встреч.</p>
+
+    <h3>Говори прямо</h3>
+    <p>«Ты важен для меня», «рад что ты есть», «мне нужен твой совет» — мужчины редко это говорят и очень ценят когда слышат. <strong>Прямая честность в мужской дружбе — не слабость. Это цемент который держит всё вместе.</strong></p>
+
+    <blockquote><p>Один настоящий друг — лучше ста подписчиков. Инвестируй в живые связи. Они единственное что останется когда всё остальное исчезнет.</p></blockquote>
+
+    <h2>ИТОГ</h2>
+    <p>Мужская дружба не исчезает сама — её перестают строить. <strong>Возьми инициативу. Делай что-то вместе. Будь регулярным. Говори прямо.</strong> Один настоящий брат рядом стоит больше любого достижения.</p>
+
+  </div>
+
+  <div class="rev-box">
+    <div class="rev-box-head"><h3>АНОНИМНЫЙ ОТЗЫВ</h3><span class="avg" id="avgStars"></span></div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+</div>
+<script>
+const THIS_ID=37,THIS_CAT='mind';
+const ARTICLES=[
+  {id:6,file:'article-006',cat:'mind',ico:'🧠',title:'ПОЧЕМУ БОЛЬШИНСТВО МУЖЧИН СЛАБЫЕ',time:'8 мин'},
+  {id:14,file:'article-014',cat:'mind',ico:'👑',title:'ВЫБЕРИ СЕБЯ — ТРИ ПРАВИЛА',time:'12 мин'},
+  {id:28,file:'article-028',cat:'mind',ico:'🏆',title:'МЫШЛЕНИЕ ПОБЕДИТЕЛЯ',time:'10 мин'},
+  {id:30,file:'article-030',cat:'mind',ico:'🌑',title:'ОДИНОЧЕСТВО — СИЛА ИЛИ БОЛЕЗНЬ',time:'9 мин'},
+  {id:32,file:'article-032',cat:'mind',ico:'👥',title:'ОКРУЖЕНИЕ — ТЫ И ЕСТЬ ТЕ ПЯТЕРО',time:'9 мин'},
+  {id:35,file:'article-035',cat:'mind',ico:'🔥',title:'ЗЛОСТЬ — ТОПЛИВО ИЛИ ЯД',time:'9 мин'},
+  {id:36,file:'article-036',cat:'mind',ico:'🧬',title:'EQ — ПОЧЕМУ УМНЫЙ ПРОИГРЫВАЕТ МУДРОМУ',time:'10 мин'},
+  {id:25,file:'article-025',cat:'girls',ico:'🛑',title:'ГРАНИЦЫ В ОТНОШЕНИЯХ',time:'9 мин'},
+];
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+window.addEventListener('scroll',()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rp').style.width=Math.min(100,pct)+'%';});
+(function(){const v=gV();v[THIS_ID]=(v[THIS_ID]||0)+1;sV(v);const r=gR();r[THIS_ID]=true;sR(r);document.getElementById('views-cnt').textContent=v[THIS_ID];document.getElementById('read-badge').style.display='flex';})();
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){if(!list.length)return'';const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;return'⭐ '+a.toFixed(1)+' ('+list.length+')';}
+function renderRevs(){const list=(gRv()[THIS_ID]||[]);document.getElementById('avgStars').textContent=avgStr(list);const el=document.getElementById('revList');if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=list.map(r=>`<div class="rev-item"><div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="ri-text">${r.t}</div><div class="ri-date">${r.d}</div></div>`).join('');}
+function sendRev(){const txt=document.getElementById('revTa').value.trim();if(!curStar){showNotif('⚠ Поставь оценку');return;}if(!txt){showNotif('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[THIS_ID])rv[THIS_ID]=[];rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('revTa').value='';curStar=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));renderRevs();showNotif('✓ Отзыв отправлен анонимно');}
+(function(){const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('nextGrid').innerHTML=others.map(a=>`<a class="next-card" href="${a.file}.html"><div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div><div class="nc-title">${a.ico} ${a.title}</div><div class="nc-time">⏱ ${a.time}</div></a>`).join('');})();
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+renderRevs();
+</script>
+</body>
+</html>

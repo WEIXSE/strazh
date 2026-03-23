@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ДЕНЬГИ ВНЕ ЗАРПЛАТЫ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+:root{
+--bg:#03040A;--card:#0A0C15;--card2:#0D1020;
+--border:#161928;--border2:#222640;
+--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+--white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+--green:#22c55e;--blue:#3b82f6;--purple:#8060B0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(128,96,176,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(55px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.05),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+.read-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold));z-index:999;transition:width .1s linear}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.nav-back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem;transition:.15s}
+.nav-back:hover{color:var(--gold);border-color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative;z-index:1}
+.art-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.art-breadcrumb a{color:var(--dim);text-decoration:none}.art-breadcrumb span{color:var(--border2)}
+.art-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem}
+.art-title{font-family:'Oswald',sans-serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.art-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center}
+.meta-views{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.meta-read{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.art-body{margin-bottom:4rem}
+.art-body h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;color:var(--white);margin:3rem 0 1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.art-body h3{font-size:1rem;font-weight:700;color:#C0CADF;margin:2rem 0 .6rem}
+.art-body p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.2rem}
+.art-body ul{padding-left:1.5rem;margin-bottom:1.2rem}
+.art-body li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.35rem}
+.art-body blockquote{border-left:3px solid var(--gold2);padding:1.2rem 1.8rem;background:rgba(201,150,10,.04);margin:2.2rem 0;border-radius:0 .4rem .4rem 0;position:relative}
+.art-body blockquote::before{content:'"';position:absolute;top:-.3rem;left:.8rem;font-size:3rem;color:rgba(201,150,10,.15);font-family:'Oswald',sans-serif;line-height:1}
+.art-body blockquote p{color:#B09050;font-style:italic;margin:0;font-size:.95rem;line-height:1.85}
+.art-body strong{color:var(--text);font-weight:700}
+.income-cards{display:flex;flex-direction:column;gap:.85rem;margin:1.3rem 0}
+.ic{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.2rem 1.4rem;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:start}
+.ic-num{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;color:var(--border2);min-width:2rem;padding-top:.1rem}
+.ic-body h4{font-family:'Oswald',sans-serif;font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.ic-body p{font-size:.82rem;color:#8898B0;line-height:1.65;margin:0}
+.ic-body .ic-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.55rem}
+.ic-tag{font-size:.62rem;font-weight:700;padding:.12rem .5rem;border-radius:.2rem;border:1px solid}
+.ic-earn{text-align:right;flex-shrink:0}
+.ic-earn .earn-val{font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:700;color:var(--green);display:block}
+.ic-earn .earn-lbl{font-size:.6rem;color:var(--dim);margin-top:.1rem}
+.mindset-list{display:flex;flex-direction:column;gap:.55rem;margin:1.2rem 0}
+.ml-item{display:flex;gap:1rem;background:var(--card2);border:1px solid var(--border);border-radius:.35rem;padding:.85rem 1.1rem;align-items:flex-start}
+.ml-ico{font-size:1.1rem;flex-shrink:0}
+.ml-body strong{display:block;font-size:.87rem;color:var(--white);margin-bottom:.12rem}
+.ml-body span{font-size:.8rem;color:#8090A8;line-height:1.6}
+.steps-num{display:flex;flex-direction:column;gap:.55rem;margin:1.2rem 0;counter-reset:steps}
+.sn-item{display:flex;gap:1rem;background:var(--card2);border:1px solid var(--border);border-radius:.35rem;padding:.85rem 1.1rem}
+.sn-item .sn-n{font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold2);font-weight:700;min-width:1.8rem;flex-shrink:0}
+.sn-item strong{display:block;font-size:.87rem;color:var(--white);margin-bottom:.12rem}
+.sn-item span{font-size:.8rem;color:#8090A8;line-height:1.6}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin-bottom:2rem}
+.rev-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.rev-box-head h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white)}
+.rev-box-head .avg{font-size:.72rem;color:var(--gold2);font-weight:700}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;line-height:1;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+.rev-ta{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+.rev-ta::placeholder{color:var(--dim)}
+.rev-send{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;transition:.15s;font-weight:700;font-family:inherit}
+.rev-send:hover{border-color:var(--gold2);color:var(--gold2)}
+.rev-list{margin-top:1.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.rev-item{padding:.9rem 0;border-bottom:1px solid var(--border)}.rev-item:last-child{border:none}
+.ri-stars{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri-text{font-size:.83rem;color:#8898B0;line-height:1.7}.ri-date{font-size:.6rem;color:var(--dim);margin-top:.28rem}
+.next-block{margin-top:3rem}
+.next-block h3{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:1rem}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.next-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc-tag{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.35rem}
+.nc-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc-time{font-size:.6rem;color:var(--dim);margin-top:.35rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.notif.show{transform:translateY(0);opacity:1}
+.milestone{display:flex;align-items:center;justify-content:center;gap:1rem;background:linear-gradient(135deg,rgba(201,150,10,.08),rgba(128,96,176,.06));border:1px solid rgba(201,150,10,.25);border-radius:.5rem;padding:1.2rem;margin-bottom:2.5rem;text-align:center}
+.ms-ico{font-size:2rem}
+.ms-text{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:1px}
+.ms-sub{font-size:.72rem;color:var(--dim);margin-top:.15rem}
+@media(max-width:640px){.ic{grid-template-columns:auto 1fr}.ic-earn{display:none}.art-title{font-size:2rem}.wrap{padding:85px 1.2rem 4rem}nav{padding:0 1.2rem}}
+</style>
+</head>
+<body>
+<div class="read-progress" id="rp"></div>
+<div class="glow-r"></div><div class="glow-g"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <a class="nav-back" href="index.html">← НАЗАД К ТЕМАМ</a>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="milestone">
+    <div class="ms-ico">🏆</div>
+    <div>
+      <div class="ms-text">ТЕМА № 50 — ЮБИЛЕЙНАЯ</div>
+      <div class="ms-sub">50 из 300 статей опубликовано · 1/6 пути пройдено</div>
+    </div>
+  </div>
+  <div style="margin-bottom:2.8rem">
+    <div class="art-breadcrumb">
+      <a href="index.html">Главная</a><span>/</span>
+      <a href="index.html">Бизнес</a><span>/</span>
+      <span>Первые деньги</span>
+    </div>
+    <div class="art-tag" style="color:#8060B0;background:rgba(128,96,176,.1);border:1px solid rgba(128,96,176,.2)">◆ БИЗНЕС</div>
+    <div class="art-title">💰 КАК НАЧАТЬ ЗАРАБАТЫВАТЬ ВНЕ ЗАРПЛАТЫ</div>
+    <div class="art-meta">
+      <span>📅 22 МАР 2026</span><span>⏱ 11 мин чтения</span>
+      <span class="meta-views">👁 <span id="views-cnt">0</span> просмотров</span>
+      <span class="meta-read" id="read-badge" style="display:none">✓ Прочитано</span>
+    </div>
+  </div>
+  <div class="art-body">
+
+    <h2>ОДНА ЗАРПЛАТА — ЛОВУШКА</h2>
+    <p>Один источник дохода — значит твой потолок задан кем-то другим. Тебя могут уволить, сократить, заморозить повышение. <strong>Мужчина с одной зарплатой финансово уязвим — независимо от её размера.</strong> Второй источник дохода не роскошь, это базовая финансовая безопасность.</p>
+    <p>Хорошая новость: начать можно с нуля, без стартового капитала, без регистрации, без особых навыков. <strong>Первые деньги вне зарплаты — это сдвиг в голове.</strong> После него думаешь иначе.</p>
+
+    <blockquote><p>Богатые люди строят системы. Бедные продают время. Первый шаг — сделать так чтобы деньги приходили не только когда ты работаешь.</p></blockquote>
+
+    <h2>8 РЕАЛЬНЫХ СПОСОБОВ — БЕЗ ИНФОЦЫГАНСТВА</h2>
+    <div class="income-cards">
+
+      <div class="ic">
+        <div class="ic-num" style="color:var(--gold2)">01</div>
+        <div class="ic-body">
+          <h4>ФРИЛАНС ПО ОСНОВНОЙ СПЕЦИАЛЬНОСТИ</h4>
+          <p>Работаешь программистом — бери подработки на аутсорс. Дизайнер — делай логотипы. Бухгалтер — веди ИП удалённо. Самый быстрый старт: уже есть навык, уже есть рынок.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:var(--green);border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.07)">Быстрый старт</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Где: Habr Career, FL.ru, Kwork</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+20–80к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:var(--blue)">02</div>
+        <div class="ic-body">
+          <h4>ПЕРЕПРОДАЖА (ФЛИППИНГ)</h4>
+          <p>Покупай дёшево — продавай дороже. Авито, барахолки, гаражные распродажи. Электроника, мебель, инструменты. Навык — видеть недооценённое. Капитал — 3–5 тысяч рублей для старта.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:var(--blue);border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.07)">Минимум навыков</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Где: Авито, Юла, OLX</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+10–40к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:#C9960A">03</div>
+        <div class="ic-body">
+          <h4>УСЛУГИ РУКАМИ — ЛОКАЛЬНЫЙ РЫНОК</h4>
+          <p>Сборка мебели, мелкий ремонт, переезды, вывоз мусора, клининг — дефицит надёжных мастеров огромный. Один нормально выполненный заказ = 3–5 рекомендаций. Старт без вложений.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:#C9960A;border-color:rgba(201,150,10,.2);background:rgba(201,150,10,.07)">Без вложений</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Где: Авито, Profi.ru, соцсети</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+15–60к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:#48A848">04</div>
+        <div class="ic-body">
+          <h4>КОНТЕНТ / СОЦСЕТИ</h4>
+          <p>Канал в Telegram, группа ВК, блог — о том в чём разбираешься. Монетизация: реклама, платный контент, продажа своих услуг. Долгий путь (6–12 месяцев), но пассивный доход на выходе.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:#48A848;border-color:rgba(72,168,72,.2);background:rgba(72,168,72,.07)">Пассивный доход</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Долгий старт</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+5–∞к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:var(--purple)">05</div>
+        <div class="ic-body">
+          <h4>ОБУЧЕНИЕ / НАСТАВНИЧЕСТВО</h4>
+          <p>Знаешь что-то лучше большинства? Учи. Репетиторство, консультации, мастер-классы — онлайн и офлайн. Навык оценивается дороже чем ты думаешь. Час консультации специалиста = 2–5 часов работы наёмного.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:var(--purple);border-color:rgba(128,96,176,.2);background:rgba(128,96,176,.07)">Высокий чек</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Где: Профи.ру, Telegram, Авито</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+20–100к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:#3A7EC0">06</div>
+        <div class="ic-body">
+          <h4>АРЕНДА — ЧТО ЕСТЬ</h4>
+          <p>Квартира, гараж, машина, инструменты, оборудование. Даже парковочное место в городе даёт 3–8 тысяч в месяц пассивно. Инвентаризируй что у тебя есть и что может работать без тебя.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:#3A7EC0;border-color:rgba(58,126,192,.2);background:rgba(58,126,192,.07)">Пассивно</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Нужны активы</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+3–50к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:#E05020">07</div>
+        <div class="ic-body">
+          <h4>ПРОДАЖА ЧУЖОГО (АГЕНТСТВО/ПАРТНЁРКИ)</h4>
+          <p>Приводи клиентов бизнесам за % от сделки. Строительные компании, автосалоны, агентства недвижимости платят 1–5% от сделки за лид. Нужны только контакты и умение говорить.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:#E05020;border-color:rgba(224,80,32,.2);background:rgba(224,80,32,.07)">Высокий потенциал</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Навык продаж</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+10–200к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+      <div class="ic">
+        <div class="ic-num" style="color:var(--gold2)">08</div>
+        <div class="ic-body">
+          <h4>МЕЛКОЕ ПРОИЗВОДСТВО / КРАФТ</h4>
+          <p>Делать руками что-то уникальное: мебель, металлоконструкции, деревянные изделия, кузнечное дело, одежда. Высокий чек, низкая конкуренция в качественном сегменте. Долгий путь к мастерству — долгосрочный актив.</p>
+          <div class="ic-tags">
+            <span class="ic-tag" style="color:var(--gold2);border-color:rgba(201,150,10,.2);background:rgba(201,150,10,.07)">Уникальность</span>
+            <span class="ic-tag" style="color:var(--dim);border-color:var(--border)">Долгий старт</span>
+          </div>
+        </div>
+        <div class="ic-earn"><span class="earn-val">+15–150к</span><span class="earn-lbl">руб/мес</span></div>
+      </div>
+
+    </div>
+
+    <h2>МЫШЛЕНИЕ КОТОРОЕ МЕШАЕТ</h2>
+    <div class="mindset-list">
+      <div class="ml-item"><div class="ml-ico">🚫</div><div class="ml-body"><strong>«Нет времени»</strong><span>2 часа в день вечером = 60 часов в месяц. Это половина рабочей недели. Вопрос не времени — вопрос приоритетов.</span></div></div>
+      <div class="ml-item"><div class="ml-ico">🚫</div><div class="ml-body"><strong>«Нет капитала»</strong><span>Фриланс, услуги руками, продажа знаний — вход нулевой. Деньги нужны только для флиппинга и аренды. Начни с того что не требует денег.</span></div></div>
+      <div class="ml-item"><div class="ml-ico">🚫</div><div class="ml-body"><strong>«Не умею продавать»</strong><span>Продажа = объяснение ценности. Один пост в соцсетях «делаю вот это, стоит вот столько» — это уже продажа. Начни с окружения — они знают тебя и доверяют.</span></div></div>
+      <div class="ml-item"><div class="ml-ico">🚫</div><div class="ml-body"><strong>«Вдруг не получится»</strong><span>Первые попытки почти всегда провальны. Это нормально — это обучение. Провал первого заказа стоит дешевле чем годы страха попробовать.</span></div></div>
+    </div>
+
+    <h2>С ЧЕГО НАЧАТЬ — 5 ШАГОВ</h2>
+    <div class="steps-num">
+      <div class="sn-item"><div class="sn-n">1</div><div><strong>Инвентаризация навыков и активов</strong><span>Запиши: что умеешь лучше большинства? Что есть в собственности? Эти два списка — твои стартовые варианты.</span></div></div>
+      <div class="sn-item"><div class="sn-n">2</div><div><strong>Выбери один способ — только один</strong><span>Не распыляйся. Один источник → первые деньги → потом второй. Попытка делать всё сразу = не делать ничего.</span></div></div>
+      <div class="sn-item"><div class="sn-n">3</div><div><strong>Первый клиент — из окружения</strong><span>Напиши в личку 10 знакомым что теперь делаешь это. Первый заказ почти всегда приходит от тех кто тебя знает.</span></div></div>
+      <div class="sn-item"><div class="sn-n">4</div><div><strong>Сделай первые деньги — любые</strong><span>Даже 500 рублей вне зарплаты меняют психологию. Это доказательство что модель работает. Масштабировать проще чем начинать.</span></div></div>
+      <div class="sn-item"><div class="sn-n">5</div><div><strong>Реинвестируй первые доходы</strong><span>Не трать — вкладывай обратно в инструменты, рекламу, обучение. Первый год — строишь систему, не тратишь прибыль.</span></div></div>
+    </div>
+
+    <blockquote><p>Цель не в том чтобы бросить работу. Цель — чтобы работа стала выбором, а не необходимостью.</p></blockquote>
+
+    <h2>ИТОГ</h2>
+    <p>Выбери один способ из восьми — тот который ближе к твоим навыкам. <strong>Первый шаг — написать 10 знакомым сегодня вечером.</strong> Не «думать», не «готовиться» — написать. Первые деньги вне зарплаты придут быстрее чем ты ожидаешь.</p>
+
+  </div>
+
+  <div class="rev-box">
+    <div class="rev-box-head"><h3>АНОНИМНЫЙ ОТЗЫВ</h3><span class="avg" id="avgStars"></span></div>
+    <p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+      <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+      <span class="star" onclick="setStar(5)">★</span>
+    </div>
+    <textarea class="rev-ta" id="revTa" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rev-send" onclick="sendRev()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rev-list" id="revList"></div>
+  </div>
+  <div class="next-block">
+    <h3>ДРУГИЕ ТЕМЫ</h3>
+    <div class="next-grid" id="nextGrid"></div>
+  </div>
+</div>
+<script>
+const THIS_ID=50,THIS_CAT='biz';
+const ARTICLES=[
+  {id:45,file:'article-045',cat:'fight',ico:'🥋',title:'САМБО — ПОЧЕМУ НАЧАТЬ ЗДЕСЬ',time:'9 мин'},
+  {id:46,file:'article-046',cat:'fight',ico:'⚔️',title:'КАКОЙ БОЙ ВЫБРАТЬ — 8 ВИДОВ',time:'10 мин'},
+  {id:26,file:'article-026',cat:'mind',ico:'🧠',title:'ДИСЦИПЛИНА — ЭТО СИСТЕМА',time:'10 мин'},
+  {id:28,file:'article-028',cat:'mind',ico:'🏆',title:'МЫШЛЕНИЕ ПОБЕДИТЕЛЯ',time:'10 мин'},
+  {id:33,file:'article-033',cat:'mind',ico:'🎯',title:'ЦЕЛИ КОТОРЫЕ РАБОТАЮТ',time:'10 мин'},
+  {id:35,file:'article-035',cat:'mind',ico:'🔥',title:'ЗЛОСТЬ — ТОПЛИВО ИЛИ ЯД',time:'9 мин'},
+  {id:41,file:'article-041',cat:'sport',ico:'🍗',title:'ПИТАНИЕ ДЛЯ РОСТА МЫШЦ',time:'9 мин'},
+  {id:42,file:'article-042',cat:'sport',ico:'😴',title:'СОН — ЛУЧШАЯ ДОБАВКА',time:'8 мин'},
+];
+const CATS={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+function gV(){return JSON.parse(localStorage.getItem('sz_views')||'{}')}
+function sV(v){localStorage.setItem('sz_views',JSON.stringify(v))}
+function gR(){return JSON.parse(localStorage.getItem('sz_read')||'{}')}
+function sR(r){localStorage.setItem('sz_read',JSON.stringify(r))}
+function gRv(){return JSON.parse(localStorage.getItem('sz_revs')||'{}')}
+function sRv(v){localStorage.setItem('sz_revs',JSON.stringify(v))}
+let ol=Math.floor(Math.random()*4)+1;
+function tickOl(){ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>9)ol=5;const e=document.getElementById('ol-cnt');if(e)e.textContent=ol;}
+setInterval(tickOl,10000);
+window.addEventListener('scroll',()=>{const el=document.documentElement;const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rp').style.width=Math.min(100,pct)+'%';});
+(function(){const v=gV();v[THIS_ID]=(v[THIS_ID]||0)+1;sV(v);const r=gR();r[THIS_ID]=true;sR(r);document.getElementById('views-cnt').textContent=v[THIS_ID];document.getElementById('read-badge').style.display='flex';})();
+let curStar=0;
+function setStar(n){curStar=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avgStr(list){if(!list.length)return'';const a=list.reduce((s,r)=>s+(r.s||5),0)/list.length;return'⭐ '+a.toFixed(1)+' ('+list.length+')';}
+function renderRevs(){const list=(gRv()[THIS_ID]||[]);document.getElementById('avgStars').textContent=avgStr(list);const el=document.getElementById('revList');if(!list.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);padding:.5rem 0;margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=list.map(r=>`<div class="rev-item"><div class="ri-stars">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="ri-text">${r.t}</div><div class="ri-date">${r.d}</div></div>`).join('');}
+function sendRev(){const txt=document.getElementById('revTa').value.trim();if(!curStar){showNotif('⚠ Поставь оценку');return;}if(!txt){showNotif('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[THIS_ID])rv[THIS_ID]=[];rv[THIS_ID].push({s:curStar,t:txt,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('revTa').value='';curStar=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));renderRevs();showNotif('✓ Отзыв отправлен анонимно');}
+(function(){const others=ARTICLES.filter(a=>a.id!==THIS_ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('nextGrid').innerHTML=others.map(a=>`<a class="next-card" href="${a.file}.html"><div class="nc-tag" style="color:${CCOL[a.cat]}">${CATS[a.cat].toUpperCase()}</div><div class="nc-title">${a.ico} ${a.title}</div><div class="nc-time">⏱ ${a.time}</div></a>`).join('');})();
+let nT;
+function showNotif(msg){clearTimeout(nT);const e=document.getElementById('notif');e.textContent=msg;e.classList.add('show');nT=setTimeout(()=>e.classList.remove('show'),3000);}
+renderRevs();
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>УТРЕННЯЯ ЗАРЯДКА — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--sport:#48A848;--sun:#E0A020;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--sun),var(--sport));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.badge-on{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.badge-city{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem;position:relative}
+.bc{display:flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:#48A848;background:rgba(72,168,72,.1);border:1px solid rgba(72,168,72,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul,ol{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--sun);padding:1.1rem 1.7rem;background:rgba(224,160,32,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#907040;font-style:italic;margin:0;font-size:.93rem}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.2rem 0}
+.sg{background:var(--card2);border:1px solid var(--border);border-radius:.4rem;padding:.9rem 1rem}
+.sg .ico{font-size:1.1rem;margin-bottom:.3rem}
+.sg strong{display:block;font-size:.86rem;color:var(--white);margin-bottom:.18rem}
+.sg span{font-size:.77rem;color:#8090A8;line-height:1.6}
+.tl{display:flex;flex-direction:column;gap:.5rem;margin:1.2rem 0}
+.ti{background:var(--card2);border:1px solid var(--border);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.ti-num{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;min-width:1.8rem;flex-shrink:0}
+.ti strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.12rem}
+.ti small{font-size:.68rem;font-weight:700;letter-spacing:1px;display:block;margin-bottom:.18rem}
+.ti span{font-size:.79rem;color:#8090A8;line-height:1.6}
+.hbox{background:rgba(72,168,72,.04);border:1px solid rgba(72,168,72,.18);border-radius:.5rem;padding:1.2rem 1.4rem;margin:1.4rem 0}
+.hbox h4{font-family:'Oswald',sans-serif;font-size:.87rem;letter-spacing:1.5px;color:var(--sport);margin-bottom:.7rem}
+.hbox li{font-size:.82rem;color:#80A080;line-height:1.75}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--sport);color:var(--sport)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.sgrid{grid-template-columns:1fr}h1{font-size:1.9rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="badge-on"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="badge-city">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Спорт</span></div>
+    <div class="tag">◆ СПОРТ</div>
+    <h1>☀️ УТРЕННЯЯ ЗАРЯДКА — 10 МИНУТ КОТОРЫЕ МЕНЯЮТ ДЕНЬ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 8 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ПОЧЕМУ УТРО РЕШАЕТ ДЕНЬ</h2>
+  <p>Первые 30–60 минут после пробуждения — это <strong>нейрохимическая установка на весь день.</strong> Кортизол естественно высок — это не стресс, это топливо. Что ты делаешь с этим пиком определяет траекторию дня. Телефон в кровати → дофамин слит, тревога запущена. Движение → кортизол конвертирован в энергию и фокус.</p>
+  <p>Утренняя зарядка — не про «сжечь калории». Это <strong>запуск нервной системы, смазка суставов, выброс эндорфинов и сигнал мозгу: сегодня я действую.</strong> 10 минут каждое утро меняют не тело — они меняют характер.</p>
+  <blockquote><p>Человек который двигается первые 10 минут утра — другой человек к 10 утра. Не метафора — физиология.</p></blockquote>
+
+  <h2>ЧТО ПРОИСХОДИТ ЗА 10 МИНУТ</h2>
+  <div class="sgrid">
+    <div class="sg"><div class="ico">🧠</div><strong>Мозговой кровоток +20%</strong><span>Больше крови в префронтальной коре — фокус и принятие решений острее с первых минут.</span></div>
+    <div class="sg"><div class="ico">😊</div><strong>Эндорфины + серотонин</strong><span>Даже лёгкое движение запускает выброс. Химический сдвиг настроения без кофе и телефона.</span></div>
+    <div class="sg"><div class="ico">🔥</div><strong>Метаболизм просыпается</strong><span>Температура тела растёт, обмен веществ ускоряется. Переключение из режима сна в режим действия.</span></div>
+    <div class="sg"><div class="ico">🦴</div><strong>Суставы и фасции</strong><span>Суставная жидкость застаивается за ночь. Движение её «перемешивает» — снижает скованность и риск травм.</span></div>
+    <div class="sg"><div class="ico">⚡</div><strong>Кортизол — в дело</strong><span>Лежание в телефоне превращает утренний кортизол в тревогу. Движение — в продуктивность.</span></div>
+    <div class="sg"><div class="ico">🎯</div><strong>Первая победа дня</strong><span>Нейронная цепь: «я действую» → легче действовать дальше. Импульс который несёт через весь день.</span></div>
+  </div>
+
+  <h2>ПРОТОКОЛ — 10 МИНУТ ПО БЛОКАМ</h2>
+  <div class="tl">
+    <div class="ti"><div class="ti-num" style="color:var(--sun)">01</div><div><small style="color:var(--sun)">МИН 1–2 · ПРОБУЖДЕНИЕ</small><strong>Суставная гимнастика стоя</strong><span>Шея → плечи → локти → запястья → тазобедренные → колени → голеностоп. Медленно, без рывков. Смазываешь суставы.</span></div></div>
+    <div class="ti"><div class="ti-num" style="color:var(--sport)">02</div><div><small style="color:var(--sport)">МИН 3–5 · АКТИВАЦИЯ</small><strong>Базовые движения без нагрузки</strong><span>20 приседаний с весом тела → 15 отжиманий → 10 выпадов на каждую ногу. Темп средний — кровоток, не усталость.</span></div></div>
+    <div class="ti"><div class="ti-num" style="color:var(--blue)">03</div><div><small style="color:var(--blue)">МИН 6–8 · CORE</small><strong>Планка + «птица-собака»</strong><span>Планка на локтях 30 сек × 2 → «птица-собака» 10 повторений каждую сторону. Защита поясницы на весь день.</span></div></div>
+    <div class="ti"><div class="ti-num" style="color:var(--red)">04</div><div><small style="color:var(--red)">МИН 9–10 · ДЫХАНИЕ</small><strong>Диафрагмальное дыхание</strong><span>5 глубоких вдохов животом (4 сек вдох, 6 сек выдох) + 60 сек растяжки груди. Парасимпатика включается — тревога снижается.</span></div></div>
+  </div>
+
+  <h2>КАК СДЕЛАТЬ ПРИВЫЧКОЙ</h2>
+  <div class="hbox">
+    <h4>5 ПРАВИЛ ЗАКРЕПЛЕНИЯ</h4>
+    <ol>
+      <li><strong>Якорь:</strong> сразу после того как встал с кровати — до телефона, до кофе, до всего</li>
+      <li><strong>Одежда с вечера:</strong> форма лежит рядом — снижает трение до нуля</li>
+      <li><strong>Начни с 5 минут</strong> — 5 минут каждый день лучше 30 минут раз в неделю</li>
+      <li><strong>Одно место:</strong> коврик на одном месте создаёт пространственный триггер</li>
+      <li><strong>21 день без пропусков</strong> — после этого тело само просит движения утром</li>
+    </ol>
+  </div>
+
+  <h2>ИТОГ</h2>
+  <p>10 минут утреннего движения — это ритуал владения собой. <strong>Ты проснулся и первое что сделал — выбрал действие вместо пассивности.</strong> Маленькие победы утром строят большие победы к вечеру.</p>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=62,CAT='sport';
+const ART=[{id:2,file:'article-002',cat:'sport',ico:'💪',title:'ПЛАН ЗАЛА: 3 ДНЯ',time:'6 мин'},{id:38,file:'article-038',cat:'sport',ico:'🏃',title:'БЕГАЙ. С НУЛЯ ДО 5 КМ',time:'8 мин'},{id:56,file:'article-056',cat:'sport',ico:'🧊',title:'ХОЛОДНЫЙ ДУШ',time:'8 мин'},{id:26,file:'article-026',cat:'mind',ico:'🧠',title:'ДИСЦИПЛИНА — СИСТЕМА',time:'10 мин'},{id:54,file:'article-054',cat:'mind',ico:'🏛️',title:'СТОИЦИЗМ НА ПРАКТИКЕ',time:'10 мин'},{id:55,file:'article-055',cat:'fight',ico:'🧱',title:'ДЕРЖАТЬ УДАР',time:'9 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function avg(l){if(!l.length)return'';return'⭐ '+(l.reduce((s,r)=>s+(r.s||5),0)/l.length).toFixed(1)+' ('+l.length+')';}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

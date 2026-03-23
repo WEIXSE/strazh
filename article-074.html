@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>КУРЕНИЕ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--health:#3A7EC0;--smoke:#808060;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--smoke),var(--red));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:#3A7EC0;background:rgba(58,126,192,.1);border:1px solid rgba(58,126,192,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.55rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--smoke);padding:1.1rem 1.7rem;background:rgba(128,128,96,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#808060;font-style:italic;margin:0;font-size:.93rem}
+.damage-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:1.2rem 0}
+.dg{background:var(--card2);border:1px solid rgba(192,39,45,.12);border-radius:.4rem;padding:.9rem 1rem}
+.dg .ico{font-size:1rem;margin-bottom:.28rem}
+.dg strong{display:block;font-size:.85rem;color:#C08080;margin-bottom:.12rem}
+.dg span{font-size:.76rem;color:#806060;line-height:1.55}
+.timeline{display:flex;flex-direction:column;gap:0;margin:1.2rem 0}
+.tl{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--border)}
+.tl:last-child{border:none}
+.tl-t{font-family:'Oswald',sans-serif;font-size:.78rem;font-weight:600;color:var(--green);min-width:80px;flex-shrink:0;padding-top:.1rem}
+.tl strong{display:block;font-size:.86rem;color:var(--white);margin-bottom:.08rem}
+.tl span{font-size:.78rem;color:#8090A8;line-height:1.6}
+.quit-cards{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.qc{background:var(--card2);border:1px solid rgba(58,126,192,.15);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.qc-num{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;color:var(--health);min-width:1.8rem;flex-shrink:0}
+.qc strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.1rem}
+.qc span{font-size:.79rem;color:#8090A8;line-height:1.6}
+.vape-box{background:rgba(128,128,96,.04);border:1px solid rgba(128,128,96,.2);border-radius:.45rem;padding:1.1rem 1.4rem;margin:1.4rem 0}
+.vape-box h4{font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:1.5px;color:var(--smoke);margin-bottom:.7rem}
+.vape-box li{font-size:.82rem;color:#808060;line-height:1.8}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--health);color:var(--health)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){.damage-grid{grid-template-columns:1fr}h1{font-size:1.85rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Здоровье</span></div>
+    <div class="tag">◆ ЗДОРОВЬЕ</div>
+    <h1>🚬 КУРЕНИЕ И НИКОТИН — ВСЁ ЧТО НУЖНО ЗНАТЬ ЧТОБЫ БРОСИТЬ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 9 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>НИКОТИН ≠ СИГАРЕТА</h2>
+  <p>Никотин — вызывает зависимость. <strong>Убивает — не никотин, а продукты горения: смолы, оксид углерода, тяжёлые металлы, 70+ канцерогенов.</strong> Это важное разграничение для понимания стратегии отказа. Цель — убрать горение, потом убрать никотин.</p>
+  <p>Никотиновая зависимость — одна из самых сильных. <strong>Сильнее героина по скорости формирования привыкания</strong> — потому что никотин достигает мозга за 7–10 секунд при курении. Это не слабость характера — это нейробиология дофаминовой системы.</p>
+
+  <blockquote><p>Каждый курильщик хочет бросить. Большинство пробовали в среднем 8–10 раз. Это не провал — это часть процесса. Успешный отказ случается в среднем после 8–14 попыток.</p></blockquote>
+
+  <h2>ЧТО РАЗРУШАЕТ КУРЕНИЕ</h2>
+  <div class="damage-grid">
+    <div class="dg"><div class="ico">❤️</div><strong>Сердце и сосуды</strong><span>Удваивает риск инфаркта. Спазм коронарных артерий после каждой сигареты. Атеросклероз в 2–3 раза быстрее.</span></div>
+    <div class="dg"><div class="ico">🫁</div><strong>Лёгкие</strong><span>ХОБЛ — необратимое разрушение лёгочной ткани. Рак лёгкого — 90% случаев связаны с курением. Снижение ОФВ1 на 30–40 мл/год вместо нормальных 20.</span></div>
+    <div class="dg"><div class="ico">🧪</div><strong>Тестостерон</strong><span>Кадмий в табачном дыме прямо повреждает клетки Лейдига в яичках. Курильщики имеют тестостерон в среднем на 15% ниже.</span></div>
+    <div class="dg"><div class="ico">🧠</div><strong>Мозг</strong><span>Ускоряет когнитивное снижение. Повышает риск деменции на 45%. Хроническое сужение сосудов мозга.</span></div>
+    <div class="dg"><div class="ico">💪</div><strong>Мышцы и спорт</strong><span>CO снижает транспорт кислорода. Выносливость падает. Восстановление замедляется. Курение после тренировки обнуляет часть анаболического ответа.</span></div>
+    <div class="dg"><div class="ico">👁️</div><strong>Внешность</strong><span>Разрушение коллагена кожи, ранние морщины. Желтизна зубов и пальцев. Снижение кровотока в коже — серый цвет лица.</span></div>
+  </div>
+
+  <h2>ТЕЛО ВОССТАНАВЛИВАЕТСЯ — ТАЙМЛАЙН</h2>
+  <div class="timeline">
+    <div class="tl"><div class="tl-t">20 МИН</div><div><strong>Давление и пульс нормализуются</strong><span>Сосудистый спазм от никотина проходит.</span></div></div>
+    <div class="tl"><div class="tl-t">8 ЧАСОВ</div><div><strong>CO в крови падает вдвое</strong><span>Кислород начинает нормально переноситься гемоглобином.</span></div></div>
+    <div class="tl"><div class="tl-t">48 ЧАСОВ</div><div><strong>Вкус и запах начинают возвращаться</strong><span>Нервные окончания начинают регенерировать.</span></div></div>
+    <div class="tl"><div class="tl-t">2–12 НЕДЕЛЬ</div><div><strong>Кровообращение и функция лёгких улучшаются</strong><span>Риск инфаркта начинает снижаться.</span></div></div>
+    <div class="tl"><div class="tl-t">1 ГОД</div><div><strong>Риск ИБС снижается вдвое</strong><span>Сосуды существенно восстановились.</span></div></div>
+    <div class="tl"><div class="tl-t">5–10 ЛЕТ</div><div><strong>Риск инсульта = как у некурящего</strong><span>Организм практически полностью компенсирует ущерб.</span></div></div>
+  </div>
+
+  <h2>КАК БРОСИТЬ — СТРАТЕГИЯ КОТОРАЯ РАБОТАЕТ</h2>
+  <div class="quit-cards">
+    <div class="qc"><div class="qc-num">01</div><div><strong>Никотинзаместительная терапия (НЗТ) — первый шаг</strong><span>Пластырь + жвачка или спрей одновременно. Снижает симптомы отмены на 50–70%. Не «читерство» — это медицина. Без НЗТ успешность отказа — 3–5%, с НЗТ — 15–25%.</span></div></div>
+    <div class="qc"><div class="qc-num">02</div><div><strong>Варениклин (Чампикс) — лучший фармпрепарат</strong><span>Частичный агонист никотиновых рецепторов. Снижает тягу и удовольствие от курения одновременно. Успешность до 30–40%. Только по рецепту, есть побочные эффекты — обсуди с врачом.</span></div></div>
+    <div class="qc"><div class="qc-num">03</div><div><strong>Определить триггеры и заменить ритуал</strong><span>Кофе + сигарета. Стресс + сигарета. Алкоголь + сигарета. Триггер убрать нельзя — реакцию можно заменить. Жвачка, прогулка, дыхание — конкретная замена для каждого триггера.</span></div></div>
+    <div class="qc"><div class="qc-num">04</div><div><strong>Дата отказа + публичное обязательство</strong><span>Конкретная дата — не «скоро». Сказать 2–3 людям. Убрать все сигареты, зажигалки, пепельницы. Сделать курение физически неудобным.</span></div></div>
+    <div class="qc"><div class="qc-num">05</div><div><strong>Физические нагрузки — снижают тягу</strong><span>20 минут кардио снижают интенсивность тяги к никотину на 1–2 часа. Механизм: дофамин от движения частично заменяет дофамин от никотина.</span></div></div>
+  </div>
+
+  <h2>ВЕЙП, АЙКОС, СНЮС — ЧЕСТНО</h2>
+  <div class="vape-box">
+    <h4>НЕ БЕЗОПАСНАЯ АЛЬТЕРНАТИВА — ДРУГОЙ ВРЕД</h4>
+    <ul>
+      <li>Вейп: нет горения — нет смол. Но есть акролеин, диацетил, тяжёлые металлы из спирали. Долгосрочные данные отсутствуют — это эксперимент в реальном времени</li>
+      <li>АЙКОС: снижает вред по сравнению с сигаретой — но не устраняет его. Никотин и часть токсинов остаются. «Менее вредно» ≠ «безвредно»</li>
+      <li>Снюс: нет дыма — нет рака лёгких. Но есть риск рака полости рта, поджелудочной, повышенное давление от никотина</li>
+      <li>Все три — поддерживают никотиновую зависимость. Могут быть переходным инструментом, но не конечной точкой</li>
+    </ul>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=74,CAT='health';
+const ART=[{id:73,file:'article-073',cat:'health',ico:'❤️',title:'СЕРДЦЕ И ДАВЛЕНИЕ',time:'9 мин'},{id:66,file:'article-066',cat:'health',ico:'🍺',title:'АЛКОГОЛЬ — ЧЕСТНО',time:'10 мин'},{id:67,file:'article-067',cat:'health',ico:'🔬',title:'АНАЛИЗЫ ДО 35',time:'8 мин'},{id:70,file:'article-070',cat:'health',ico:'😤',title:'СТРЕСС И КОРТИЗОЛ',time:'9 мин'},{id:3,file:'article-003',cat:'health',ico:'🧪',title:'ТЕСТОСТЕРОН',time:'4 мин'},{id:48,file:'article-048',cat:'mind',ico:'😰',title:'ТРЕВОГА И ПАНИКА',time:'9 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>

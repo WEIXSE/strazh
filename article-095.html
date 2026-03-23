@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ПРОДАЖИ БЕЗ ВПАРИВАНИЯ — СТРАЖ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+:root{--bg:#03040A;--card:#0A0C15;--card2:#0D1020;--border:#161928;--border2:#222640;--gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;--white:#F0F2FF;--text:#D0D8F0;--dim:#4A5578;--green:#22c55e;--blue:#3b82f6;--biz:#8060B0;--biz2:#604890;}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.rp{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--biz2),var(--biz));z-index:999;transition:width .1s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(3,4,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:9px;color:var(--gold);text-decoration:none}
+.back{font-size:.72rem;font-weight:600;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.3rem .85rem;border-radius:.25rem}
+.back:hover{color:var(--gold);border-color:var(--gold2)}
+.bon{display:flex;align-items:center;gap:.45rem;font-size:.62rem;font-weight:700;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.22rem .75rem;border-radius:.2rem;background:rgba(34,197,94,.05)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pu 2s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.bcity{font-size:.6rem;letter-spacing:2.5px;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.22rem .7rem;border-radius:.2rem;background:rgba(192,39,45,.07)}
+.nr{display:flex;align-items:center;gap:.8rem}
+.wrap{max-width:800px;margin:0 auto;padding:100px 2rem 5rem}
+.bc{display:flex;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-bottom:1.2rem;align-items:center}
+.bc a{color:var(--dim);text-decoration:none}.bc span{color:var(--border2)}
+.tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:4px;margin-bottom:.9rem;padding:.2rem .8rem;border-radius:.2rem;color:var(--biz);background:rgba(128,96,176,.1);border:1px solid rgba(128,96,176,.2)}
+h1{font-family:'Oswald',sans-serif;font-size:2.55rem;font-weight:700;color:var(--white);line-height:1.06;margin-bottom:1.1rem}
+.meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.68rem;color:var(--dim);font-weight:600;padding-bottom:1.6rem;border-bottom:1px solid var(--border);align-items:center;margin-bottom:2rem}
+.mv{display:flex;align-items:center;gap:.3rem;color:var(--blue);border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+.mr2{display:flex;align-items:center;gap:.3rem;color:var(--green);border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.06);padding:.15rem .55rem;border-radius:.2rem;font-size:.62rem}
+h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:600;color:var(--white);margin:2.8rem 0 .9rem;padding-bottom:.55rem;border-bottom:1px solid var(--border)}
+p{font-size:.95rem;color:#A8B6CC;line-height:2;margin-bottom:1.1rem}
+ul{padding-left:1.5rem;margin-bottom:1.1rem}
+li{font-size:.92rem;color:#A0AECA;line-height:1.95;margin-bottom:.3rem}
+strong{color:var(--text);font-weight:700}
+blockquote{border-left:3px solid var(--biz2);padding:1.1rem 1.7rem;background:rgba(128,96,176,.04);margin:2rem 0;border-radius:0 .4rem .4rem 0}
+blockquote p{color:#705090;font-style:italic;margin:0;font-size:.93rem}
+.phase-cards{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.pc{background:var(--card2);border:1px solid rgba(128,96,176,.15);border-radius:.4rem;padding:.9rem 1.1rem;display:flex;gap:.9rem}
+.pc-n{font-family:'Oswald',sans-serif;font-size:.95rem;font-weight:700;color:var(--biz);min-width:1.8rem;flex-shrink:0}
+.pc strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:.1rem}
+.pc span{font-size:.79rem;color:#8080A8;line-height:1.6}
+.err-cards{display:flex;flex-direction:column;gap:.5rem;margin:1.2rem 0}
+.ec{background:var(--card2);border:1px solid rgba(192,39,45,.1);border-radius:.35rem;padding:.8rem 1.1rem;display:flex;gap:.8rem}
+.ec-x{color:var(--red);font-weight:800;flex-shrink:0;font-size:.9rem}
+.ec strong{display:block;font-size:.85rem;color:#C07070;margin-bottom:.05rem}
+.ec span{font-size:.77rem;color:#806060;line-height:1.55}
+.script-box{background:rgba(128,96,176,.04);border:1px solid rgba(128,96,176,.18);border-radius:.45rem;padding:1.2rem 1.6rem;margin:1.4rem 0}
+.script-box h4{font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:1.5px;color:var(--biz);margin-bottom:.8rem}
+.sline{font-size:.83rem;color:#9080A8;line-height:1.8;margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid rgba(128,96,176,.2)}
+.sline strong{color:var(--biz);font-size:.75rem;letter-spacing:1px}
+.rev-box{background:var(--card2);border:1px solid var(--border);border-radius:.5rem;padding:1.8rem;margin:3rem 0 2rem}
+.rev-box h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1.5px;color:var(--white);margin-bottom:.2rem}
+.rev-box>p{font-size:.73rem;color:var(--dim);margin-bottom:1rem}
+.stars{display:flex;gap:.3rem;margin-bottom:.9rem}
+.star{font-size:1.7rem;color:var(--border2);cursor:pointer;transition:.12s;user-select:none}
+.star:hover,.star.on{color:var(--gold)}
+textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.3rem;padding:.8rem 1rem;color:var(--text);font-size:.87rem;resize:vertical;min-height:80px;outline:none;font-family:inherit}
+textarea::placeholder{color:var(--dim)}
+.rsend{background:transparent;border:1px solid var(--border2);color:var(--dim);padding:.45rem 1.1rem;border-radius:.25rem;font-size:.74rem;cursor:pointer;margin-top:.65rem;font-weight:700;font-family:inherit}
+.rsend:hover{border-color:var(--biz);color:var(--biz)}
+.rlist{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.ri{padding:.9rem 0;border-bottom:1px solid var(--border)}.ri:last-child{border:none}
+.ri .rs{color:var(--gold);font-size:.78rem;margin-bottom:.3rem}.ri .rt{font-size:.83rem;color:#8898B0;line-height:1.7}.ri .rd{font-size:.6rem;color:var(--dim);margin-top:.25rem}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin-top:1rem}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:.4rem;padding:1rem 1.1rem;text-decoration:none;display:block;transition:.18s}
+.nc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.nc .nt{font-size:.56rem;font-weight:800;letter-spacing:2.5px;margin-bottom:.3rem}
+.nc .nn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4}
+.nc .ni{font-size:.6rem;color:var(--dim);margin-top:.3rem}
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:.4rem;padding:.85rem 1.3rem;font-size:.78rem;color:var(--text);z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:280px}
+.notif.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){h1{font-size:1.85rem}.wrap{padding:85px 1.1rem 4rem}nav{padding:0 1.1rem}}
+</style></head><body>
+<div class="rp" id="rp"></div>
+<div class="notif" id="notif"></div>
+<nav>
+  <div style="display:flex;align-items:center;gap:1.5rem"><a class="logo" href="index.html">СТРАЖ</a><a class="back" href="index.html">← НАЗАД</a></div>
+  <div class="nr"><div class="bon"><div class="dot"></div><span id="ol">1</span>&nbsp;ОНЛАЙН</div><div class="bcity">ПЕРМЬ · РФ</div></div>
+</nav>
+<div class="wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="bc"><a href="index.html">Главная</a><span>/</span><span>Бизнес</span></div>
+    <div class="tag">◆ БИЗНЕС</div>
+    <h1>📈 ПРОДАЖИ БЕЗ ВПАРИВАНИЯ</h1>
+    <div class="meta"><span>📅 22 МАР 2026</span><span>⏱ 9 мин</span><span class="mv">👁 <span id="vc">0</span> просмотров</span><span class="mr2" id="rb" style="display:none">✓ Прочитано</span></div>
+  </div>
+
+  <h2>ПРОДАЖИ — ЭТО ПОМОЩЬ, НЕ МАНИПУЛЯЦИЯ</h2>
+  <p>Большинство людей боятся продавать потому что ассоциируют продажи с давлением и обманом. <strong>Настоящая продажа — это помочь человеку принять решение которое ему выгодно.</strong> Если продукт решает реальную проблему — продавать не стыдно. Стыдно продавать то что не нужно.</p>
+  <p>Лучшие продавцы — не те кто говорит больше всех. <strong>Они слушают больше всех.</strong> Понять боль клиента точнее чем он сам её формулирует — это и есть продажа. Остальное — техника.</p>
+
+  <blockquote><p>Люди не покупают продукты. Они покупают лучшую версию себя. — Стив Джобс</p></blockquote>
+
+  <h2>5 ФАЗА ПРОДАЖИ</h2>
+  <div class="phase-cards">
+    <div class="pc"><div class="pc-n">01</div><div><strong>Контакт и доверие — первые 30 секунд</strong><span>Люди покупают у людей которым доверяют. Задача первого контакта — не продать, а расположить. Улыбка, имя, искренний интерес. Не начинай с продукта — начни с человека.</span></div></div>
+    <div class="pc"><div class="pc-n">02</div><div><strong>Выявление потребности — задавай вопросы</strong><span>«Что сейчас мешает? Как вы это решаете сейчас? Что было бы идеально?» Слушай — не перебивай. Записывай ключевые слова клиента — используешь их в презентации.</span></div></div>
+    <div class="pc"><div class="pc-n">03</div><div><strong>Презентация — только то что важно клиенту</strong><span>Не рассказывай всё. Только то что закрывает его боль которую он назвал. Говори языком клиента, не языком продукта. Не характеристики — выгоды.</span></div></div>
+    <div class="pc"><div class="pc-n">04</div><div><strong>Работа с возражениями — это не отказ</strong><span>Возражение = интерес + сомнение. «Дорого» — значит «не понял ценность». «Подумаю» — значит «боюсь ошибиться». Не спорь — уточни и раскрой.</span></div></div>
+    <div class="pc"><div class="pc-n">05</div><div><strong>Закрытие — попроси решение</strong><span>Большинство теряют продажи здесь: не спрашивают. «Оформляем?», «Когда начинаем?», «Какой вариант берёте?» — альтернативный вопрос закрывает лучше прямого.</span></div></div>
+  </div>
+
+  <h2>5 ОШИБОК КОТОРЫЕ УБИВАЮТ ПРОДАЖУ</h2>
+  <div class="err-cards">
+    <div class="ec"><div class="ec-x">✗</div><div><strong>Говорить больше чем слушать</strong><span>Золотое правило: 30% говоришь ты — 70% говорит клиент. Кто задаёт вопросы — тот управляет разговором.</span></div></div>
+    <div class="ec"><div class="ec-x">✗</div><div><strong>Называть цену до ценности</strong><span>Цена без контекста всегда кажется дорогой. Сначала покажи что получит клиент — потом цена воспринимается иначе.</span></div></div>
+    <div class="ec"><div class="ec-x">✗</div><div><strong>Бояться отказа и не закрывать</strong><span>Не спросил — не продал. Отказ — это информация, не катастрофа. Большинство продаж происходит после 4–5 касания, не первого.</span></div></div>
+    <div class="ec"><div class="ec-x">✗</div><div><strong>Продавать всем подряд</strong><span>Квалифицируй клиента сразу. Есть ли у него проблема? Есть ли деньги? Есть ли полномочия решать? Нет — не трать время ни его ни своё.</span></div></div>
+    <div class="ec"><div class="ec-x">✗</div><div><strong>Не брать контакт и не делать follow-up</strong><span>«Я подумаю» без даты следующего контакта = потеря. Всегда договаривайся о следующем шаге прямо сейчас.</span></div></div>
+  </div>
+
+  <h2>СКРИПТ ПЕРВОГО РАЗГОВОРА</h2>
+  <div class="script-box">
+    <h4>💬 СТРУКТУРА — АДАПТИРУЙ ПОД СЕБЯ</h4>
+    <div class="sline"><strong>ОТКРЫТИЕ:</strong> «Добрый день, [имя]. Меня зовут [имя]. Мы занимаемся [коротко]. Скажите, сейчас актуально [тема]?»</div>
+    <div class="sline"><strong>ВОПРОС О БОЛИ:</strong> «Расскажите — как вы сейчас решаете [задачу]? Что в этом самое неудобное?»</div>
+    <div class="sline"><strong>УСИЛЕНИЕ:</strong> «То есть из-за этого [последствие]? Как давно так?»</div>
+    <div class="sline"><strong>МЕЧТА:</strong> «А как было бы идеально для вас?»</div>
+    <div class="sline"><strong>ПРЕЗЕНТАЦИЯ:</strong> «Именно для этого мы сделали [продукт]. Он позволяет [выгода из его слов].»</div>
+    <div class="sline"><strong>ЗАКРЫТИЕ:</strong> «Как вам такой вариант? Когда удобно начать?»</div>
+  </div>
+
+  <div class="rev-box">
+    <h3>АНОНИМНЫЙ ОТЗЫВ</h3><p>Имя не сохраняется — только твоя мысль</p>
+    <div class="stars" id="stars"><span class="star" onclick="ss(1)">★</span><span class="star" onclick="ss(2)">★</span><span class="star" onclick="ss(3)">★</span><span class="star" onclick="ss(4)">★</span><span class="star" onclick="ss(5)">★</span></div>
+    <textarea id="ta" placeholder="Напиши мысль об этой теме..."></textarea>
+    <button class="rsend" onclick="sr()">ОТПРАВИТЬ АНОНИМНО</button>
+    <div class="rlist" id="rl"></div>
+  </div>
+  <div><h2 style="margin-top:0">ДРУГИЕ ТЕМЫ</h2><div class="ng" id="ng"></div></div>
+</div>
+<script>
+const ID=95,CAT='biz';
+const ART=[{id:93,file:'article-093',cat:'biz',ico:'💼',title:'КАК НАЧАТЬ СВОЁ ДЕЛО',time:'9 мин'},{id:94,file:'article-094',cat:'biz',ico:'💰',title:'ДЕНЬГИ — КАК ДУМАТЬ ПРАВИЛЬНО',time:'8 мин'},{id:96,file:'article-096',cat:'biz',ico:'🧾',title:'НАЛОГИ И ИП — МИНИМУМ',time:'7 мин'},{id:97,file:'article-097',cat:'biz',ico:'🎯',title:'МАРКЕТИНГ СВОИМИ РУКАМИ',time:'9 мин'},{id:100,file:'article-100',cat:'biz',ico:'🤝',title:'ПЕРЕГОВОРЫ — КАК ДОБИВАТЬСЯ СВОЕГО',time:'9 мин'},{id:20,file:'article-020',cat:'mind',ico:'🧠',title:'МЫШЛЕНИЕ БОГАТОГО ЧЕЛОВЕКА',time:'8 мин'}];
+const CN={girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CC={girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const gV=()=>JSON.parse(localStorage.getItem('sz_v')||'{}');
+const sV=v=>localStorage.setItem('sz_v',JSON.stringify(v));
+const gRv=()=>JSON.parse(localStorage.getItem('sz_rv')||'{}');
+const sRv=v=>localStorage.setItem('sz_rv',JSON.stringify(v));
+let ol=2;setInterval(()=>{ol=Math.max(1,ol+(Math.random()<.5?1:-1));if(ol>8)ol=4;const e=document.getElementById('ol');if(e)e.textContent=ol;},10000);
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('rp').style.width=Math.min(100,(d.scrollTop/(d.scrollHeight-d.clientHeight))*100)+'%';});
+(()=>{const v=gV();v[ID]=(v[ID]||0)+1;sV(v);document.getElementById('vc').textContent=v[ID];document.getElementById('rb').style.display='flex';})();
+let cs=0;
+function ss(n){cs=n;document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function rr(){const l=(gRv()[ID]||[]);const el=document.getElementById('rl');if(!l.length){el.innerHTML='<p style="font-size:.75rem;color:var(--dim);margin-top:.5rem">Отзывов пока нет — будь первым.</p>';return;}el.innerHTML=l.map(r=>`<div class="ri"><div class="rs">${'★'.repeat(r.s||5)}${'☆'.repeat(5-(r.s||5))}</div><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join('');}
+function sr(){const t=document.getElementById('ta').value.trim();if(!cs){sn('⚠ Поставь оценку');return;}if(!t){sn('⚠ Напиши мысль');return;}const rv=gRv();if(!rv[ID])rv[ID]=[];rv[ID].push({s:cs,t,d:new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long'})});sRv(rv);document.getElementById('ta').value='';cs=0;document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));rr();sn('✓ Отправлен анонимно');}
+(()=>{const o=ART.filter(a=>a.id!==ID).sort(()=>Math.random()-.5).slice(0,4);document.getElementById('ng').innerHTML=o.map(a=>`<a class="nc" href="${a.file}.html"><div class="nt" style="color:${CC[a.cat]}">${CN[a.cat].toUpperCase()}</div><div class="nn">${a.ico} ${a.title}</div><div class="ni">⏱ ${a.time}</div></a>`).join('');})();
+let nt;function sn(m){clearTimeout(nt);const e=document.getElementById('notif');e.textContent=m;e.classList.add('show');nt=setTimeout(()=>e.classList.remove('show'),3000);}
+rr();
+</script></body></html>
