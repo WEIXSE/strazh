@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>СТРАЖ — Братство</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#03040A;--bg2:#070910;--card:#0A0C15;--card2:#0D1020;
+  --border:#161928;--border2:#222640;
+  --gold:#F0C230;--gold2:#C9960A;--red:#C0272D;--red2:#8C1A1E;
+  --white:#F0F2FF;--text:#D0D8F0;--muted:#8090B8;--dim:#4A5578;
+  --green:#22c55e;--blue:#3b82f6;--purple:#a855f7;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --nav-h:64px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at top center,rgba(192,39,45,.08),transparent 32%),
+    radial-gradient(circle at bottom right,rgba(240,194,48,.05),transparent 24%),
+    var(--bg);
+  font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;min-height:100vh;
+}
+body.menu-open{overflow:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.glow-r{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:min(900px,94vw);height:500px;background:radial-gradient(ellipse,rgba(192,39,45,.07),transparent 70%);pointer-events:none;z-index:0;filter:blur(50px)}
+.glow-g{position:fixed;bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,194,48,.04),transparent 65%);pointer-events:none;z-index:0;filter:blur(60px)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(12px,2vw,34px);
+  background:rgba(3,4,10,.92);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.05)
+}
+.nav-logo{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:.45rem;color:var(--gold);cursor:pointer;text-decoration:none;white-space:nowrap}
+.nav-left{display:flex;align-items:center;gap:2rem;min-width:0}
+.nav-links{display:flex;gap:1.4rem;flex-wrap:wrap}
+.nav-links a{font-size:.74rem;font-weight:600;letter-spacing:.05em;color:var(--muted);text-decoration:none;cursor:pointer;transition:.15s}
+.nav-links a:hover{color:var(--white)}
+.nav-right{display:flex;align-items:center;gap:.65rem}
+.badge-city{font-size:.62rem;letter-spacing:.18em;color:var(--red);font-weight:700;border:1px solid var(--red2);padding:.35rem .8rem;border-radius:999px;background:rgba(192,39,45,.07)}
+.badge-online{display:flex;align-items:center;gap:.45rem;font-size:.64rem;font-weight:700;letter-spacing:.08em;color:var(--green);border:1px solid rgba(34,197,94,.2);padding:.35rem .8rem;border-radius:999px;background:rgba(34,197,94,.05)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.btn-join{font-family:'Oswald',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.16em;color:#000;background:var(--gold);border:none;padding:.6rem 1.15rem;border-radius:999px;cursor:pointer;transition:.2s}
+.btn-join:hover{background:var(--white)}
+
+.burger{
+  display:none;align-items:center;justify-content:center;width:42px;height:42px;
+  border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  color:var(--white);cursor:pointer;flex-shrink:0
+}
+.burger span,.burger span::before,.burger span::after{
+  display:block;width:18px;height:2px;background:var(--white);border-radius:999px;position:relative;transition:.18s
+}
+.burger span::before,.burger span::after{content:'';position:absolute;left:0}
+.burger span::before{top:-6px}
+.burger span::after{top:6px}
+body.menu-open .burger span{background:transparent}
+body.menu-open .burger span::before{top:0;transform:rotate(45deg)}
+body.menu-open .burger span::after{top:0;transform:rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;top:var(--nav-h);left:0;right:0;z-index:490;
+  background:rgba(7,9,16,.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);padding:1rem;display:none
+}
+body.menu-open .mobile-menu{display:block}
+.mobile-menu-inner{display:grid;gap:.7rem}
+.mobile-menu a,.mobile-menu button{
+  width:100%;text-align:left;background:rgba(255,255,255,.025);border:1px solid var(--border);
+  color:var(--text);text-decoration:none;border-radius:14px;padding:1rem;font-size:.92rem;font-weight:600
+}
+.menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:480}
+body.menu-open .menu-backdrop{display:block}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - var(--nav-h));padding-top:var(--nav-h)}
+
+/* SIDEBAR */
+aside{position:fixed;top:var(--nav-h);left:0;bottom:0;width:230px;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;z-index:300}
+.sb-header{padding:1.1rem 1.2rem 1rem;border-bottom:1px solid var(--border)}
+.sb-brand{font-family:'Oswald',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:4px;color:var(--dim);margin-bottom:.85rem}
+.sb-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.sb-s{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:.7rem;padding:.55rem .6rem;text-align:center}
+.sb-s-n{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);line-height:1}
+.sb-s-l{font-size:.5rem;font-weight:700;letter-spacing:1.5px;color:var(--dim);margin-top:.12rem}
+.sb-sec{padding:1.1rem 0 .3rem}
+.sb-sec-label{font-size:.55rem;font-weight:800;letter-spacing:4px;color:var(--dim);padding:0 1.2rem;margin-bottom:.5rem}
+.sb-a{display:flex;align-items:center;gap:.7rem;padding:.62rem 1.2rem;font-size:.77rem;font-weight:500;color:#7080A8;cursor:pointer;transition:.12s;border-left:2px solid transparent;text-decoration:none}
+.sb-a:hover{background:rgba(255,255,255,.02);color:var(--text);border-left-color:var(--border2)}
+.sb-a.on{background:rgba(240,194,48,.055);color:var(--gold);border-left-color:var(--gold2)}
+.sb-ico{width:16px;text-align:center;font-size:.85rem;opacity:.75;flex-shrink:0}
+.sb-cnt{margin-left:auto;font-size:.58rem;background:var(--border);color:var(--dim);padding:.1rem .42rem;border-radius:999px;font-weight:700}
+.sb-sep{height:1px;background:var(--border);margin:.65rem 1.2rem}
+
+/* MAIN */
+main{flex:1;margin-left:230px;padding:clamp(16px,2vw,34px);position:relative;z-index:1;padding-bottom:calc(28px + var(--safe-bottom))}
+.main-shell{width:min(100%,1400px);margin:0 auto}
+
+/* HERO */
+.hero{
+  position:relative;background:linear-gradient(135deg,#08090F,var(--card));border:1px solid var(--border2);
+  border-radius:1.2rem;padding:clamp(24px,5vw,68px);margin-bottom:1.4rem;overflow:hidden;
+  box-shadow:0 18px 48px rgba(0,0,0,.32)
+}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(192,39,45,.06),transparent 45%,rgba(240,194,48,.04));pointer-events:none}
+.hero-wm{position:absolute;right:-1rem;bottom:-2rem;font-family:'Oswald',sans-serif;font-size:min(16rem,24vw);font-weight:700;color:rgba(255,255,255,.016);pointer-events:none;line-height:1;user-select:none}
+.hero-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.6rem;font-weight:800;letter-spacing:.3em;color:var(--red);margin-bottom:1.2rem}
+.hero-label::before{content:'';width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--red))}
+.hero h1{font-family:'Oswald',sans-serif;font-size:clamp(2.2rem,6vw,4.3rem);font-weight:700;line-height:.98;color:var(--white);margin-bottom:.8rem}
+.hero h1 .shine{-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(90deg,#F7E878,#E09010,#F7D040,#E09010,#F7E878);background-size:300% auto;animation:shine 4s linear infinite}
+@keyframes shine{0%{background-position:0 50%}100%{background-position:300% 50%}}
+.hero-sub{font-size:clamp(.88rem,2.3vw,1rem);color:#9AAAC8;max-width:620px;line-height:1.8;margin-bottom:1.6rem}
+.hero-actions{display:flex;gap:.85rem;flex-wrap:wrap}
+.btn-primary{font-family:'Oswald',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.16em;color:#fff;background:var(--red);border:none;padding:.9rem 1.5rem;border-radius:999px;cursor:pointer;transition:.2s;box-shadow:0 6px 20px rgba(192,39,45,.25)}
+.btn-primary:hover{background:#a01e22;transform:translateY(-2px)}
+.btn-ghost{font-size:.8rem;font-weight:600;color:var(--muted);background:transparent;border:1px solid var(--border2);padding:.9rem 1.3rem;border-radius:999px;cursor:pointer;transition:.15s}
+.btn-ghost:hover{border-color:var(--muted);color:var(--text)}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;margin-bottom:1.4rem}
+.sbar{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem 1.1rem;position:relative;overflow:hidden;transition:.2s}
+.sbar:hover{border-color:var(--border2);transform:translateY(-2px)}
+.sbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:.2s}
+.sbar:hover::after{opacity:1}
+.sb1::after{background:var(--green)}.sb2::after{background:var(--gold)}.sb3::after{background:var(--blue)}.sb4::after{background:var(--red)}.sb5::after{background:var(--purple)}
+.sbar-ico{font-size:.95rem;margin-bottom:.3rem;opacity:.65}
+.sbar-n{font-family:'Oswald',sans-serif;font-size:clamp(1.65rem,4vw,2rem);font-weight:700;color:var(--white);line-height:1}
+.sbar-l{font-size:.56rem;font-weight:700;letter-spacing:1.8px;color:var(--dim);margin-top:.1rem}
+
+/* TOP */
+.top-block{background:var(--card2);border:1px solid var(--border);border-radius:1rem;margin-bottom:1.4rem;overflow:hidden}
+.top-block-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border-bottom:1px solid var(--border);gap:1rem;flex-wrap:wrap}
+.top-block-head h3{font-family:'Oswald',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:2.5px;color:var(--white)}
+.top-row{display:flex;align-items:center;gap:1rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--border);cursor:pointer;transition:.12s;text-decoration:none}
+.top-row:last-child{border:none}
+.top-row:hover{background:rgba(255,255,255,.02)}
+.top-rank{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;color:var(--dim);min-width:28px;text-align:center}
+.rank-1{color:var(--gold)}.rank-2{color:#B8C0CC}.rank-3{color:#C08850}
+.top-info{flex:1;min-width:0}
+.top-title{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.12rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.top-cat{font-size:.58rem;font-weight:800;letter-spacing:2px}
+.top-views{font-size:.7rem;font-weight:700;color:var(--muted);white-space:nowrap}
+
+.search-wrap{
+  margin:0 0 1rem;
+}
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), var(--card);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:.75rem .9rem;
+}
+.search-ico{
+  color:var(--dim);
+  font-size:1rem;
+  flex-shrink:0;
+}
+#siteSearch{
+  flex:1;
+  min-width:0;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:var(--white);
+  font-size:.92rem;
+  font-family:inherit;
+}
+#siteSearch::placeholder{
+  color:var(--dim);
+}
+.search-clear{
+  border:none;
+  background:rgba(255,255,255,.04);
+  color:var(--muted);
+  padding:.55rem .8rem;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:.74rem;
+  font-weight:700;
+  flex-shrink:0;
+}
+.search-clear:hover{
+  color:var(--white);
+  background:rgba(255,255,255,.07);
+}
+.search-meta{
+  margin-top:.45rem;
+  color:var(--dim);
+  font-size:.72rem;
+  font-weight:700;
+}
+
+
+/* SECTION HEAD */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.8rem}
+.sec-head h2{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:600;color:var(--white);letter-spacing:1.5px}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;overflow-x:auto;max-width:100%;padding-bottom:.15rem}
+.tab{font-size:.67rem;font-weight:700;letter-spacing:.4px;padding:.45rem .82rem;border:1px solid var(--border);border-radius:999px;color:var(--dim);cursor:pointer;background:transparent;transition:.12s;flex:0 0 auto}
+.tab:hover{border-color:var(--border2);color:var(--muted)}
+.tab.on{background:rgba(192,39,45,.1);border-color:var(--red2);color:var(--red)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:1rem;overflow:hidden;cursor:pointer;transition:.22s;position:relative;text-decoration:none;display:block}
+.card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.35)}
+.card-read-badge{position:absolute;top:.7rem;right:.7rem;font-size:.55rem;font-weight:800;letter-spacing:1.5px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#50D870;padding:.16rem .55rem;border-radius:999px}
+.card-view-badge{position:absolute;top:.7rem;left:.7rem;font-size:.58rem;font-weight:700;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.07);color:#A9B4D0;padding:.15rem .5rem;border-radius:999px;backdrop-filter:blur(4px)}
+.card-img{height:106px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:48px;background:linear-gradient(transparent,var(--card))}
+.bg-girls{background:linear-gradient(135deg,#200d18,#120910)}
+.bg-sport{background:linear-gradient(135deg,#0a1c0a,#080f08)}
+.bg-health{background:linear-gradient(135deg,#08121c,#080c14)}
+.bg-fight{background:linear-gradient(135deg,#1c0d04,#100c06)}
+.bg-biz{background:linear-gradient(135deg,#14081c,#0c080f)}
+.bg-mind{background:linear-gradient(135deg,#181600,#0f0f06)}
+.card-body{padding:1rem 1rem .9rem}
+.card-tag{font-size:.56rem;font-weight:800;letter-spacing:3px;margin-bottom:.45rem}
+.cc-girls{color:#C05080}.cc-sport{color:#48A848}.cc-health{color:#3A7EC0}.cc-fight{color:var(--gold2)}.cc-biz{color:#8060B0}.cc-mind{color:#9A9A18}
+.card-title{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.38rem;line-height:1.38;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.card-prev{font-size:.75rem;color:#8090B0;line-height:1.65;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.7rem 1rem;border-top:1px solid var(--border)}
+.card-time{font-size:.63rem;color:var(--dim);font-weight:500}
+.card-btn{font-size:.7rem;font-weight:700;color:var(--gold2);background:none;border:none;cursor:pointer;letter-spacing:.3px;white-space:nowrap}
+
+/* ACCESS */
+.access-wrap{background:var(--card);border:1px solid var(--border2);border-radius:1.2rem;padding:clamp(24px,5vw,56px);max-width:760px;position:relative;overflow:hidden}
+.access-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,39,45,.05),transparent 50%,rgba(240,194,48,.04));pointer-events:none}
+.access-wrap::after{content:'⚔';position:absolute;right:-1rem;bottom:-2rem;font-size:min(15rem,28vw);color:rgba(255,255,255,.013);pointer-events:none;line-height:1}
+.acc-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.6rem;font-weight:700;letter-spacing:3px;color:var(--red);border:1px solid var(--red2);background:rgba(192,39,45,.07);padding:.32rem .9rem;border-radius:999px;margin-bottom:1.2rem}
+.access-wrap h2{font-family:'Oswald',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--white);margin-bottom:.6rem;line-height:1}
+.access-wrap>p{font-size:.88rem;color:#8898C0;max-width:480px;line-height:1.85;margin-bottom:1.4rem}
+.price-big{font-family:'Oswald',sans-serif;font-size:clamp(2.5rem,6vw,3.4rem);font-weight:700;color:var(--white);line-height:1}
+.price-big sub{font-family:'Inter',sans-serif;font-size:1rem;font-weight:400;color:var(--muted);vertical-align:middle}
+.price-note{font-size:.72rem;color:var(--dim);margin:.3rem 0 1.4rem}
+.perks{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+.perk{font-size:.72rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:999px;padding:.32rem .72rem;color:#8898B8}
+.perk b{color:var(--gold2);margin-right:.2rem}
+.pay-btn{font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:2.5px;color:#fff;background:var(--red);border:none;padding:1rem 1.4rem;border-radius:999px;cursor:pointer;box-shadow:0 8px 30px rgba(192,39,45,.22);transition:.22s;display:inline-flex;align-items:center;justify-content:center}
+.pay-btn:hover{background:#a01e22;transform:translateY(-2px)}
+.pay-note{font-size:.67rem;color:var(--dim);margin-top:.7rem}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:600;align-items:center;justify-content:center;padding:1rem}
+.overlay.show{display:flex}
+.modal{background:var(--card);border:1px solid var(--border2);border-radius:1.2rem;padding:2rem;max-width:440px;width:100%;position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--gold2),transparent)}
+.modal-close{position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;transition:.15s}
+.modal-close:hover{color:var(--text)}
+.modal h2{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.modal>p{font-size:.8rem;color:#8898C0;margin-bottom:1.5rem;line-height:1.65}
+.modal-price{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--white);margin-bottom:1.3rem}
+.modal-price span{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--dim);font-weight:400}
+.fg{margin-bottom:.95rem}
+.fg label{display:block;font-size:.57rem;font-weight:700;letter-spacing:2.5px;color:var(--dim);margin-bottom:.38rem}
+.fg input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:.8rem;padding:.82rem 1rem;color:var(--white);font-size:.86rem;outline:none;transition:.15s;font-family:inherit}
+.fg input:focus{border-color:rgba(192,39,45,.45)}
+.modal-submit{width:100%;font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:2.5px;color:#fff;background:var(--red);border:none;padding:1rem;border-radius:999px;cursor:pointer;transition:.15s;margin-top:.5rem}
+.modal-submit:hover{background:#a01e22}
+.modal-ok{display:none;text-align:center;padding:1.8rem 0}
+.ok-ico{font-size:2.8rem;margin-bottom:.8rem}
+.modal-ok h3{font-family:'Oswald',sans-serif;color:#50D870;font-size:1.3rem;letter-spacing:1.5px;margin-bottom:.5rem}
+.modal-ok p{font-size:.8rem;color:var(--muted);line-height:1.7}
+
+.empty{text-align:center;padding:4rem 1rem;color:var(--dim);font-size:.85rem;background:rgba(255,255,255,.02);border:1px dashed var(--border2);border-radius:1rem}
+
+.mobile-bottom-nav{
+  display:none;position:fixed;left:10px;right:10px;bottom:calc(10px + var(--safe-bottom));z-index:450;
+  background:rgba(10,12,21,.9);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;padding:.45rem;grid-template-columns:repeat(4,1fr);gap:.4rem
+}
+.mbn-btn{
+  min-height:50px;border:none;border-radius:14px;background:transparent;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+  font-size:.63rem;font-weight:800;cursor:pointer
+}
+.mbn-btn span:first-child{font-size:1rem}
+.mbn-btn.active{background:rgba(255,255,255,.04);color:var(--white)}
+
+@media(max-width:1180px){
+  .stats-bar{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media(max-width:980px){
+  aside{display:none}
+  main{margin-left:0;padding:1rem 1rem calc(96px + var(--safe-bottom))}
+  .nav-links,.badge-city{display:none}
+  .burger{display:flex}
+  .mobile-bottom-nav{display:grid}
+}
+
+@media(max-width:720px){
+  nav{padding:0 .85rem}
+  .nav-logo{font-size:1rem;letter-spacing:.32rem}
+  .btn-join{display:none}
+  .hero{padding:1.2rem;border-radius:1rem}
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-ghost,.pay-btn{width:100%;justify-content:center}
+  .stats-bar{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid{grid-template-columns:1fr}
+  .tabs{flex-wrap:nowrap;overflow-x:auto}
+  .card-foot{flex-wrap:wrap}
+  .access-wrap h2 br{display:none}
+}
+
+@media(max-width:480px){
+  .badge-online{display:none}
+  .hero-label::before{display:none}
+  .hero-wm{font-size:min(10rem,34vw)}
+  .hero h1{font-size:2rem}
+  .top-row{align-items:flex-start}
+  .top-views{padding-top:.2rem}
+  .modal{padding:1.4rem 1rem}
+  .sbar{padding:.9rem}
+  .card-img{height:100px}
+  .card-body,.card-foot{padding-left:.9rem;padding-right:.9rem}
+}
+
+.sb-club-anim {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(240,194,48,0.1), rgba(192,39,45,0.1));
+  border: 1px solid var(--gold2);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Oswald', sans-serif;
+}
+.club-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(240,194,48,0.3), transparent);
+  animation: clubShine 3s infinite linear;
+}
+@keyframes clubShine {
+  0% { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100%) skewX(-20deg); opacity: 0; }
+}
+.club-title {
+  font-size: 1.4rem; font-weight: 700; color: var(--gold); display: block; letter-spacing: 0.3em;
+}
+.club-open {
+  font-size: 1.1rem; color: var(--green); font-weight: 800; letter-spacing: 0.2em; animation: pulseClub 2s infinite;
+}
+@keyframes pulseClub { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+
+
+@media(hover:none){
+  .card:hover,.sbar:hover,.btn-primary:hover,.pay-btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="glow-r"></div>
+<div class="glow-g"></div>
+
+<nav>
+  <div class="nav-left">
+    <button class="burger" id="burgerBtn" aria-label="Открыть меню"><span></span></button>
+    <a class="nav-logo" href="index.html">СТРАЖ</a>
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="#" onclick="filterCat('fight');setTabsByCat('fight');setActiveBottom('fight');closeMenu();return false">Борьба</a>
+      <a href="#" onclick="filterCat('mind');setTabsByCat('mind');setActiveBottom('mind');closeMenu();return false">Мышление</a>
+      <a href="#" onclick="showAccess();setActiveBottom('access');closeMenu();return false">Встречи</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="badge-online"><div class="dot-live"></div><span id="ol-cnt">1</span>&nbsp;ОНЛАЙН</div>
+    <div class="badge-city">ПЕРМЬ · РФ</div>
+    <button class="btn-join" onclick="openModal()">ВСТУПИТЬ</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="index.html" onclick="closeMenu()">Главная</a>
+    <button onclick="filterCat('all');setTabsByCat('all');setActiveBottom('home');closeMenu()">Все темы</button>
+    <button onclick="filterCat('fight');setTabsByCat('fight');setActiveBottom('fight');closeMenu()">Борьба</button>
+    <button onclick="filterCat('mind');setTabsByCat('mind');setActiveBottom('mind');closeMenu()">Мышление</button>
+    <button onclick="showAccess();setActiveBottom('access');closeMenu()">Встречи</button>
+    <button onclick="openModal();closeMenu()">Вступить</button>
+  </div>
+</div>
+<div class="menu-backdrop" onclick="closeMenu()"></div>
+
+<div class="layout">
+<aside>
+  <div class="sb-header">
+    <div class="sb-brand">СТРАЖ · БРАТСТВО</div>
+    <div class="sb-stat-grid">
+  <div class="sb-club-anim">
+    <div class="club-glow"></div>
+    <span>НАБОР В</span>
+    <span class="club-title">ЗАКРЫТЫЙ КЛУБ</span>
+    <span class="club-open">ОТКРЫТ!</span>
+  </div>
+</div>
+
+  </div>
+  <div class="sb-sec">
+    <div class="sb-sec-label">НАВИГАЦИЯ</div>
+    <a class="sb-a on" href="index.html"><span class="sb-ico">⊞</span>Главная</a>
+    <a class="sb-a" href="#" onclick="showAccess();setActiveBottom('access');return false"><span class="sb-ico">🔒</span>Встречи<span class="sb-cnt">₽</span></a>
+  </div>
+  <div class="sb-sep"></div>
+  <div class="sb-sec">
+    <div class="sb-sec-label">КАТЕГОРИИ</div>
+    <a class="sb-a" href="#" onclick="filterCat('all');setTabsByCat('all');setActiveBottom('home');return false"><span class="sb-ico">≡</span>Все темы<span class="sb-cnt" id="cn-all">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('girls');setTabsByCat('girls');return false"><span class="sb-ico">❤</span>Девушки<span class="sb-cnt" id="cn-girls">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('sport');setTabsByCat('sport');return false"><span class="sb-ico">◈</span>Спорт<span class="sb-cnt" id="cn-sport">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('health');setTabsByCat('health');return false"><span class="sb-ico">◉</span>Здоровье<span class="sb-cnt" id="cn-health">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('fight');setTabsByCat('fight');setActiveBottom('fight');return false"><span class="sb-ico">⚔</span>Борьба<span class="sb-cnt" id="cn-fight">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('biz');setTabsByCat('biz');return false"><span class="sb-ico">◇</span>Бизнес<span class="sb-cnt" id="cn-biz">0</span></a>
+    <a class="sb-a" href="#" onclick="filterCat('mind');setTabsByCat('mind');setActiveBottom('mind');return false"><span class="sb-ico">◆</span>Мышление<span class="sb-cnt" id="cn-mind">0</span></a>
+  </div>
+</aside>
+
+<main>
+<div class="main-shell">
+
+<div id="vHome">
+  <div class="hero">
+    <div class="hero-wm">СТРАЖ</div>
+    <div class="hero-label">МУЖСКОЕ БРАТСТВО</div>
+    <h1>ДОБРО ПОЖАЛОВАТЬ<br>В <span class="shine">СТРАЖ</span></h1>
+    <p class="hero-sub">Читай статьи, тренируйся, находи братьев рядом. Платформа для тех, кто выбрал путь роста — а не разговоры о нём.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="filterCat('all');setTabsByCat('all');setActiveBottom('home')">ЧИТАТЬ ТЕМЫ</button>
+      <button class="btn-ghost" onclick="showAccess();setActiveBottom('access')">Доступ к встречам</button>
+    </div>
+  </div>
+
+  <div class="top-block">
+    <div class="top-block-head">
+      <h3>🔥 ТОП ПО ПРОСМОТРАМ</h3>
+      <span style="font-size:.6rem;color:var(--dim);font-weight:700;letter-spacing:1.5px">ЗА ВСЁ ВРЕМЯ</span>
+    </div>
+    <div id="topList"></div>
+  </div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-ico">⌕</span>
+    <input id="siteSearch" type="search" placeholder="Поиск по темам, названиям, описаниям..." autocomplete="off">
+    <button id="clearSearch" class="search-clear" type="button">Сброс</button>
+  </div>
+  <div class="search-meta">Найдено: <span id="searchCount">0</span></div>
+</div>
+
+  <div class="sec-head">
+    <h2>ТЕМЫ</h2>
+    <div class="tabs">
+      <button class="tab on" data-cat="all" onclick="filterCat('all');sT(this);setActiveBottom('home')">Все</button>
+      <button class="tab" data-cat="girls" onclick="filterCat('girls');sT(this)">❤ Девушки</button>
+      <button class="tab" data-cat="sport" onclick="filterCat('sport');sT(this)">◈ Спорт</button>
+      <button class="tab" data-cat="health" onclick="filterCat('health');sT(this)">◉ Здоровье</button>
+      <button class="tab" data-cat="fight" onclick="filterCat('fight');sT(this);setActiveBottom('fight')">⚔ Борьба</button>
+      <button class="tab" data-cat="biz" onclick="filterCat('biz');sT(this)">◇ Бизнес</button>
+      <button class="tab" data-cat="mind" onclick="filterCat('mind');sT(this);setActiveBottom('mind')">◆ Мышление</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div id="vAccess" style="display:none">
+  <div class="access-wrap">
+    <div class="acc-badge">⚔ УРОВЕНЬ II — БРАТ</div>
+    <h2>ДОСТУП К ВСТРЕЧАМ<br>И ТРЕНИРОВКАМ</h2>
+    <p>Ежемесячные тренировки с инструктором, закрытый чат братства, испытания и совместные вылазки. По всей России — начиная с Перми.</p>
+    <div class="price-big">990 <sub>руб / мес</sub></div>
+    <div class="price-note">или 7 900 руб / год — экономия 2 месяца</div>
+    <div class="perks">
+      <div class="perk"><b>✓</b>Закрытый чат братства</div>
+      <div class="perk"><b>✓</b>Тренировки с инструктором</div>
+      <div class="perk"><b>✓</b>Контакт администратора</div>
+      <div class="perk"><b>✓</b>Еженедельные испытания</div>
+      <div class="perk"><b>✓</b>Встречи в твоём городе</div>
+      <div class="perk"><b>✓</b>Благотворительные акции</div>
+    </div>
+    <button class="pay-btn" onclick="openModal()">ПОЛУЧИТЬ ДОСТУП — Т‑БАНК →</button>
+    <div class="pay-note">Безопасная оплата · Отмена в любой момент</div>
+  </div>
+</div>
+
+</div>
+</main>
+</div>
+
+<div class="mobile-bottom-nav">
+  <button class="mbn-btn active" data-bottom="home" onclick="filterCat('all');setTabsByCat('all');setActiveBottom('home')"><span>⌂</span><span>Главная</span></button>
+  <button class="mbn-btn" data-bottom="fight" onclick="filterCat('fight');setTabsByCat('fight');setActiveBottom('fight')"><span>⚔</span><span>Борьба</span></button>
+  <button class="mbn-btn" data-bottom="mind" onclick="filterCat('mind');setTabsByCat('mind');setActiveBottom('mind')"><span>◆</span><span>Мышление</span></button>
+  <button class="mbn-btn" data-bottom="access" onclick="showAccess();setActiveBottom('access')"><span>🔒</span><span>Встречи</span></button>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="mForm">
+      <h2>ОПЛАТА ДОСТУПА</h2>
+      <p>После оплаты получишь контакт администратора и приглашение в закрытый чат братства.</p>
+      <div class="modal-price">990 <span>руб / месяц</span></div>
+      <div class="fg"><label>ИМЯ</label><input id="pName" placeholder="Как тебя зовут"></div>
+      <div class="fg"><label>TELEGRAM ИЛИ ВКОНТАКТЕ</label><input id="pTg" placeholder="@username"></div>
+      <button class="modal-submit" onclick="submitPay()">ОПЛАТИТЬ ЧЕРЕЗ Т‑БАНК</button>
+    </div>
+    <div class="modal-ok" id="mOk">
+      <div class="ok-ico">✅</div>
+      <h3>ЗАЯВКА ПРИНЯТА</h3>
+      <p>Свяжемся с тобой в течение 24 часов.<br>Добро пожаловать в братство.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// СПИСОК ВСЕХ СТАТЕЙ — твой текущий список оставь БЕЗ ИЗМЕНЕНИЙ
+// Просто вставь сюда свой массив ARTICLES целиком из текущего файла.
+// ══════════════════════════════════════════════
+const ARTICLES = [
+  {id:1, file:'article-001', cat:'girls',  ico:'❤',  title:'НЕ ИЩИ ДЕВУШКУ. СЕРЬЁЗНО.',            prev:'Ты ищешь девушку - поэтому у тебя её нет.',                              time:'3 мин', date:'1 APR 2026'},
+  {id:2, file:'article-002', cat:'sport',  ico:'💪',  title:'ПЛАН ЗАЛА: 3 ДНЯ В НЕДЕЛЮ',               prev:'Минимум времени — максимум результата. Базовая программа без лишнего.',                                 time:'6 мин', date:'3 APR 2026'},
+  {id:3, file:'article-003', cat:'health', ico:'🧪',  title:'ТЕСТОСТЕРОН — ГОРМОН КОТОРЫЙ ДЕЛАЕТ ТЕБЯ МУЖЧИНОЙ',             prev:'Тестостерон — это главный мужской половой гормон. Именно он делает тебя мужчиной.',                                  time:'4 мин', date:'5 APR 2026'},
+  {id:4, file:'article-004', cat:'fight',  ico:'⚔',  title:'ПОЧЕМУ КАЖДЫЙ МУЖЧИНА ДОЛЖЕН УМЕТЬ ДРАТЬСЯ',       prev:'Не про насилие. Про то что умение защищать себя меняет тебя изнутри.',                                 time:'7 мин', date:'7 APR 2026'},
+  {id:5, file:'article-005', cat:'biz',    ico:'💼',  title:'КАК УСТРОИТЬСЯ НА РАБОТУ — УМЕЙ СЕБЯ ПРОДАТЬ',            prev:'Работу получает не самый умный. Не самый опытный. Работу получает тот, кто умеет себя продать.',                               time:'9 мин', date:'9 APR 2026'},
+  {id:6, file:'article-006', cat:'mind',   ico:'🧠',  title:'ПОЧЕМУ БОЛЬШИНСТВО МУЖЧИН СЛАБЫЕ — И КАК ВЫЙТИ',   prev:'Не физически. Характером. Это не приговор — это выбор который можно изменить.',                          time:'8 мин', date:'11 APR 2026'},
+  // Тема 7
+  {id:7, file:'article-007', cat:'health', ico:'🍽',
+  title:'ПИТАНИЕ - ФУНДАМЕНТ',
+  prev:'Твой организм работает на мусоре. Разбираем что есть чтобы быть заряженным каждый день.',
+  time:'9 мин', date:'22 MAR 2026'},
+  // Тема 8
+  {id:8, file:'article-008', cat:'mind', ico:'⚔',
+  title:'КОДЕКС ПОБЕДИТЕЛЯ — ПОЛНАЯ СИСТЕМА',
+  prev:'Правила, график, зал, питание — всё в одном. Не мотивация, а операционная система победителя.',
+  time:'15 мин', date:'22 MAR 2026'},
+  // Тема 9
+  {id:9, file:'article-009', cat:'mind', ico:'🚨',
+  title:'НИКОГДА НЕ ВЕРЬ СЛОВАМ. СМОТРИ НА ДЕЙСТВИЯ',
+  prev:'Слова ничего не стоят. Действия говорят всё. Научился через боль — теперь делюсь.',
+  time:'10 мин', date:'22 MAR 2026'},
+  // Тема 10
+  {id:10, file:'article-010', cat:'mind', ico:'👑',
+  title:'ТЫ СТРОИШЬ ЭТО ДЛЯ СЕБЯ. НЕ ДЛЯ НЕЁ.',
+  prev:'Строишь ради неё — передаёшь ей власть над собой. Разбираем почему фундамент должен быть внутри тебя.',
+  time:'10 мин', date:'22 МАР 2026'},
+  // Тема 11
+  {id:11, file:'article-011', cat:'girls', ico:'💔',
+  title:'Я ВЕРИЛ ДО КОНЦА.',
+  prev:'Самый личный пост. Про предательство, про иллюзии, и про то как из этого выходят мужчиной.',
+  time:'11 мин', date:'22 МАР 2026'},
+  // Тема 12
+  {id:12, file:'article-012', cat:'mind', ico:'🧠',
+  title:'КАК ПЕРЕСТАТЬ БЫТЬ ЖЕРТВОЙ И ВЗЯТЬ ОТВЕТСТВЕННОСТЬ.',
+  prev:'Твоя жизнь — результат твоих решений. Не обстоятельств. Не людей. Твоих.',
+  time:'9 мин', date:'22 МАР 2026'},
+  // Тема 13
+  {id:13, file:'article-013', cat:'mind', ico:'🧠',
+  title:'СИНДРОМ САМОЗВАНЦА — ОТКУДА БЕРЁТСЯ И КАК ИЗБАВИТЬСЯ?',
+  prev:'Чувствуешь что недостаточно хорош? Что вот-вот раскроют? Это не правда — и вот почему.',
+  time:'10 мин', date:'22 МАР 2026'},
+  // Тема 14
+  {id:14, file:'article-014', cat:'mind', ico:'👑',
+  title:'ВЫБЕРИ СЕБЯ — ТРИ ПРАВИЛА СВОБОДНОГО ЧЕЛОВЕКА',
+  prev:'Одобрение, счастье, границы. Три ловушки — один выход. Разбираем честно.',
+  time:'12 мин', date:'22 МАР 2026'},
+// Тема 15
+{id:15, file:'article-015', cat:'girls', ico:'🚩',
+ title:'ОНА ТЕБЯ ПРЕДУПРЕДИЛА. ТЫ НЕ ПОСЛУШАЛ.',
+ prev:'Красные флаги висели с первого дня. Ты выбрал не видеть. 10 сигналов которые мужики игнорируют — и почему это всегда заканчивается одинаково.',
+ time:'8 мин', date:'22 МАР 2026'},
+ // Тема 16
+{id:16, file:'article-016', cat:'girls', ico:'❤',
+ title:'ОНА НЕ ХОЧЕТ ИДЕАЛЬНОГО. ОНА ХОЧЕТ НАСТОЯЩЕГО.',
+ prev:'Ты делаешь всё правильно — и именно поэтому проигрываешь. Разбираем почему старание понравиться убивает притяжение.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 17
+{id:17, file:'article-017', cat:'girls', ico:'⚠',
+ title:'ОНА ТОБОЙ МАНИПУЛИРУЕТ. И ТЫ ЭТО ПОЗВОЛЯЕШЬ.',
+ prev:'Газлайтинг, бойкот, шантаж, горячо-холодно. 7 техник которые используют против тебя — и как перестать на них вестись.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 18
+{id:18, file:'article-018', cat:'girls', ico:'🔥',
+ title:'ПЕРВОЕ СВИДАНИЕ. ПОЛНЫЙ РАЗБОР.',
+ prev:'Не про то как понравиться. Про то как прийти с правильной рамкой, вести разговор и уйти так чтобы она захотела снова.',
+ time:'11 мин', date:'22 МАР 2026'},
+// Тема 19
+{id:19, file:'article-019', cat:'girls', ico:'💔',
+ title:'РАССТАЛИСЬ. ЧТО ТЕПЕРЬ.',
+ prev:'Больно — это нормально. Но есть разница между пережить боль и утонуть в ней. Разбираем как выйти из этого мужчиной.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 20
+{id:20, file:'article-020', cat:'girls', ico:'🔒',
+ title:'РЕВНОСТЬ — ЭТО НЕ ЛЮБОВЬ. ЭТО СТРАХ.',
+ prev:'Ты контролируешь — она задыхается. Разбираем откуда берётся ревность и почему она создаёт именно то чего ты боишься.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 21
+{id:21, file:'article-021', cat:'girls', ico:'🚷',
+ title:'ЗОНА ДРУГА. КАК ТУДА ПОПАДАЮТ И КАК ВЫЙТИ.',
+ prev:'В зону друга не засовывают — в неё заходят сами. Разбираем 5 шагов как это происходит и что реально можно сделать.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 22
+{id:22, file:'article-022', cat:'girls', ico:'💬',
+ title:'КАК ПЕРЕПИСЫВАТЬСЯ ЧТОБЫ ЗВАЛИ НА ВСТРЕЧУ.',
+ prev:'Переписка — не цель, а мост. Разбираем 5 ошибок, показываем как писать с примерами диалогов и как выйти из телефона в реальность.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 23
+{id:23, file:'article-023', cat:'girls', ico:'🔗',
+ title:'ПОЧЕМУ ДЛИННЫЕ ОТНОШЕНИЯ УМИРАЮТ — И КАК НЕ ДАТЬ.',
+ prev:'Пара которая была огнём — через год становится сожителями. Разбираем 4 стадии и что реально держит отношения живыми.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 24
+{id:24, file:'article-024', cat:'girls', ico:'👁',
+ title:'ПОДОШЁЛ. ПОЗНАКОМИЛСЯ. БЕЗ ТИНДЕРА.',
+ prev:'99% мужчин не подходят. Поэтому тот кто подошёл — уже выделился. Разбираем как начать разговор, взять номер и не бояться отказа.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 25
+{id:25, file:'article-025', cat:'girls', ico:'🛑',
+ title:'ГРАНИЦЫ В ОТНОШЕНИЯХ — ЭТО НЕ СТЕНЫ. ЭТО ФУНДАМЕНТ.',
+ prev:'Мужчина без границ не притягивает — он пугает. Разбираем что такое граница, как её поставить и почему это делает отношения крепче.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 26
+{id:26, file:'article-026', cat:'mind', ico:'🧠',
+ title:'ДИСЦИПЛИНА — ЭТО НЕ СИЛА ВОЛИ. ЭТО СИСТЕМА.',
+ prev:'Строить жизнь на силе воли — строить дом на песке. Разбираем 3 принципа системной дисциплины и как выстроить среду которая работает за тебя.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 27
+{id:27, file:'article-027', cat:'mind', ico:'⏳',
+ title:'ПРОКРАСТИНАЦИЯ — ЭТО НЕ ЛЕНЬ. ЭТО СТРАХ.',
+ prev:'Ты избегаешь не задачу — ты избегаешь чувства которые с ней связаны. Разбираем 4 корня и 5 инструментов которые реально работают.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 28
+{id:28, file:'article-028', cat:'mind', ico:'🏆',
+ title:'МЫШЛЕНИЕ ПОБЕДИТЕЛЯ — ЧЕМ ОНИ ОТЛИЧАЮТСЯ.',
+ prev:'Разница не в таланте и не в удаче. В том как они интерпретируют события. Разбираем 5 установок которые меняют всё.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 29
+{id:29, file:'article-029', cat:'mind', ico:'😨',
+ title:'СТРАХ — ТВОЙ КОМПАС. НЕ ВРАГ.',
+ prev:'Там где страшно — там следующий уровень. Разбираем 5 страхов которые держат мужчин и 4 способа сделать шаг вопреки.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 30
+{id:30, file:'article-030', cat:'mind', ico:'🌑',
+ title:'ОДИНОЧЕСТВО — СИЛА ИЛИ БОЛЕЗНЬ?',
+ prev:'Человек который боится одиночества — в ловушке. Разбираем два вида одиночества и почему умение быть одному — навык зрелого мужчины.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 31
+{id:31, file:'article-031', cat:'mind', ico:'💎',
+ title:'УВЕРЕННОСТЬ — ЭТО НЕ ТО ЧТО ТЫ ДУМАЕШЬ.',
+ prev:'Уверенность — не отсутствие сомнений. Это действие несмотря на них. Разбираем откуда она берётся и 8 практик которые строят её изнутри.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 32
+{id:32, file:'article-032', cat:'mind', ico:'👥',
+ title:'ОКРУЖЕНИЕ — ТЫ И ЕСТЬ ТЕ ПЯТЕРО.',
+ prev:'Мозг синхронизируется с окружением. Незаметно, постепенно, неизбежно. Разбираем 5 типов людей и как строить круг который тебя поднимает.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 33
+{id:33, file:'article-033', cat:'mind', ico:'🎯',
+ title:'ЦЕЛИ КОТОРЫЕ РАБОТАЮТ — КАК СТАВИТЬ ПРАВИЛЬНО.',
+ prev:'Размытая цель — гарантированный провал. Разбираем SMART-формулу, систему год-квартал-неделя и 5 шагов чтобы не бросить на полпути.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 34
+{id:34, file:'article-034', cat:'mind', ico:'⚡',
+ title:'СТРЕСС — КАК УПРАВЛЯТЬ А НЕ ПРЯТАТЬСЯ.',
+ prev:'Враг не стресс — враг хронический стресс без восстановления. Таблица что его усиливает, 6 инструментов и матрица контроля по-стоически.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 35
+{id:35, file:'article-035', cat:'mind', ico:'🔥',
+ title:'ЗЛОСТЬ — ТОПЛИВО ИЛИ ЯД?',
+ prev:'Разница не в том испытываешь ли злость — в том управляешь ли ею или она тобой. 5 шагов когда накрывает и как превратить злость в топливо.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 36
+{id:36, file:'article-036', cat:'mind', ico:'🧬',
+ title:'EQ — ПОЧЕМУ УМНЫЙ ПРОИГРЫВАЕТ МУДРОМУ.',
+ prev:'IQ предсказывает оценки. EQ предсказывает жизнь. Разбираем 4 столпа эмоционального интеллекта и как развить то что реально важно.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 37
+{id:37, file:'article-037', cat:'mind', ico:'🤝',
+ title:'МУЖСКАЯ ДРУЖБА — ПОЧЕМУ ОНА ИСЧЕЗАЕТ.',
+ prev:'Каждый третий мужчина старше 30 — без близких друзей. Почему это происходит и 4 шага как строить настоящие мужские связи во взрослой жизни.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 38
+{id:38, file:'article-038', cat:'sport', ico:'🏃',
+ title:'БЕГАЙ. 8 НЕДЕЛЬ — С НУЛЯ ДО 5 КМ.',
+ prev:'Большинство бросают бег после первой недели — потому что начинают неправильно. План по неделям, правильный темп и техника которая не убьёт колени.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 39
+{id:39, file:'article-039', cat:'sport', ico:'🔩',
+ title:'ТУРНИК — ОТ НУЛЯ ДО 10 ПОДТЯГИВАНИЙ.',
+ prev:'10 чистых подтягиваний — базовый стандарт мужской силы. Прогрессия по уровням, 4 ключевых упражнения и техника без читерства.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 40
+{id:40, file:'article-040', cat:'sport', ico:'⬇️',
+ title:'ОТЖИМАНИЯ — 100 РАЗ ЗА 6 НЕДЕЛЬ.',
+ prev:'6 вариантов отжиманий, план по неделям с конкретными схемами и 3 правила техники. 100 раз подряд — реально за полтора месяца.',
+ time:'7 мин', date:'22 МАР 2026'},
+// Тема 41
+{id:41, file:'article-041', cat:'sport', ico:'🍗',
+ title:'ЕШЬ ПРАВИЛЬНО — ПИТАНИЕ ДЛЯ РОСТА МЫШЦ.',
+ prev:'Мышцы растут не в зале — они растут на кухне. Нормы белка, углеводов и жиров, лучшие продукты и 4 правила питания которые реально работают.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 42
+{id:42, file:'article-042', cat:'sport', ico:'😴',
+ title:'СОН — ЛУЧШАЯ ДОБАВКА ДЛЯ РОСТА.',
+ prev:'90% гормона роста — во сне. Недосып блокирует рост мышц даже при идеальном питании. Фазы сна, что делать и не делать, 3 шага к качественному восстановлению.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 43
+{id:43, file:'article-043', cat:'sport', ico:'🧘',
+ title:'РАСТЯЖКА — ЗАЧЕМ И КАК ДЕЛАТЬ ПРАВИЛЬНО.',
+ prev:'Мужчины игнорируют растяжку — и платят травмами. 6 ключевых упражнений, 3 мифа которые мешают делать правильно, и когда растягиваться для максимального эффекта.',
+ time:'7 мин', date:'22 МАР 2026'},
+// Тема 44
+{id:44, file:'article-044', cat:'sport', ico:'🚿',
+ title:'ХОЛОДНЫЙ ДУШ — ПРОТОКОЛ И НАУКА.',
+ prev:'Норадреналин +300%, дофамин +250% — без кофеина и добавок. Протокол входа за 4 недели, прогрессия по дням и почему холод после зала — ошибка.',
+ time:'7 мин', date:'22 МАР 2026'},
+// Тема 45
+{id:45, file:'article-045', cat:'fight', ico:'🥋',
+ title:'САМБО — ПОЧЕМУ НАЧАТЬ ИМЕННО ЗДЕСЬ.',
+ prev:'Самбо vs Дзюдо vs BJJ — что выбрать взрослому. Путь поясов, 5 шагов как начать с нуля и почему единоборства нужны каждому мужчине.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 46
+{id:46, file:'article-046', cat:'fight', ico:'⚔️',
+ title:'КАКОЙ БОЙ ВЫБРАТЬ — 8 ВИДОВ РАЗОБРАНЫ.',
+ prev:'Самбо, бокс, муа-тай, BJJ, MMA, дзюдо, каратэ, крав-мага — что выбрать под твою цель. Таблица: самозащита, спорт, физуха, без опыта.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 47
+{id:47, file:'article-047', cat:'fight', ico:'😤',
+ title:'СТРАХ ПЕРЕД БОЕМ — КАК С НИМ РАБОТАТЬ.',
+ prev:'Трясутся все — даже чемпионы. Что происходит в теле под адреналином, 4 инструмента чтобы управлять страхом и почему злость мешает а не помогает.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 48
+{id:48, file:'article-048', cat:'fight', ico:'🥊',
+ title:'ПЕРВЫЙ СПАРРИНГ — ЧТО ОЖИДАТЬ.',
+ prev:'Первые 60 секунд — забудешь всё что учил. Это нормально. Таймлайн как проходит первый спарринг, что делать и не делать, и 7 уроков которые узнаешь только через контакт.',
+ time:'8 мин', date:'22 МАР 2026'},
+// Тема 49
+{id:49, file:'article-049', cat:'fight', ico:'🏋️',
+ title:'ФИЗПОДГОТОВКА БОЙЦА — ЧТО И КАК КАЧАТЬ.',
+ prev:'Большие мышцы — не боец. 5 качеств тела бойца, план ОФП на неделю по дням и 7 упражнений с протоколами. Без них техника рассыпается на 2-й минуте.',
+ time:'9 мин', date:'22 МАР 2026'},
+// Тема 50
+{id:50, file:'article-050', cat:'biz', ico:'💰',
+ title:'КАК НАЧАТЬ ЗАРАБАТЫВАТЬ ВНЕ ЗАРПЛАТЫ.',
+ prev:'Один источник дохода — ловушка. 8 реальных способов без инфоцыганства: фриланс, флиппинг, услуги, контент, обучение, аренда, партнёрки, крафт. Первый шаг — сегодня вечером.',
+ time:'11 мин', date:'22 МАР 2026'},
+// Тема 51
+{id:51, file:'article-051', cat:'biz', ico:'👁',
+ title:'КАК ЧИТАТЬ ЛЮДЕЙ — ЯЗЫК ТЕЛА И СИГНАЛЫ.',
+ prev:'93% коммуникации — не слова. 4 зоны чтения: глаза, руки, тело, голос. Таблица кластеров по ситуациям. 3 приёма: калибровка, зеркалирование, пауза.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 52
+{id:52, file:'article-052', cat:'biz', ico:'🤝',
+ title:'ПЕРЕГОВОРЫ — КАК ПОЛУЧАТЬ ЧТО ХОЧЕШЬ.',
+ prev:'Переговоры — не давление, а управление. 7 тактик: якорение, BATNA, молчание, условные уступки. 5 ошибок которые стоят денег. Применимо: зарплата, сделка, конфликт.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 53
+{id:53, file:'article-053', cat:'biz', ico:'💳',
+ title:'ЛИЧНЫЕ ФИНАНСЫ — БЮДЖЕТ МУЖЧИНЫ С НУЛЯ.',
+ prev:'Проблема не в доходе — в отсутствии системы. Правило 50/30/20, 5 приоритетов куда деньги в первую очередь, 6 ловушек которые держат в ноль. Начни сегодня.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 54
+{id:54, file:'article-054', cat:'mind', ico:'🏛️',
+ title:'СТОИЦИЗМ НА ПРАКТИКЕ — МАРК АВРЕЛИЙ СЕГОДНЯ.',
+ prev:'Не «терпи и молчи» — операционная система для ума. 4 столпа, 5 практик которые делал Марк Аврелий, современные ситуации и как стоик на них отвечает.',
+ time:'10 мин', date:'22 МАР 2026'},
+// Тема 55
+{id:55, file:'article-055', cat:'fight', ico:'🧱',
+ title:'ДЕРЖАТЬ УДАР — ФИЗИЧЕСКИ И ПСИХОЛОГИЧЕСКИ.',
+ prev:'Удар — это информация. Как правильно принимать физически, 4 уровня психоустойчивости от паники до хладнокровия, и как зал тренирует реакцию на удары жизни.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:57, file:'article-057', cat:'girls', ico:'🔗',
+ title:'ТЫ НЕ ВЛЮБЛЁН. ТЫ ЗАВИСИМ.',
+ prev:'Проверяешь телефон каждые 5 минут, не можешь есть и спать — это не любовь, это тревожная привязанность. 7 симптомов, откуда берётся, 5 шагов выхода.',
+ time:'10 мин', date:'22 МАР 2026'},
+{id:58, file:'article-058', cat:'girls', ico:'🔥',
+ title:'СЕКС — О ЧЁМ НИКТО НЕ ГОВОРИТ.',
+ prev:'Порно — не образование. 5 вещей которые реально важны: присутствие, фрейм, коммуникация, предвкушение, поведение после. 4 мифа которые мешают.',
+ time:'10 мин', date:'22 МАР 2026'},
+{id:59, file:'article-059', cat:'sport', ico:'🔥',
+ title:'КАРДИО — ЧТО РЕАЛЬНО СЖИГАЕТ ЖИР.',
+ prev:'Час на дорожке — миф. LISS vs MISS vs HIIT — таблица сравнения. 5 пульсовых зон с % и объяснением. EPOC-эффект HIIT. Как сохранить мышцы при похудении.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:60, file:'article-060', cat:'sport', ico:'💊',
+ title:'ДОБАВКИ — ЧТО РАБОТАЕТ, ЧТО РАЗВОД.',
+ prev:'6 добавок с реальной доказательной базой (A+, A, B+) с дозами. 5 добавок-пустышек куда не надо тратить деньги. Приоритет с чего начать.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:61, file:'article-061', cat:'sport', ico:'🚑',
+ title:'ТРАВМЫ В ЗАЛЕ — КАК НЕ УБИТЬ СЕБЯ.',
+ prev:'5 самых частых травм с уровнем риска, причиной и исправлением. 8 правил защиты. 4 сигнала когда надо немедленно остановиться. Год прогресса = одна тупая тренировка.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:62, file:'article-062', cat:'sport', ico:'☀️',
+ title:'УТРЕННЯЯ ЗАРЯДКА — 10 МИНУТ КОТОРЫЕ МЕНЯЮТ ДЕНЬ.',
+ prev:'Почему первые 10 минут решают весь день. 6 физиологических эффектов. Протокол по 4 блокам с таймингом. 5 правил как закрепить как привычку за 21 день.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:63, file:'article-063', cat:'sport', ico:'💉',
+ title:'СТЕРОИДЫ — ПРАВДА КОТОРУЮ СКРЫВАЮТ.',
+ prev:'Почему 90% «натуральных» блогеров не натуральны. Как работает химия. 6 реальных побочек. 6 вещей которые скрывают. Что реально достижимо натурально — цифры.',
+ time:'10 мин', date:'22 МАР 2026'},
+{id:64, file:'article-064', cat:'sport', ico:'🔑',
+ title:'МОТИВАЦИЯ НЕ РАБОТАЕТ. РАБОТАЕТ ВОТ ЭТО.',
+ prev:'3 мифа о мотивации. Мотивация vs Система — сравнение. 5 инструментов системы: якоря, трение, минимальный стандарт, прогресс, среда. Идентичность как главный механизм.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:65, file:'article-065', cat:'health', ico:'🛡️',
+ title:'ИММУНИТЕТ — КАК ПЕРЕСТАТЬ БОЛЕТЬ.',
+ prev:'4 столпа иммунитета (сон, питание, движение, стресс). 7 действий с доказательной базой. 3 мифа куда не надо тратить деньги. D3, цинк, клетчатка — конкретные дозы.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:66, file:'article-066', cat:'health', ico:'🍺',
+ title:'АЛКОГОЛЬ — ЧЕСТНО И БЕЗ МОРАЛИЗМА.',
+ prev:'Биохимия без морали. Что происходит с мозгом, сном, тестостероном, печенью. Временная шкала одного вечера. Минимум вреда если пьёшь. 5 красных флагов зависимости.',
+ time:'10 мин', date:'22 МАР 2026'},
+{id:67, file:'article-067', cat:'health', ico:'🔬',
+ title:'АНАЛИЗЫ КОТОРЫЕ НУЖНО СДАТЬ ДО 35 ЛЕТ.',
+ prev:'Зачем знать свои показатели. Таблица обязательного минимума (ОАК, глюкоза, липиды, витамин D, тестостерон). Дополнительно после 30. Как правильно сдавать. 4 красных флага.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:68, file:'article-068', cat:'health', ico:'🦴',
+ title:'ОСАНКА И СПИНА — ИСПРАВИТЬ ПОКА НЕ ПОЗДНО.',
+ prev:'Почему болит спина у всех. 4 главные причины (сидячая работа, text neck, слабый кор, зал). 7 упражнений с описанием. Привычки офисного дня. Когда к врачу — немедленно.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:69, file:'article-069', cat:'health', ico:'👁️',
+ title:'ЗРЕНИЕ — КАК НЕ УГРОБИТЬ ЗА ЭКРАНОМ.',
+ prev:'Цифровой зрительный синдром. Правило 20-20-20. 8 конкретных правил. 3 мифа о зрении. 4 тревожных симптома когда к врачу немедленно.',
+ time:'7 мин', date:'22 МАР 2026'},
+{id:70, file:'article-070', cat:'health', ico:'😤',
+ title:'СТРЕСС И КОРТИЗОЛ — УПРАВЛЯЙ ИЛИ ОН УПРАВЛЯЕТ ТОБОЙ.',
+ prev:'Кортизол — не враг. 6 систем которые разрушает хронический стресс. Техника дыхания 4-7-8. 6 инструментов управления стрессом включая ашваганду с дозировкой.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:70, file:'article-070', cat:'health', ico:'😤',
+ title:'СТРЕСС И КОРТИЗОЛ — УПРАВЛЯЙ ИЛИ ОН УПРАВЛЯЕТ ТОБОЙ.',
+ prev:'Кортизол — не враг. 6 систем которые разрушает хронический стресс. Техника дыхания 4-7-8. 6 инструментов управления стрессом включая ашваганду с дозировкой.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:72, file:'article-072', cat:'health', ico:'🍬',
+ title:'САХАР И ИНСУЛИНОРЕЗИСТЕНТНОСТЬ — ТИХАЯ ЭПИДЕМИЯ.',
+ prev:'Что такое ИР и почему 40% не знают. 6 симптомов. Скрытый сахар в «здоровых» продуктах. 6 инструментов восстановления чувствительности. Как проверить себя — индекс HOMA-IR.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:73, file:'article-073', cat:'health', ico:'❤️',
+ title:'СЕРДЦЕ И ДАВЛЕНИЕ — ЧТО УБИВАЕТ МУЖЧИН РАНЬШЕ ВСЕГО.',
+ prev:'Статистика смертности мужчин. Таблица норм давления с цветами. 6 факторов риска. 6 действий защиты. Симптомы инфаркта — когда немедленно 112.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:74, file:'article-074', cat:'health', ico:'🚬',
+ title:'КУРЕНИЕ И НИКОТИН — ВСЁ ЧТО НУЖНО ЗНАТЬ ЧТОБЫ БРОСИТЬ.',
+ prev:'Никотин ≠ сигарета — в чём разница. 6 систем которые разрушает курение. Таймлайн восстановления от 20 мин до 10 лет. 5 стратегий отказа. Вейп/АЙКОС/снюс — честно.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:75, file:'article-075', cat:'health', ico:'💊',
+ title:'ВИТАМИНЫ И ДОБАВКИ — ЧТО РЕАЛЬНО РАБОТАЕТ.',
+ prev:'Рынок БАД — 90% маркетинг. Таблица 10 добавок с вердиктом: принимай/при дефиците/деньги на ветер. 4 популярные пустышки. Базовый стек на 1 500–3 000 руб/мес.',
+ time:'10 мин', date:'22 МАР 2026'},
+{id:76, file:'article-076', cat:'health', ico:'🔬',
+ title:'МУЖСКОЕ ЗДОРОВЬЕ — ПРОСТАТА, ГОРМОНЫ, ЧТО ПРОВЕРЯТЬ.',
+ prev:'Почему мужчины умирают раньше. 6 признаков низкого тестостерона. Простата и ПСА — нормы по возрасту. Полный гормональный профиль с расшифровкой. 5 действий + тревожные симптомы.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:77, file:'article-077', cat:'health', ico:'🧠',
+ title:'ПСИХОСОМАТИКА — КАК ТЕЛО ГОВОРИТ ЗА ТЕБЯ.',
+ prev:'50–70% визитов к врачу — психосоматика. Карта тела: где держится стресс. 3 мифа. 5 инструментов работы с телом и психикой.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:78, file:'article-078', cat:'fight', ico:'🥊',
+ title:'БОЙ БЕЗ ПРАВИЛ — С ЧЕГО НАЧАТЬ НОВИЧКУ.',
+ prev:'MMA — система, не стиль. 4 кита: удары, борьба, партер, физо. 4 мифа. Как выбрать зал — чеклист. Первые 6 месяцев — что ожидать. Экипировка от 6 000 руб.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:79, file:'article-079', cat:'fight', ico:'🤼',
+ title:'САМБО, ДЗЮДО ИЛИ ГРЭППЛИНГ — ЧТО ВЫБРАТЬ.',
+ prev:'Таблица сравнения 3 дисциплин. Самбо — для россиянина. Дзюдо — бросковая база. BJJ — лучший партер. 5 базовых техник. План первых 3 месяцев.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:80, file:'article-080', cat:'fight', ico:'🥋',
+ title:'БОКС — БАЗОВАЯ ТЕХНИКА И ПОСТАНОВКА УДАРА.',
+ prev:'6 базовых ударов с числовым кодом. Стойка — 4 правила. 5 ошибок новичков. 10-минутный домашний дрилл без зала.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:81, file:'article-081', cat:'fight', ico:'🧠',
+ title:'ПСИХОЛОГИЯ БОЯ — СТРАХ, АДРЕНАЛИН, КОНТРОЛЬ.',
+ prev:'Страх — это нормально. 3 фазы адреналина. Реактивное vs проактивное состояние. 5 инструментов контроля. Техника боевого дыхания.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:82, file:'article-082', cat:'fight', ico:'💪',
+ title:'СИЛОВАЯ ПОДГОТОВКА БОЙЦА — НЕ КАК У БОДИБИЛДЕРА.',
+ prev:'Сила бойца ≠ бодибилдер. Таблица отличий. 6 ключевых упражнений. Недельная программа на 2 дня совмещённая с единоборствами.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:83, file:'article-083', cat:'fight', ico:'🏃',
+ title:'ВЫНОСЛИВОСТЬ — КАК ТРЕНИРОВАТЬ ДЛЯ БОЯ.',
+ prev:'Газ важнее техники у любителя. 3 зоны тренировки. 4 протокола: мешок, интервалы, табата, скакалка. Недельный план совмещённый с единоборствами.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:84, file:'article-084', cat:'fight', ico:'🗡️',
+ title:'САМООБОРОНА — ЧТО РЕАЛЬНО РАБОТАЕТ НА УЛИЦЕ.',
+ prev:'Улица ≠ спортзал. 4 мифа самообороны. 7 правил: осознанность, деэскалация, дистанция. Против нескольких — только бегство. Правовой минимум по ст. 37 УК РФ.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:85, file:'article-085', cat:'fight', ico:'🦵',
+ title:'УДАРЫ НОГАМИ — ТАЙСКИЙ БОКС И КИКБОКСИНГ.',
+ prev:'Лоу-кик накапливает урон незаметно. 6 базовых ударов ногами. Техника лоу-кика по шагам. 4 ошибки новичков. Дрилл для дома и зала.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:86, file:'article-086', cat:'fight', ico:'🤺',
+ title:'ОРУЖИЕ — ПРАВОВОЙ МИНИМУМ И РЕАЛЬНОСТЬ.',
+ prev:'Таблица: что можно носить в РФ. Перцовый баллончик — оптимум. Нож для самообороны — иллюзия. Тренированные руки — лучшее законное оружие. Под угрозой ножа — 5 приоритетов.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:87, file:'article-087', cat:'fight', ico:'🧘',
+ title:'ВОССТАНОВЛЕНИЕ БОЙЦА — СУСТАВЫ, ТРАВМЫ, РЕЖИМ.',
+ prev:'Прогресс происходит в восстановлении, не на тренировке. 4 столпа: сон, питание, активное восстановление, ЦНС. Красные и жёлтые сигналы тела. Ежедневный протокол защиты суставов.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:88, file:'article-088', cat:'fight', ico:'👁️',
+ title:'ЧИТАТЬ ПРОТИВНИКА — ЯЗЫК ТЕЛА, ТЕЛЕГРАФИРОВАНИЕ, ТАКТИКА.',
+ prev:'Смотри на грудину — видишь всё. 7 телеграфов: взгляд, дыхание, вес, замах, плечо, бёдра, мимика. 4 типа противников и как бить каждого. 5 дрилов на чтение.',
+ time:'7 мин', date:'22 МАР 2026'},
+{id:89, file:'article-089', cat:'fight', ico:'🤼',
+ title:'ГРЭППЛИНГ И БОРЬБА — ТЕЙКДАУНЫ И ПАРТЕР.',
+ prev:'Борец выбирает где будет бой. 5 тейкдаунов: дабл-лег, сингл, бросок через бедро, подсечка, клинч-трип. 4 позиции партера. Минимум для новичка — 5 упражнений.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:90, file:'article-090', cat:'fight', ico:'🔥',
+ title:'ДИСЦИПЛИНА ВОИНА — РЕЖИМ, РУТИНА, ХАРАКТЕР.',
+ prev:'Дисциплина — не мотивация, а мышца. 4 столпа: сон, питание, расписание, внимание. 7 ежедневных привычек бойца. Шаблон идеального дня по часам.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:91, file:'article-091', cat:'fight', ico:'🛡️',
+ title:'МЕНТАЛЬНОСТЬ БОЙЦА — СТОИЦИЗМ, ВОЛЯ, ХАРАКТЕР.',
+ prev:'Тело без ума — оружие без владельца. 5 принципов стоика-бойца: дихотомия контроля, amor fati, memento mori, premeditatio malorum, момент настоящего. Мышление победителя vs слабого. 4 цитаты воинов.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:92, file:'article-092', cat:'fight', ico:'🏆',
+ title:'ПЕРВЫЙ ТУРНИР — КАК ПОДГОТОВИТЬСЯ И ВЫСТУПИТЬ.',
+ prev:'Проиграть первый — норма: цель — опыт. Таймлайн 8 недель до турнира. Чеклист дня турнира. 4 шага разбора после: видео, тренер, 3 точки роста, следующий турнир.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:93, file:'article-093', cat:'biz', ico:'💼',
+ title:'КАК НАЧАТЬ СВОЁ ДЕЛО — БЕЗ ИЛЛЮЗИЙ.',
+ prev:'Не нужна уникальная идея, капитал или бизнес-план на 50 страниц. Найди проблему → реши → получи деньги. 4 мифа убивающих старт. 7 шагов первого бизнеса. Чеклист первых 30 дней.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:94, file:'article-094', cat:'biz', ico:'💰',
+ title:'ДЕНЬГИ — КАК ДУМАТЬ О НИХ ПРАВИЛЬНО.',
+ prev:'Богатство — разница между доходом и расходами. Бедное vs богатое мышление. 6 правил: плати себе первым, считай, подушка, долги, инвестируй регулярно, увеличивай доход. Формула: Доход − Расходы = Инвестиции.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:95, file:'article-095', cat:'biz', ico:'📈',
+ title:'ПРОДАЖИ БЕЗ ВПАРИВАНИЯ.',
+ prev:'Продажи — помощь, не манипуляция. 5 фаз: контакт, потребность, презентация, возражения, закрытие. 5 ошибок убивающих продажу. Готовый скрипт первого разговора.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:96, file:'article-096', cat:'biz', ico:'🧾',
+ title:'НАЛОГИ И ИП — МИНИМУМ КОТОРЫЙ НУЖНО ЗНАТЬ.',
+ prev:'ИП за 3 дня, 6% с дохода. 3 режима: УСН 6%, УСН 15%, НПД самозанятый. 5 шагов открытия через Госуслуги. Календарь налогов на год. Фиксированные взносы ~53 658 руб/год уменьшают налог.',
+ time:'7 мин', date:'22 МАР 2026'},
+{id:97, file:'article-097', cat:'biz', ico:'🎯',
+ title:'МАРКЕТИНГ СВОИМИ РУКАМИ.',
+ prev:'Маркетинг — не реклама, а весь путь клиента. 6 каналов без бюджета: сарафан, Telegram, Авито, SEO, Директ, партнёрства. 5 типов контента которые продают. Простая воронка из 6 шагов.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:98, file:'article-098', cat:'biz', ico:'⏰',
+ title:'УПРАВЛЕНИЕ ВРЕМЕНЕМ ПРЕДПРИНИМАТЕЛЯ.',
+ prev:'Занятость ≠ продуктивность. Матрица Эйзенхауэра: 4 квадранта задач. 5 методов: правило 3 задач, Помодоро, тайм-блокинг, защищённое утро, еженедельный обзор. Шаблон дня предпринимателя.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:99, file:'article-099', cat:'biz', ico:'👥',
+ title:'КОМАНДА — НАНИМАТЬ, МОТИВИРОВАТЬ, УВОЛЬНЯТЬ.',
+ prev:'A-игроки нанимают A-игроков. 6 шагов найма: описывай результат, тестовое задание, спрашивай о провалах, пробный период, рекомендации, интуиция. Сигналы держать или отпускать. Правила увольнения без скандала.',
+ time:'8 мин', date:'22 МАР 2026'},
+{id:100, file:'article-100', cat:'biz', ico:'🤝',
+ title:'ПЕРЕГОВОРЫ — КАК ДОБИВАТЬСЯ СВОЕГО.',
+ prev:'Сила — это готовность уйти. BATNA — лучшая альтернатива. 6 принципов: готовься, якорь, молчание, торгуйся по условиям, задавай вопросы, фиксируй письменно. 4 тактики. 6 фраз которые меняют исход.',
+ time:'9 мин', date:'22 МАР 2026'},
+{id:101, file:'article-101', cat:'biz', ico:'📊',
+ title:'ФИНАНСОВАЯ ГРАМОТНОСТЬ ПРЕДПРИНИМАТЕЛЯ.',
+ prev:'Выручка ≠ Прибыль ≠ Деньги на счёте. 5 концепций: кассовый разрыв, юнит-экономика, постоянные расходы, рентабельность. 3 отчёта: P&L, Cash Flow, Баланс. 6 метрик панели управления.',
+ time:'8 мин', date:'22 МАР 2026'},
+
+];
+
+const CATS = {girls:'Девушки',sport:'Спорт',health:'Здоровье',fight:'Борьба',biz:'Бизнес',mind:'Мышление'};
+const CCOL = {girls:'#C05080',sport:'#48A848',health:'#3A7EC0',fight:'#C9960A',biz:'#8060B0',mind:'#9A9A18'};
+const CBGS = {girls:'bg-girls',sport:'bg-sport',health:'bg-health',fight:'bg-fight',biz:'bg-biz',mind:'bg-mind'};
+
+let curCat = 'all';
+let searchQuery = '';
+let olCount = Math.floor(Math.random() * 401 + 400); // 400-800
+
+
+
+
+function safeJSONParse(value, fallback){
+  try{
+    const data = JSON.parse(value);
+    return data && typeof data === 'object' ? data : fallback;
+  }catch(e){
+    return fallback;
+  }
+}
+
+function clampNumber(n, min=0, max=999999999){
+  n = Number(n);
+  if(!Number.isFinite(n)) return min;
+  return Math.min(max, Math.max(min, Math.floor(n)));
+}
+
+function formatStat(num){
+  return new Intl.NumberFormat('ru-RU').format(clampNumber(num));
+}
+
+function gV(){
+  const raw = safeJSONParse(localStorage.getItem('sz_views') || '{}', {});
+  const clean = {};
+  Object.keys(raw).forEach(key=>{
+    const val = clampNumber(raw[key], 0, 999999);
+    if(val > 0) clean[key] = val;
+  });
+  return clean;
+}
+
+function gR(){
+  const raw = safeJSONParse(localStorage.getItem('sz_read') || '{}', {});
+  const clean = {};
+  Object.keys(raw).forEach(key=>{
+    if(raw[key]) clean[key] = 1;
+  });
+  return clean;
+}
+
+function gRv(){
+  const raw = safeJSONParse(localStorage.getItem('sz_revs') || '{}', {});
+  const clean = {};
+  Object.keys(raw).forEach(key=>{
+    clean[key] = Array.isArray(raw[key]) ? raw[key] : [];
+  });
+  return clean;
+}
+
+function updOnline() {
+  olCount = Math.floor(Math.random() * 401 + 400); // Рандом 400-800 каждый раз
+  ['ol-cnt','sb-ol','ls-ol'].forEach(id => { // Удали sb-ol ls-ol если нет элементов
+    const e = document.getElementById(id);
+    if(e) e.textContent = olCount;
+  });
+  // Обнови badge-online если нужно
+  const badge = document.querySelector('.badge-online span');
+  if(badge) badge.textContent = olCount;
+}
+
+
+function updStats(){
+  const v=gV(),r=gR(),rv=gRv();
+  // Темы фиксированы
+const themes = Object.keys(CATS).reduce((acc, c) => {
+  const cnt = document.getElementById(`cn-${c}`)?.textContent || '0';
+  acc[c] = parseInt(cnt) || 0;
+  return acc;
+}, {});
+// Но не используй, т.к. темы статичны
+
+  const tot = ARTICLES.length;
+  const totalViews = Object.values(v).reduce((s,n)=>s+clampNumber(n),0);
+  const readCount = Object.keys(r).length;
+  let revCount=0;
+  Object.values(rv).forEach(arr=>revCount += Array.isArray(arr) ? arr.length : 0);
+
+  const s=(id,val)=>{
+    const e=document.getElementById(id);
+    if(e)e.textContent=formatStat(val);
+  };
+
+  s('sb-tot',tot); s('ls-tot',tot);
+  s('sb-vw',totalViews); s('ls-vw',totalViews);
+  s('sb-rv',revCount); s('ls-rv',revCount);
+  s('ls-rd',readCount);
+
+  const cats={};
+  ARTICLES.forEach(a=>cats[a.cat]=(cats[a.cat]||0)+1);
+  s('cn-all',tot);
+  Object.keys(CATS).forEach(c=>s('cn-'+c,cats[c]||0));
+}
+
+function articleMatchesSearch(article, query){
+  const q = (query || '').trim().toLowerCase();
+  if(!q) return true;
+
+  const haystack = [
+    article.title || '',
+    article.prev || '',
+    article.cat || '',
+    article.file || '',
+    article.date || '',
+    article.time || ''
+  ].join(' ').toLowerCase();
+
+  return haystack.includes(q);
+}
+
+function updateSearchCount(count){
+  const el = document.getElementById('searchCount');
+  if(el) el.textContent = count;
+}
+
+function initSearch(){
+  const input = document.getElementById('siteSearch');
+  const clearBtn = document.getElementById('clearSearch');
+
+  if(!input) return;
+
+  input.addEventListener('input', function(){
+    searchQuery = this.value || '';
+    renderGrid(curCat);
+  });
+
+  if(clearBtn){
+    clearBtn.addEventListener('click', function(){
+      input.value = '';
+      searchQuery = '';
+      renderGrid(curCat);
+      input.focus();
+    });
+  }
+}
+
+function renderGrid(cat){
+  curCat = cat;
+  const v = gV(), r = gR();
+
+  let list = cat === 'all'
+    ? ARTICLES
+    : ARTICLES.filter(a => a.cat === cat);
+
+  if(searchQuery.trim()){
+    list = list.filter(a => articleMatchesSearch(a, searchQuery));
+  }
+
+  const grid = document.getElementById('grid');
+
+  if(!list.length){
+    grid.innerHTML = `<div class="empty">Ничего не найдено.</div>`;
+    updateSearchCount(0);
+    renderTop();
+    updStats();
+    return;
+  }
+
+  updateSearchCount(list.length);
+
+  grid.innerHTML = list.map(a => `
+    <a class="card" href="${a.file}.html">
+      ${r[a.id] ? `<div class="card-read-badge">READ</div>` : ``}
+      <div class="card-view-badge">${formatStat(v[a.id] || 0)}</div>
+      <div class="card-img ${CBGS[a.cat] || 'bg-mind'}">${a.ico}</div>
+      <div class="card-body">
+        <div class="card-tag cc-${a.cat}">${(CATS[a.cat] || a.cat).toUpperCase()}</div>
+        <div class="card-title">${a.title}</div>
+        <div class="card-prev">${a.prev}</div>
+      </div>
+      <div class="card-foot">
+        <span class="card-time">${a.time} · ${a.date}</span>
+        <span class="card-btn">${r[a.id] ? 'Открыть снова' : 'Читать'}</span>
+      </div>
+    </a>
+  `).join('');
+
+  renderTop();
+  updStats();
+}
+
+
+function renderTop(){
+  const v=gV();
+  const sorted=[...ARTICLES].sort((a,b)=>(clampNumber(v[b.id]||0)-clampNumber(v[a.id]||0))).slice(0,5);
+  const ranks=[['rank-1','①'],['rank-2','②'],['rank-3','③'],['','④'],['','⑤']];
+  document.getElementById('topList').innerHTML=sorted.map((a,i)=>`
+    <a class="top-row" href="${a.file}.html">
+      <div class="top-rank ${ranks[i]?ranks[i][0]:''}">${ranks[i]?ranks[i][1]:i+1}</div>
+      <div class="top-info">
+        <div class="top-title">${a.title}</div>
+        <div class="top-cat" style="color:${CCOL[a.cat]}">${CATS[a.cat]}</div>
+      </div>
+      <div class="top-views">👁 ${formatStat(v[a.id]||0)}</div>
+    </a>
+  `).join('');
+}
+
+function filterCat(cat){
+  curCat=cat;
+  document.getElementById('vHome').style.display='block';
+  document.getElementById('vAccess').style.display='none';
+  renderGrid(cat);
+  closeMenu();
+}
+
+function showAccess(){
+  document.getElementById('vHome').style.display='none';
+  document.getElementById('vAccess').style.display='block';
+  closeMenu();
+}
+
+function sT(el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  if(el) el.classList.add('on');
+}
+
+function setTabsByCat(cat){
+  const btn=document.querySelector(`.tab[data-cat="${cat}"]`);
+  if(btn) sT(btn);
+}
+
+function setActiveBottom(name){
+  document.querySelectorAll('.mbn-btn').forEach(btn=>btn.classList.remove('active'));
+  const t=document.querySelector(`.mbn-btn[data-bottom="${name}"]`);
+  if(t)t.classList.add('active');
+}
+
+function openMenu(){document.body.classList.add('menu-open')}
+function closeMenu(){document.body.classList.remove('menu-open')}
+function toggleMenu(){document.body.classList.contains('menu-open')?closeMenu():openMenu()}
+
+function openModal(){
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('mForm').style.display='block';
+  document.getElementById('mOk').style.display='none';
+  document.body.style.overflow=document.body.classList.contains('menu-open')?'hidden':'';
+}
+function submitPay(){
+  if(!document.getElementById('pName').value.trim()||!document.getElementById('pTg').value.trim())return;
+  document.getElementById('mForm').style.display='none';
+  document.getElementById('mOk').style.display='block';
+}
+
+document.getElementById('burgerBtn').addEventListener('click',toggleMenu);
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeModal()}});
+
+setInterval(updOnline, 10000);
+updOnline();
+initSearch();
+renderGrid('all');
+updStats();
+// Инициализация просмотров
+let visitViews = parseInt(localStorage.getItem('visitViews') || '1234');
+visitViews += 12;
+localStorage.setItem('visitViews', visitViews.toString());
+const viewsKey = Date.now().toString(); // Уникальный ключ за сессию/день
+let viewsData = safeJSONParse(localStorage.getItem('zviews'), {});
+viewsData[viewsKey] = visitViews;
+localStorage.setItem('zviews', JSON.stringify(viewsData));
+updStats(); // Перезагрузит
+
+</script>
+</body>
+</html>
